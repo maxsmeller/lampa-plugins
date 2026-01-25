@@ -47,7 +47,7 @@
     var KP_API_KEYS   = (window.RATINGS_PLUGIN_TOKENS && window.RATINGS_PLUGIN_TOKENS.KP_API_KEYS)   || 
 					[localStorage.getItem('maxsm_kp_api_key') || ''];
     var JACRED_URL = (window.RATINGS_PLUGIN_TOKENS && window.RATINGS_PLUGIN_TOKENS.JACRED_URL) || localStorage.getItem('maxsm_jacred_url') ||'';
-    var JACRED_API_KEY = (window.RATINGS_PLUGIN_TOKENS && window.RATINGS_PLUGIN_TOKENS.JACRED_API_KEY) || '';
+    var JACRED_API_KEY = (window.RATINGS_PLUGIN_TOKENS && window.RATINGS_PLUGIN_TOKENS.JACRED_API_KEY) || localStorage.getItem('maxsm_jacred_api_key') || ''; 
 
 	// Добавьте отладку
     if (C_LOGGING) console.log("MAXSM-RATINGS", "OMDB_API_KEYS при старте: " + OMDB_API_KEYS);
@@ -2054,6 +2054,32 @@
 		    }
 		});
 
+      Lampa.SettingsApi.addParam({
+		    component: 'maxsm_ratings',
+		    param: {
+		        name: 'maxsm_jacred_api_key',
+		        type: 'button'
+		    },
+		    field: {
+		        name: 'ENTER JACRED API KEY',
+		        description: ''
+		    },
+		    onChange: function() {	
+		        Lampa.Input.edit({
+		            free: true,
+		            title: 'ENTER JACRED API KEY'
+		        }, function(newKey) { 
+		            if (typeof newKey === 'string') {
+		                newKey = newKey.trim();
+		            }
+		            if (newKey && newKey.length > 0) {
+		                Lampa.Storage.set('maxsm_jacred_api_key', newKey);
+		                setTimeout(() => location.reload(), 500);
+		            } 
+		        });
+		    }
+		});
+
 		Lampa.SettingsApi.addParam({
 		    component: 'maxsm_ratings',
 		    param: {
@@ -2190,6 +2216,7 @@
     if (!window.maxsmRatingsPlugin) startPlugin();
 
 })();
+
 
 
 
