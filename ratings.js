@@ -43,8 +43,8 @@
     var KP_CACHE = 'maxsm_ratings_kp_cache';
     var ID_MAPPING_CACHE = 'maxsm_ratings_id_mapping_cache';
     var QUALITY_CACHE = 'maxsm_ratings_quality_cache_v2';
-    var OMDB_API_KEYS = (window.RATINGS_PLUGIN_TOKENS && window.RATINGS_PLUGIN_TOKENS.OMDB_API_KEYS) || Lampa.Storage.get(maxsm_omdb_api_keys) || ['']; // api ключи массивом
-    var KP_API_KEYS   = (window.RATINGS_PLUGIN_TOKENS && window.RATINGS_PLUGIN_TOKENS.KP_API_KEYS)   || Lampa.Storage.get(maxsm_kp_api_keys) || ['']; // api ключи массивом
+    var OMDB_API_KEYS = (window.RATINGS_PLUGIN_TOKENS && window.RATINGS_PLUGIN_TOKENS.OMDB_API_KEYS) || Lampa.Storage.get('maxsm_omdb_api_keys', '') || ['']; // api ключи массивом
+    var KP_API_KEYS   = (window.RATINGS_PLUGIN_TOKENS && window.RATINGS_PLUGIN_TOKENS.KP_API_KEYS)   || Lampa.Storage.get('maxsm_kp_api_keys', '') || ['']; // api ключи массивом
     var JACRED_PROTOCOL = (window.RATINGS_PLUGIN_TOKENS && window.RATINGS_PLUGIN_TOKENS.JACRED_PROTOCOL) || 'https://';
     var JACRED_URL = (window.RATINGS_PLUGIN_TOKENS && window.RATINGS_PLUGIN_TOKENS.JACRED_URL) || '';
     var JACRED_API_KEY = (window.RATINGS_PLUGIN_TOKENS && window.RATINGS_PLUGIN_TOKENS.JACRED_API_KEY) || '';
@@ -2147,3 +2147,4 @@
     if (!window.maxsmRatingsPlugin) startPlugin();
 
 })();
+
