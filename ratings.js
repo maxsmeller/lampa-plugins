@@ -2041,7 +2041,7 @@
 		    onChange: function() {	
 		        Lampa.Input.edit({
 		            free: true,
-		            title: 'KP KEYJACRED URL'
+		            title: 'ENTER JACRED URL'
 		        }, function(newKey) { 
 		            if (typeof newKey === 'string') {
 		                newKey = newKey.trim();
@@ -2067,7 +2067,7 @@
 		    onChange: function() {	
 		        Lampa.Input.edit({
 		            free: true,
-		            title: 'OMDB KEY',
+		            title: 'ENTER OMDB KEY',
 		            value: ''
 		        }, function(newKey) { 
 		            if (typeof newKey === 'string') {
@@ -2094,7 +2094,7 @@
 		    onChange: function() {	
 		        Lampa.Input.edit({
 		            free: true,
-		            title: 'KP KEY',
+		            title: 'ENTER KP KEY',
 		            value: ''
 		        }, function(newKey) { 
 		            if (typeof newKey === 'string') {
@@ -2154,11 +2154,11 @@
                 type: 'title'
             },
             field: {
-                name: KP_STATUS,
+                name: OMDB_STATUS,
                 description: ''
             }
         });
-        
+
         Lampa.SettingsApi.addParam({
             component: 'maxsm_ratings',
             param: {
@@ -2166,7 +2166,7 @@
                 type: 'title'
             },
             field: {
-                name: OMDB_STATUS,
+                name: KP_STATUS,
                 description: ''
             }
         });
@@ -2190,6 +2190,7 @@
     if (!window.maxsmRatingsPlugin) startPlugin();
 
 })();
+
 
 
 
