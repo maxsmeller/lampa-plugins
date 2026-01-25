@@ -2029,15 +2029,15 @@
 		Lampa.SettingsApi.addParam({
 		    component: 'maxsm_ratings',
 		    param: {
-		        name: 'maxsm_omdb_api_keys',
+		        name: 'maxsm_omdb_api_key',
 		        type: 'button'
 		    },
 		    field: {
 		        name: 'OMDB KEY',
-		        description: Lampa.Storage.get('maxsm_omdb_api_keys', '')
+		        description: Lampa.Storage.get('maxsm_omdb_api_key', '')
 		    },
 		    onChange: function() {
-		        var currentKey = Lampa.Storage.get('maxsm_omdb_api_keys', '') || '';
+		        var currentKey = Lampa.Storage.get('maxsm_omdb_api_key', '') || '';
 		
 		        Lampa.Input.edit({
 		            free: true,
@@ -2049,7 +2049,7 @@
 		            }
 		
 		            if (newKey && newKey.length > 0) {
-		                Lampa.Storage.set('maxsm_omdb_api_keys', newKey);
+		                Lampa.Storage.set('maxsm_omdb_api_key', newKey);
 		                // Lampa.Noty.show(Lampa.Lang.translate('surs_name_saved') || 'Название сохранено');
 		
 		                setTimeout(() => Lampa.Controller.toggle('settings'), 300);
@@ -2149,5 +2149,6 @@
     if (!window.maxsmRatingsPlugin) startPlugin();
 
 })();
+
 
 
