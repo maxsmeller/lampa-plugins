@@ -1,0 +1,1 @@
+maxsm-lampa-plugins
