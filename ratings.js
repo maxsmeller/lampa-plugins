@@ -35,7 +35,7 @@
     'use strict';
 
     // Перепемнные настройки 
-    var C_LOGGING = false;  // Общий логгинг 
+    var C_LOGGING = true;  // Общий логгинг 
     var Q_LOGGING = false;  // Логгинг качество
     var CACHE_TIME = 3 * 24 * 60 * 60 * 1000;  // Время, которое кеш считается валидным (3 суток)
     var Q_CACHE_TIME = 24 * 60 * 60 * 1000;  // Время, которое кеш считается валидным (сутки)
@@ -50,6 +50,10 @@
     var JACRED_PROTOCOL = (window.RATINGS_PLUGIN_TOKENS && window.RATINGS_PLUGIN_TOKENS.JACRED_PROTOCOL) || 'https://';
     var JACRED_URL = (window.RATINGS_PLUGIN_TOKENS && window.RATINGS_PLUGIN_TOKENS.JACRED_URL) || '';
     var JACRED_API_KEY = (window.RATINGS_PLUGIN_TOKENS && window.RATINGS_PLUGIN_TOKENS.JACRED_API_KEY) || '';
+
+	// Добавьте отладку
+    if (C_LOGGING) console.log("MAXSM-RATINGS", "OMDB_API_KEYS при старте: " + OMDB_API_KEYS);
+    if (C_LOGGING) console.log("MAXSM-RATINGS", "Ключ из localStorage: " + localStorage.getItem('maxsm_omdb_api_key'));
 
     // Словарь возрастных рейтингов
     var AGE_RATINGS = {
@@ -2034,7 +2038,7 @@
 		    },
 		    field: {
 		        name: 'OMDB KEY',
-		        description: localStorage.getItem('maxsm_omdb_api_key') || '';
+		        description: localStorage.getItem('maxsm_omdb_api_key') || ''
 		    },
 		    onChange: function() {
 		        var currentKey = localStorage.getItem('maxsm_omdb_api_key') || '';
@@ -2047,22 +2051,11 @@
 		            if (typeof newKey === 'string') {
 		                newKey = newKey.trim();
 		            }
-		
 		            if (newKey && newKey.length > 0) {
 		                Lampa.Storage.set('maxsm_omdb_api_key', newKey);
-		                // Lampa.Noty.show(Lampa.Lang.translate('surs_name_saved') || 'Название сохранено');
-		
 		                setTimeout(() => Lampa.Controller.toggle('settings'), 300);
-		
-		                setTimeout(() => {
-		                    try { softRefresh(newKey, false); } catch(e) {}
-		                }, 2000);
-		
 		                setTimeout(() => location.reload(), 3500);
-		
-		            } else {
-		                // Lampa.Noty.show(Lampa.Lang.translate('surs_name_not_entered') || 'Название не введено');
-		            }
+		            } 
 		        });
 		    }
 		});
@@ -2149,6 +2142,7 @@
     if (!window.maxsmRatingsPlugin) startPlugin();
 
 })();
+
 
 
 
