@@ -2030,6 +2030,8 @@
             }
         });
 
+	/*
+
 		Lampa.SettingsApi.addParam({
 		    component: 'maxsm_ratings',
 		    param: {
@@ -2059,6 +2061,8 @@
 		        });
 		    }
 		});
+
+		*/
         
         // Определяем текст для лейбла
         var qualityLabelText = '';
@@ -2142,6 +2146,7 @@
     if (!window.maxsmRatingsPlugin) startPlugin();
 
 })();
+
 
 
 
