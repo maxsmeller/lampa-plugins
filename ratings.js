@@ -24,8 +24,7 @@
             'КЛЮЧ',
             'КЛЮЧ'
         ],
-        JACRED_PROTOCOL: 'https://',
-        JACRED_URL: 'сайт.рф',
+        JACRED_URL: 'https://сайт.рф',
         JACRED_API_KEY: 'КЛЮЧ'
     };
 
@@ -47,8 +46,7 @@
                     [localStorage.getItem('maxsm_omdb_api_key') || ''];
     var KP_API_KEYS   = (window.RATINGS_PLUGIN_TOKENS && window.RATINGS_PLUGIN_TOKENS.KP_API_KEYS)   || 
 					[localStorage.getItem('maxsm_kp_api_key') || ''];
-    var JACRED_PROTOCOL = (window.RATINGS_PLUGIN_TOKENS && window.RATINGS_PLUGIN_TOKENS.JACRED_PROTOCOL) || 'https://';
-    var JACRED_URL = (window.RATINGS_PLUGIN_TOKENS && window.RATINGS_PLUGIN_TOKENS.JACRED_URL) || '';
+    var JACRED_URL = (window.RATINGS_PLUGIN_TOKENS && window.RATINGS_PLUGIN_TOKENS.JACRED_URL) || localStorage.getItem('maxsm_jacred_url') ||'';
     var JACRED_API_KEY = (window.RATINGS_PLUGIN_TOKENS && window.RATINGS_PLUGIN_TOKENS.JACRED_API_KEY) || '';
 
 	// Добавьте отладку
@@ -700,7 +698,7 @@
         }
     
         var uid = Lampa.Storage.get('lampac_unic_id', '');
-        var apiUrl = JACRED_PROTOCOL + JACRED_URL + '/api/v2.0/indexers/all/results?' +
+        var apiUrl = JACRED_URL + '/api/v2.0/indexers/all/results?' +
                      'apikey=' + JACRED_API_KEY +
                      '&uid=' + uid +
                      '&year=' + year;
@@ -2030,6 +2028,32 @@
             }
         });
 
+      Lampa.SettingsApi.addParam({
+		    component: 'maxsm_ratings',
+		    param: {
+		        name: 'maxsm_jacred_url',
+		        type: 'button'
+		    },
+		    field: {
+		        name: 'ENTER JACRED URL',
+		        description: ''
+		    },
+		    onChange: function() {	
+		        Lampa.Input.edit({
+		            free: true,
+		            title: 'KP KEYJACRED URL'
+		        }, function(newKey) { 
+		            if (typeof newKey === 'string') {
+		                newKey = newKey.trim();
+		            }
+		            if (newKey && newKey.length > 0) {
+		                Lampa.Storage.set('maxsm_jacred_url', newKey);
+		                setTimeout(() => location.reload(), 500);
+		            } 
+		        });
+		    }
+		});
+
 		Lampa.SettingsApi.addParam({
 		    component: 'maxsm_ratings',
 		    param: {
@@ -2064,7 +2088,7 @@
 		        type: 'button'
 		    },
 		    field: {
-		        name: 'KP KEY',
+		        name: 'ENTER KP KEY',
 		        description: ''
 		    },
 		    onChange: function() {	
@@ -2166,6 +2190,7 @@
     if (!window.maxsmRatingsPlugin) startPlugin();
 
 })();
+
 
 
 
