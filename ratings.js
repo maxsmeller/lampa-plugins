@@ -2030,7 +2030,35 @@
             }
         });
 
-	/*
+		Lampa.SettingsApi.addParam({
+		    component: 'maxsm_ratings',
+		    param: {
+		        name: 'maxsm_omdb_api_key',
+		        type: 'button'
+		    },
+		    field: {
+		        name: 'OMDB KEY',
+		        description: localStorage.getItem('maxsm_omdb_api_key') || ''
+		    },
+		    onChange: function() {
+		        var currentKey = localStorage.getItem('maxsm_omdb_api_key') || '';
+		
+		        Lampa.Input.edit({
+		            free: true,
+		            title: 'OMDB KEY',
+		            value: currentKey
+		        }, function(newKey) { 
+		            if (typeof newKey === 'string') {
+		                newKey = newKey.trim();
+		            }
+		            if (newKey && newKey.length > 0) {
+		                Lampa.Storage.set('maxsm_omdb_api_key', newKey);
+		                setTimeout(() => Lampa.Controller.toggle('settings'), 300);
+		                setTimeout(() => location.reload(), 3500);
+		            } 
+		        });
+		    }
+		});
 
 		Lampa.SettingsApi.addParam({
 		    component: 'maxsm_ratings',
@@ -2062,7 +2090,35 @@
 		    }
 		});
 
-		*/
+		Lampa.SettingsApi.addParam({
+		    component: 'maxsm_ratings',
+		    param: {
+		        name: 'maxsm_kp_api_key',
+		        type: 'button'
+		    },
+		    field: {
+		        name: 'KP KEY',
+		        description: localStorage.getItem('maxsm_kp_api_key') || ''
+		    },
+		    onChange: function() {
+		        var currentKey = localStorage.getItem('maxsm_kp_api_key') || '';
+		
+		        Lampa.Input.edit({
+		            free: true,
+		            title: 'KP KEY',
+		            value: currentKey
+		        }, function(newKey) { 
+		            if (typeof newKey === 'string') {
+		                newKey = newKey.trim();
+		            }
+		            if (newKey && newKey.length > 0) {
+		                Lampa.Storage.set('maxsm_omdb_api_key', newKey);
+		                setTimeout(() => Lampa.Controller.toggle('settings'), 300);
+		                setTimeout(() => location.reload(), 3500);
+		            } 
+		        });
+		    }
+		});
         
         // Определяем текст для лейбла
         var qualityLabelText = '';
@@ -2146,6 +2202,7 @@
     if (!window.maxsmRatingsPlugin) startPlugin();
 
 })();
+
 
 
 
