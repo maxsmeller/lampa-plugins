@@ -34,7 +34,7 @@
     'use strict';
 
     // Перепемнные настройки 
-    var C_LOGGING = true;  // Общий логгинг 
+    var C_LOGGING = false;  // Общий логгинг 
     var Q_LOGGING = false;  // Логгинг качество
     var CACHE_TIME = 3 * 24 * 60 * 60 * 1000;  // Время, которое кеш считается валидным (3 суток)
     var Q_CACHE_TIME = 24 * 60 * 60 * 1000;  // Время, которое кеш считается валидным (сутки)
@@ -2216,6 +2216,7 @@
     if (!window.maxsmRatingsPlugin) startPlugin();
 
 })();
+
 
 
 
