@@ -15,6 +15,7 @@
     
 /*    
     window.RATINGS_PLUGIN_TOKENS = {
+	    PREGONF: 'YES',
         OMDB_API_KEYS: [
             'КЛЮЧ',
             'КЛЮЧ'
@@ -42,6 +43,7 @@
     var KP_CACHE = 'maxsm_ratings_kp_cache';
     var ID_MAPPING_CACHE = 'maxsm_ratings_id_mapping_cache';
     var QUALITY_CACHE = 'maxsm_ratings_quality_cache_v2';
+	var PREGONF = (window.RATINGS_PLUGIN_TOKENS && window.RATINGS_PLUGIN_TOKENS.PRECONF) || 'NO';
 	var OMDB_API_KEYS = (window.RATINGS_PLUGIN_TOKENS && window.RATINGS_PLUGIN_TOKENS.OMDB_API_KEYS) || 
                     [localStorage.getItem('maxsm_omdb_api_key') || ''];
     var KP_API_KEYS   = (window.RATINGS_PLUGIN_TOKENS && window.RATINGS_PLUGIN_TOKENS.KP_API_KEYS)   || 
@@ -2027,175 +2029,176 @@
                 window.location.reload();
             }
         });
-
-      Lampa.SettingsApi.addParam({
-		    component: 'maxsm_ratings',
-		    param: {
-		        name: 'maxsm_jacred_url',
-		        type: 'button'
-		    },
-		    field: {
-		        name: 'ENTER JACRED URL',
-		        description: ''
-		    },
-		    onChange: function() {	
-		        Lampa.Input.edit({
-		            free: true,
-		            title: 'ENTER JACRED URL'
-		        }, function(newKey) { 
-		            if (typeof newKey === 'string') {
-		                newKey = newKey.trim();
-		            }
-		            if (newKey && newKey.length > 0) {
-		                Lampa.Storage.set('maxsm_jacred_url', newKey);
-		                setTimeout(() => location.reload(), 500);
-		            } 
-		        });
-		    }
-		});
-
-      Lampa.SettingsApi.addParam({
-		    component: 'maxsm_ratings',
-		    param: {
-		        name: 'maxsm_jacred_api_key',
-		        type: 'button'
-		    },
-		    field: {
-		        name: 'ENTER JACRED API KEY',
-		        description: ''
-		    },
-		    onChange: function() {	
-		        Lampa.Input.edit({
-		            free: true,
-		            title: 'ENTER JACRED API KEY'
-		        }, function(newKey) { 
-		            if (typeof newKey === 'string') {
-		                newKey = newKey.trim();
-		            }
-		            if (newKey && newKey.length > 0) {
-		                Lampa.Storage.set('maxsm_jacred_api_key', newKey);
-		                setTimeout(() => location.reload(), 500);
-		            } 
-		        });
-		    }
-		});
-
-		Lampa.SettingsApi.addParam({
-		    component: 'maxsm_ratings',
-		    param: {
-		        name: 'maxsm_omdb_api_key',
-		        type: 'button'
-		    },
-		    field: {
-		        name: 'ENTER OMDB KEY',
-		        description: ''
-		    },
-		    onChange: function() {	
-		        Lampa.Input.edit({
-		            free: true,
-		            title: 'ENTER OMDB KEY',
-		            value: ''
-		        }, function(newKey) { 
-		            if (typeof newKey === 'string') {
-		                newKey = newKey.trim();
-		            }
-		            if (newKey && newKey.length > 0) {
-		                Lampa.Storage.set('maxsm_omdb_api_key', newKey);
-		                setTimeout(() => location.reload(), 500);
-		            } 
-		        });
-		    }
-		});
-
-		Lampa.SettingsApi.addParam({
-		    component: 'maxsm_ratings',
-		    param: {
-		        name: 'maxsm_kp_api_key',
-		        type: 'button'
-		    },
-		    field: {
-		        name: 'ENTER KP KEY',
-		        description: ''
-		    },
-		    onChange: function() {	
-		        Lampa.Input.edit({
-		            free: true,
-		            title: 'ENTER KP KEY',
-		            value: ''
-		        }, function(newKey) { 
-		            if (typeof newKey === 'string') {
-		                newKey = newKey.trim();
-		            }
-		            if (newKey && newKey.length > 0) {
-		                Lampa.Storage.set('maxsm_kp_api_key', newKey);
-		                setTimeout(() => location.reload(), 500);
-		            } 
-		        });
-		    }
-		});
-        
-        // Определяем текст для лейбла
-        var qualityLabelText = '';
-
-        // Формируем текст
-        if (JACRED_URL && JACRED_URL.trim() !== '') {
-            qualityLabelText = 'Quality: ' + JACRED_URL;
-        } else {
-            qualityLabelText = 'Quality: JacRed server not set';
-        }
-        
-        // Выводим в консоль
-        if (Q_LOGGING) console.log('MAXSM-RATINGS', qualityLabelText);
-        
-        // Используем твои переменные
-        var omdbOk = 0, kpOk = 0;
-
-        for (var i = 0; i < OMDB_API_KEYS.length; i++) if (OMDB_API_KEYS[i]) omdbOk++;
-        for (var j = 0; j < KP_API_KEYS.length; j++) if (KP_API_KEYS[j]) kpOk++;
-
-        // Сохраняем строки в переменные
-        var OMDB_STATUS = 'OMDB: ' + omdbOk + ' keys - ' + (omdbOk ? 'OK' : 'NO WORK');
-        var KP_STATUS = 'KP: ' + kpOk + ' keys - ' + (kpOk ? 'OK' : 'NO WORK');
-
-        // Выводим
-        if (C_LOGGING) console.log('MAXSM-RATINGS', OMDB_STATUS);
-        if (C_LOGGING) console.log('MAXSM-RATINGS', KP_STATUS);
-        
-        Lampa.SettingsApi.addParam({
-            component: 'maxsm_ratings',
-            param: {
-                name: '',
-                type: 'title'
-            },
-            field: {
-                name: qualityLabelText,
-                description: ''
-            }
-        });
-
-        Lampa.SettingsApi.addParam({
-            component: 'maxsm_ratings',
-            param: {
-                name: '',
-                type: 'title'
-            },
-            field: {
-                name: OMDB_STATUS,
-                description: ''
-            }
-        });
-
-        Lampa.SettingsApi.addParam({
-            component: 'maxsm_ratings',
-            param: {
-                name: '',
-                type: 'title'
-            },
-            field: {
-                name: KP_STATUS,
-                description: ''
-            }
-        });
+      if (PREGONF === 'NO') {
+	      Lampa.SettingsApi.addParam({
+			    component: 'maxsm_ratings',
+			    param: {
+			        name: 'maxsm_jacred_url',
+			        type: 'button'
+			    },
+			    field: {
+			        name: 'ENTER JACRED URL',
+			        description: ''
+			    },
+			    onChange: function() {	
+			        Lampa.Input.edit({
+			            free: true,
+			            title: 'ENTER JACRED URL'
+			        }, function(newKey) { 
+			            if (typeof newKey === 'string') {
+			                newKey = newKey.trim();
+			            }
+			            if (newKey && newKey.length > 0) {
+			                Lampa.Storage.set('maxsm_jacred_url', newKey);
+			                setTimeout(() => location.reload(), 500);
+			            } 
+			        });
+			    }
+			});
+	
+	      Lampa.SettingsApi.addParam({
+			    component: 'maxsm_ratings',
+			    param: {
+			        name: 'maxsm_jacred_api_key',
+			        type: 'button'
+			    },
+			    field: {
+			        name: 'ENTER JACRED API KEY',
+			        description: ''
+			    },
+			    onChange: function() {	
+			        Lampa.Input.edit({
+			            free: true,
+			            title: 'ENTER JACRED API KEY'
+			        }, function(newKey) { 
+			            if (typeof newKey === 'string') {
+			                newKey = newKey.trim();
+			            }
+			            if (newKey && newKey.length > 0) {
+			                Lampa.Storage.set('maxsm_jacred_api_key', newKey);
+			                setTimeout(() => location.reload(), 500);
+			            } 
+			        });
+			    }
+			});
+	
+			Lampa.SettingsApi.addParam({
+			    component: 'maxsm_ratings',
+			    param: {
+			        name: 'maxsm_omdb_api_key',
+			        type: 'button'
+			    },
+			    field: {
+			        name: 'ENTER OMDB KEY',
+			        description: ''
+			    },
+			    onChange: function() {	
+			        Lampa.Input.edit({
+			            free: true,
+			            title: 'ENTER OMDB KEY',
+			            value: ''
+			        }, function(newKey) { 
+			            if (typeof newKey === 'string') {
+			                newKey = newKey.trim();
+			            }
+			            if (newKey && newKey.length > 0) {
+			                Lampa.Storage.set('maxsm_omdb_api_key', newKey);
+			                setTimeout(() => location.reload(), 500);
+			            } 
+			        });
+			    }
+			});
+	
+			Lampa.SettingsApi.addParam({
+			    component: 'maxsm_ratings',
+			    param: {
+			        name: 'maxsm_kp_api_key',
+			        type: 'button'
+			    },
+			    field: {
+			        name: 'ENTER KP KEY',
+			        description: ''
+			    },
+			    onChange: function() {	
+			        Lampa.Input.edit({
+			            free: true,
+			            title: 'ENTER KP KEY',
+			            value: ''
+			        }, function(newKey) { 
+			            if (typeof newKey === 'string') {
+			                newKey = newKey.trim();
+			            }
+			            if (newKey && newKey.length > 0) {
+			                Lampa.Storage.set('maxsm_kp_api_key', newKey);
+			                setTimeout(() => location.reload(), 500);
+			            } 
+			        });
+			    }
+			});
+	        
+	        // Определяем текст для лейбла
+	        var qualityLabelText = '';
+	
+	        // Формируем текст
+	        if (JACRED_URL && JACRED_URL.trim() !== '') {
+	            qualityLabelText = 'Quality: ' + JACRED_URL;
+	        } else {
+	            qualityLabelText = 'Quality: JacRed server not set';
+	        }
+	        
+	        // Выводим в консоль
+	        if (Q_LOGGING) console.log('MAXSM-RATINGS', qualityLabelText);
+	        
+	        // Используем твои переменные
+	        var omdbOk = 0, kpOk = 0;
+	
+	        for (var i = 0; i < OMDB_API_KEYS.length; i++) if (OMDB_API_KEYS[i]) omdbOk++;
+	        for (var j = 0; j < KP_API_KEYS.length; j++) if (KP_API_KEYS[j]) kpOk++;
+	
+	        // Сохраняем строки в переменные
+	        var OMDB_STATUS = 'OMDB: ' + omdbOk + ' keys - ' + (omdbOk ? 'OK' : 'NO WORK');
+	        var KP_STATUS = 'KP: ' + kpOk + ' keys - ' + (kpOk ? 'OK' : 'NO WORK');
+	
+	        // Выводим
+	        if (C_LOGGING) console.log('MAXSM-RATINGS', OMDB_STATUS);
+	        if (C_LOGGING) console.log('MAXSM-RATINGS', KP_STATUS);
+	        
+	        Lampa.SettingsApi.addParam({
+	            component: 'maxsm_ratings',
+	            param: {
+	                name: '',
+	                type: 'title'
+	            },
+	            field: {
+	                name: qualityLabelText,
+	                description: ''
+	            }
+	        });
+	
+	        Lampa.SettingsApi.addParam({
+	            component: 'maxsm_ratings',
+	            param: {
+	                name: '',
+	                type: 'title'
+	            },
+	            field: {
+	                name: OMDB_STATUS,
+	                description: ''
+	            }
+	        });
+	
+	        Lampa.SettingsApi.addParam({
+	            component: 'maxsm_ratings',
+	            param: {
+	                name: '',
+	                type: 'title'
+	            },
+	            field: {
+	                name: KP_STATUS,
+	                description: ''
+	            }
+	        });
+	    }  
         
         if (localStorage.getItem('maxsm_ratings_quality_inlist') === 'true') {
             // Вызов наблюдателя
@@ -2216,6 +2219,7 @@
     if (!window.maxsmRatingsPlugin) startPlugin();
 
 })();
+
 
 
 
