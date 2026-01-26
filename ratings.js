@@ -15,7 +15,7 @@
     
 /*    
     window.RATINGS_PLUGIN_TOKENS = {
-	    PREСONF: 'YES',
+	    PRECONF: 'YES',
         OMDB_API_KEYS: [
             'КЛЮЧ',
             'КЛЮЧ'
@@ -43,7 +43,7 @@
     var KP_CACHE = 'maxsm_ratings_kp_cache';
     var ID_MAPPING_CACHE = 'maxsm_ratings_id_mapping_cache';
     var QUALITY_CACHE = 'maxsm_ratings_quality_cache_v2';
-	var PREСONF = (window.RATINGS_PLUGIN_TOKENS && window.RATINGS_PLUGIN_TOKENS.PRECONF) || 'NO';
+	var PRECONF = (window.RATINGS_PLUGIN_TOKENS && window.RATINGS_PLUGIN_TOKENS.PRECONF) || 'NO';
 	var OMDB_API_KEYS = (window.RATINGS_PLUGIN_TOKENS && window.RATINGS_PLUGIN_TOKENS.OMDB_API_KEYS) || 
                     [localStorage.getItem('maxsm_omdb_api_key') || ''];
     var KP_API_KEYS   = (window.RATINGS_PLUGIN_TOKENS && window.RATINGS_PLUGIN_TOKENS.KP_API_KEYS)   || 
@@ -2029,7 +2029,7 @@
                 window.location.reload();
             }
         });
-      if (PREСONF === 'NO') {
+      if (PRECONF === 'NO') {
 	      Lampa.SettingsApi.addParam({
 			    component: 'maxsm_ratings',
 			    param: {
@@ -2219,6 +2219,7 @@
     if (!window.maxsmRatingsPlugin) startPlugin();
 
 })();
+
 
 
 
