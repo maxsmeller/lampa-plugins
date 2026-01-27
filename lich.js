@@ -29,14 +29,18 @@
 			
             // Год - обновлено: закругление со всех сторон и отступ от края
             '.card__age {' +
-                'position: absolute !important;' +
-                'right: -0.8em !important;' + 
-                'bottom: 0.4em !important;' + 
-                'font-weight: 700 !important;' +
-                'padding: 0.4em 0.8em !important;' +
-                'border-radius: 0.5em !important;' + 
-                'font-size: 1.0em !important;' +
-                'background: rgba(0, 0, 0, 0.5) !important;' +
+            //    'position: absolute !important;' +
+            //    'right: -0.8em !important;' + 
+             //   'bottom: 0.4em !important;' + 
+             //   'font-weight: 700 !important;' +
+              //  'padding: 0.4em 0.8em !important;' +
+               // 'border-radius: 0.5em !important;' + 
+                //'font-size: 1.0em !important;' +
+                //'background: rgba(0, 0, 0, 0.5) !important;' +
+			    'padding: 0.4em 0.4em;' +
+		        'background: #ffe216;' +
+	        	'color: #000;' +
+	     	    'border-radius: 0.3em;' +
             '}' +
             
             // Иконки закладок и т.д.
@@ -46,12 +50,16 @@
             
             // Рейтинг - обновлено: закругление со всех сторон и отступ от края
             '.card__vote {' +
-                'bottom: auto !important;' +
-                'right: -0.8em !important;' + 
-                'top: 0.4em !important;' + 
-                'padding: 0.4em 0.8em !important;' +
-                'border-radius: 0.5em !important;' + 
-                'font-size: 1.0em !important;' +
+                //'bottom: auto !important;' +
+                //'right: -0.8em !important;' + 
+                //'top: 0.4em !important;' + 
+                //'padding: 0.4em 0.8em !important;' +
+                //'border-radius: 0.5em !important;' + 
+                //'font-size: 1.0em !important;' +
+			    'padding: 0.4em 0.4em;' +
+		        'background: #ffe216;' +
+	        	'color: #000;' +
+	     	    'border-radius: 0.3em;' +
             '}' +
             
             // Качество - обновлено: закругление со всех сторон и отступ от края
@@ -184,6 +192,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
