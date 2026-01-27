@@ -41,6 +41,7 @@
             "padding: 0.4em 0.6em !important; font-weight: 700 !important; font-size: 1.0em !important; " +
             "border-radius: 0.4em 0 0.4em 0 !important; text-transform: uppercase !important; }" +
 
+            // Тип сериал
             ".card--tv .card__type { " +
             "position: absolute !important; " +
             "bottom: auto !important; " +
@@ -54,6 +55,9 @@
             "font-size: 1.0em !important; " +
             "z-index: 5 !important; " +
             "}" +
+
+              // Год
+            ".card__age {\n  position: absolute;\n  right: 0em;\n  bottom: 0em;\n  z-index: 10;\n  background: rgba(0, 0, 0, 0.6);\n  color: #ffffff;\n  font-weight: 700;\n  padding: 0.4em 0.6em;\n    -webkit-border-radius: 0.48em 0 0.48em 0;\n     -moz-border-radius: 0.48em 0 0.48em 0;\n          border-radius: 0.48em 0 0.48em 0;\nline-height: 1.0;\nfont-size: 1.0em;\n}\n " +
             
             /* Расстояние между рядами */
             ".items-line.items-line--type-cards + .items-line.items-line--type-cards { margin-top: 1em !important; }" +
@@ -148,5 +152,6 @@
         });
     }
 })();
+
 
 
