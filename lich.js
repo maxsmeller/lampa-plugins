@@ -19,12 +19,6 @@
         
         // Оптимизированные объединенные стили
         var css = '' +       
-			'.card {' + 
-			    'background: #fff !important;' +
-			    'color: #000 !important;' +
-                'border-radius: 1em !important;' + 
-            '}' +
-			
             // Заголовок карточки максимум 3 строки
             '.card__title {' +
                 'height: 3.6em !important;' +
@@ -194,5 +188,6 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
