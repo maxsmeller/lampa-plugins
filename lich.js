@@ -21,10 +21,10 @@
         var css = '' +    
             // Рейтинг
             '.card__vote {' +
-                'left: -0.8em;' + 
+                'right: -0.8em;' + 
                 //'top: 1.4em;' +
 	     		'bottom: 5.6em;' +
-			    'right: auto;' +
+			    'left: auto;' +
 			    //'bottom: auto;' +
 			    'padding: 0.4em 0.4em;' +
 	     	    'border-radius: 0.3em;' +
@@ -37,7 +37,7 @@
                 'position: absolute;' +
                 //'right: 0.3em;' + 
                 //'bottom: 0.3em;' + 
-	            'left: -0.8em;' + 
+	            'right: -0.8em;' + 
 	     		'bottom: 5.0em;' +
 			    'top: auto;' +
                 'background: rgba(0, 0, 0, 0.5);' +
@@ -172,6 +172,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
