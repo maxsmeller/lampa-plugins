@@ -33,9 +33,6 @@
             "line-height: 1.0 !important; font-size: 1.0em !important; }" +
             ".card__vote { position: absolute !important; bottom: auto !important; right: 0em !important; top: 0em !important; " +
             "font-weight: 700 !important; border-radius: 0 0.34em 0 0.34em !important; line-height: 1.0 !important; }" +
-            ".card__icons { position: absolute !important; top: 2em !important; left: 0 !important; right: auto !important; display: flex !important; " +
-            "justify-content: center !important; border-radius: 0 0.5em 0.5em 0 !important; }" +
-            ".card__icons-inner { }" +
             ".card__marker { position: absolute !important; left: 0em !important; top: 4em !important; bottom: auto !important; " +
             "border-radius: 0 0.5em 0.5em 0 !important; font-weight: 700 !important; font-size: 1.0em !important; padding: 0.4em 0.6em !important; " +
             "display: flex !important; align-items: center !important; line-height: 1.2 !important; max-width: min(12em, 95%) !important; }" +
@@ -151,4 +148,5 @@
         });
     }
 })();
+
 
