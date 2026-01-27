@@ -38,7 +38,7 @@
                 'position: absolute;' +
 	            'right: -0.6em;' + 
 			    'left: auto;' +
-	     		'bottom: 0.8em;' +
+	     		'bottom: 1.4em;' +
 			    'top: auto;' +
                 'background: #ffe216;' +
 			    'color: #000;' +
@@ -179,6 +179,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
