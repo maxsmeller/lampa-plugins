@@ -8,7 +8,7 @@
     // Переменные настройки
     var Q_LOGGING = true;  // Логгинг качества
     var Q_CACHE_TIME = 24 * 60 * 60 * 1000;  // Время кеша качества (сутки)
-    var QUALITY_CACHE = 'maxsm_quality_cache_v2';
+    var QUALITY_CACHE = 'maxsm_quality_cache_v3';
     
     // Получение настроек из внешних переменных
     var PRECONF = (window.QUALITY_PLUGIN_TOKENS && window.QUALITY_PLUGIN_TOKENS.PRECONF) || 'NO';
@@ -703,4 +703,5 @@
 
 
 })();
+
 
