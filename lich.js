@@ -55,50 +55,6 @@
         
         // Объединенные стили - только НЕ цветовые свойства
         var css = "" +
-            /* Основной фон приложения - УДАЛЕНО (только цвета) */
-            
-            /* Навигационная панель - УДАЛЕНО (только цвета) */
-            
-            /* Модальные окна - УДАЛЕНО (только цвета и border) */
-            
-            /* Настройки - УДАЛЕНО (только цвета) */
-            
-            /* Заставки и загрузчики */
-            ".activity__loader { position:absolute; top:0; left:0; width:100%; height:100%; display:none; }" +
-            
-            /* Активные элементы - УДАЛЕНО (только цвета и градиенты) */
-            
-            /* Особые стили для элементов настроек */
-            ".selectbox-item.focus," +
-            ".settings-folder.focus," +
-            ".settings-param.focus { " +
-            "border-radius: 0.5em 0 0 0.5em !important;" +
-            "}" +
-            
-            /* Обводка фокуса - оставляем только border и box-shadow без цветов */
-            ".full-episode.focus::after," +
-            ".card-episode.focus .full-episode::after," +
-            ".items-cards .selector.focus::after," +
-            ".card-more.focus .card-more__box::after," +
-            ".card.focus .card__view::after," +
-            ".card.hover .card__view::after," +
-            ".torrent-item.focus::after," +
-            ".watched-history.selector.focus::after," +
-            ".online-prestige.selector.focus::after," +
-            ".online-prestige--full.selector.focus::after," +
-            ".explorer-card__head-img.selector.focus::after," +
-            ".extensions__item.focus::after," +
-            ".extensions__block-add.focus::after," +
-            ".full-review-add.focus::after { " +
-            "border: 0.2em solid !important; " +
-            "box-shadow: 0 0 0.8em !important; " +
-            "}" +
-            
-            /* Кнопки в шапке - УДАЛЕНО (только цвета и градиенты) */
-            
-            /* Торренты - оставляем только border */
-            ".torrent-serial { border: 0.2em solid !important; }" +
-            ".torrent-serial.focus { border: 0.2em solid !important; }" +
             
             /* Отступ для времени */
             ".head__time-now { margin-left: 0.5em; }" +
@@ -114,11 +70,6 @@
             "-webkit-justify-content: center !important; justify-content: center !important; text-align: center !important; }" +
             ".full-start__title-original { max-width: 100% !important; }" +
             "}" +
-            
-            /* Рейтинги - оставляем только размеры и позиционирование */
-            ".full-start__rate { border-radius: 0.25em; padding: 0.3em; }" +
-            ".full-start__pg, .full-start__status, .full-start-new__rate-line .full-start__pg { " +
-            "font-size: 1em !important; }" +
             
             /* Карточки - оставляем позиционирование, размеры, но убираем цвета */
             ".card__title { height: 3.6em !important; text-overflow: ellipsis !important; -webkit-line-clamp: 3 !important; line-clamp: 3 !important; }" +
@@ -171,8 +122,6 @@
             /* Высота карточки */
             "@media screen and (min-width: 580px) { .full-start-new { min-height: 80vh !important; display: flex !important; } }" +
             
-            /* Постер - УДАЛЕНО (только opacity) */
-            
             /* Скругления */
             ".explorer__files .torrent-filter .simple-button { font-size: 1.2em !important; border-radius: 0.5em !important; }" +
             ".full-review-add, .full-review, .extensions__item, .extensions__block-add, .search-source, " +
@@ -190,7 +139,7 @@
             ".full-review.focus { border-radius: 0.5em !important; }" +
             
             /* Меню */
-            ".menu__item.focus { border-radius: 0 0.5em 0.5em 0 !important; }" +
+            ".menu__item.focus { border-radius: 0 1em 1em 0 !important; }" +
             ".menu__list { padding-left: 0em !important; }" +
             
             /* Анимации */
