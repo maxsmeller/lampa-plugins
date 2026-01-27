@@ -22,7 +22,7 @@
             // Рейтинг
             '.card__vote {' +
 			    'bottom: auto;' +
-                'top: 1.2em;' +
+                'top: 1.0em;' +
                 'right: 0em;' + 
 			    'left: auto;' +
                 'background: #000;' +
@@ -180,6 +180,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
