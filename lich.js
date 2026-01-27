@@ -32,23 +32,7 @@
                 'font-weight: 700;' +
                 'font-size: 1.0em;' +
             '}' +
-			
-            // Год
-            '.card__age {' +
-                'position: absolute;' +
-	     		'bottom: 1.4em;' +
-			    'top: auto;' +
-	            'right: 0em;' + 
-			    'left: auto;' +
-                'background: #000;' +
-			    'color: #fff;' +
-			    'padding: 0.4em 0.4em;' +
-	     	    'border-radius: 0.3em 0 0 0.3em;' +
-                'font-weight: 700;' +
-                'font-size: 0.8em;' +
-            '}' +
-
-            
+			           
             // Качество
             '.card__quality {' +
                 'bottom: auto;' + 
@@ -63,9 +47,24 @@
             // Тип сериал
             '.card--tv .card__type {' +
                 'bottom: auto;' + 
-                'top: 3.6em;' + 
+                'top: 4.2em;' + 
 	            'right: 0em;' + 
 			    'left: auto;' +
+	     	    'border-radius: 0.3em 0 0 0.3em;' +
+                'font-weight: 700;' +
+                'font-size: 0.8em;' +
+            '}' +
+
+            // Год
+            '.card__age {' +
+                'position: absolute;' +
+	     		'bottom: 1.4em;' +
+			    'top: auto;' +
+	            'right: 0em;' + 
+			    'left: auto;' +
+                'background: #000;' +
+			    'color: #fff;' +
+			    'padding: 0.4em 0.4em;' +
 	     	    'border-radius: 0.3em 0 0 0.3em;' +
                 'font-weight: 700;' +
                 'font-size: 0.8em;' +
@@ -181,6 +180,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
