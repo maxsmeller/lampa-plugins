@@ -10,7 +10,7 @@
             be: "СЕРЫЯЛ",     
             zh: "剧集",       
             pt: "SÉRIE",     
-            bg: "СЕРИАЛ",      
+            bg: "СЕРІАЛ",      
             he: "סִדְרָה",  
             cs: "SERIÁL" 
         }
@@ -39,7 +39,7 @@
             "@media screen and (max-width: 480px) { " +
             ".full-start-new__head, .full-start-new__title, .full-start__title-original, " +
             ".full-start__rate, .full-start-new__reactions, .full-start-new__rate-line, " +
-            ".full-start-new__buttons, .full-start-new__details, .full-start-new__tagline { " +
+            ".full-start-new__details, .full-start-new__tagline { " +
             "-webkit-justify-content: center !important; justify-content: center !important; text-align: center !important; }" +
             ".full-start__title-original { max-width: 100% !important; }" +
             "}" +
@@ -77,14 +77,21 @@
             "z-index: 5 !important; " +
             "}" +
             
+            /* Скрываем оригинальный текст элемента */
+            ".card--tv .card__type { " +
+            "color: transparent !important; " +
+            "background: transparent !important; " +
+            "}" +
+            
             /* Переопределяем текст через content */
             ".card--tv .card__type::after { " +
             "content: '" + tvCaption.replace(/'/g, "\\'") + "' !important; " +
-            "}" +
-            
-            /* Убираем стандартное содержимое */
-            ".card--tv .card__type .card__type-inner { " +
-            "display: none !important; " +
+            "position: absolute !important; " +
+            "top: 0.4em !important; " +
+            "left: 0.6em !important; " +
+            "right: 0.6em !important; " +
+            "color: inherit !important; " +
+            "background: inherit !important; " +
             "}" +
             
             /* Расстояние между рядами */
@@ -95,38 +102,20 @@
             /* Высота карточки */
             "@media screen and (min-width: 580px) { .full-start-new { min-height: 80vh !important; display: flex !important; } }" +
             
-            /* Скругления */
-            ".explorer__files .torrent-filter .simple-button { font-size: 1.2em !important; border-radius: 0.5em !important; }" +
-            ".full-review-add, .full-review, .extensions__item, .extensions__block-add, .search-source, " +
-            ".bookmarks-folder__layer, .bookmarks-folder__body, .card__img, .card__promo, " +
-            ".full-episode--next .full-episode__img:after, .full-episode__img img, .full-episode__body, .full-person__photo, .card-more__box, " +
-            ".full-start__button, .simple-button, .register { border-radius: 0.5em !important; }" +
-            ".extensions__item.focus::after, .extensions__block-add.focus::after, .full-episode.focus::after, " +
-            ".full-review-add.focus::after, .card-episode.focus .full-episode::after, " +
-            ".card-episode.hover .full-episode::after, .card.focus .card__view::after, " +
-            ".card.hover .card__view::after, .card-more.focus .card-more__box::after, " +
-            ".register.focus::after { border-radius: 1em !important; }" +
-            ".search-source.focus, .simple-button.focus, .menu__item.focus, .menu__item.traverse, " +
-            ".menu__item.hover, .full-start__button.focus, .full-descr__tag.focus, " +
-            ".player-panel .button.focus, .full-person.selector.focus, .tag-count.selector.focus, " +
-            ".full-review.focus { border-radius: 0.5em !important; }" +
-            
-            /* Меню */
+            /* Меню - оставляем только неравномерные скругления */
             ".menu__item.focus { border-radius: 0 1em 1em 0 !important; }" +
             ".menu__list { padding-left: 0em !important; }" +
             
             /* Анимации */
             ".card { transform: scale(1) !important; transition: transform 0.3s ease !important; }" +
             ".card.focus { transform: scale(1.03) !important; }" +
-            ".watched-history, .torrent-item, .online-prestige { transform: scale(1) !important; transition: transform 0.3s ease !important; }" +
-            ".watched-history.focus, .torrent-item.focus, .online-prestige.focus { transform: scale(1.01) !important; }" +
             ".extensions__item, .extensions__block-add, .full-review-add, .full-review, .tag-count, " +
-            ".full-person, .full-episode, .simple-button, .full-start__button, .items-cards .selector, " +
+            ".full-person, .full-episode, .items-cards .selector, " +
             ".card-more, .explorer-card__head-img.selector, .card-episode { " +
             "transform: scale(1) !important; transition: transform 0.3s ease !important; }" +
             ".extensions__item.focus, .extensions__block-add.focus, .full-review-add.focus, " +
             ".full-review.focus, .tag-count.focus, .full-person.focus, .full-episode.focus, " +
-            ".simple-button.focus, .full-start__button.focus, .items-cards .selector.focus, " +
+            ".items-cards .selector.focus, " +
             ".card-more.focus, .explorer-card__head-img.selector.focus, .card-episode.focus { " +
             "transform: scale(1.03) !important; }" +
             ".menu__item { transition: transform 0.3s ease !important; }" +
@@ -169,7 +158,7 @@
                             '<div class="card__age">{release_year}</div>' +
                             '<div class="full-episode__num hide">{num}</div>' +
                             '<div class="full-episode__name>{name}</div>' +
-                            '<div class="full-episode__date">{date}</div>' +
+                            '<div class="full-episode__date>{date}</div>' +
                         '</div>' +
                     '</div>' +
                 '</div>' +
@@ -198,4 +187,3 @@
         });
     }
 })();
-
