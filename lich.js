@@ -26,15 +26,17 @@
                 '-webkit-line-clamp: 3 !important;' +
                 'line-clamp: 3 !important;' +
             '}' +
-            /*
+            
+			/*
+			
             // Год - обновлено: закругление со всех сторон и отступ от края
             '.card__age {' +
                 'position: absolute !important;' +
-                'right: 0.5em !important;' + /* Сдвиг от правого края */
-                'bottom: 0.5em !important;' + /* Сдвиг от нижнего края */
+                'right: 0.5em !important;' + 
+                'bottom: 0.5em !important;' + 
                 'font-weight: 700 !important;' +
                 'padding: 0.4em 0.8em !important;' +
-                'border-radius: 1em !important;' + /* Закругление со всех сторон */
+                'border-radius: 1em !important;' + 
                 'line-height: 1.0 !important;' +
                 'font-size: 1.0em !important;' +
                 'background: rgba(0, 0, 0, 0.5) !important;' +
@@ -42,18 +44,18 @@
             
             // Иконки закладок и т.д.
             '.card__icons {' +
-                'top: 2.5em !important;' + /* Сдвиг от верхнего края */
+                'top: 2.5em !important;' + 
             '}' +
             
             // Рейтинг - обновлено: закругление со всех сторон и отступ от края
             '.card__vote {' +
                 'position: absolute !important;' +
                 'bottom: auto !important;' +
-                'right: 0.5em !important;' + /* Сдвиг от правого края */
-                'top: 0.5em !important;' + /* Сдвиг от верхнего края */
+                'right: 0.5em !important;' + 
+                'top: 0.5em !important;' + 
                 'font-weight: 700 !important;' +
                 'padding: 0.4em 0.8em !important;' +
-                'border-radius: 1em !important;' + /* Закругление со всех сторон */
+                'border-radius: 1em !important;' + 
                 'line-height: 1.0 !important;' +
                 'font-size: 1.0em !important;' +
             '}' +
@@ -62,13 +64,13 @@
             '.card__quality {' +
                 'position: absolute !important;' +
                 'bottom: auto !important;' +
-                'left: 0.5em !important;' + /* Сдвиг от левого края */
+                'left: 0.5em !important;' + 
                 'right: auto !important;' +
-                'top: 0.5em !important;' + /* Сдвиг от верхнего края */
+                'top: 0.5em !important;' + 
                 'padding: 0.4em 0.8em !important;' +
                 'font-weight: 700 !important;' +
                 'font-size: 1.0em !important;' +
-                'border-radius: 1em !important;' + /* Закругление со всех сторон */
+                'border-radius: 1em !important;' + 
                 // 'color: #ffffff;' +
             '}' +
             
@@ -76,16 +78,18 @@
             '.card--tv .card__type {' +
                 'position: absolute !important;' +
                 'bottom: auto !important;' +
-                'left: 0.5em !important;' + /* Сдвиг от левого края */
+                'left: 0.5em !important;' + 
                 'right: auto !important;' +
-                'top: 0.5em !important;' + /* Сдвиг от верхнего края */
+                'top: 0.5em !important;' + 
                 'font-weight: 700 !important;' +
                 'padding: 0.4em 0.8em !important;' +
-                'border-radius: 1em !important;' + /* Закругление со всех сторон */
+                'border-radius: 1em !important;' + 
                 'line-height: 1.0 !important;' +
                 'font-size: 1.0em !important;' +
             '}' +
+			
             */
+			
             // Расстояние между рядами
             '.items-line.items-line--type-cards + .items-line.items-line--type-cards {' +
                 'margin-top: 1em !important;' +
@@ -189,8 +193,3 @@
     // Запускаем инициализацию
     init();
 })();
-
-
-
-
-
