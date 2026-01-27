@@ -28,9 +28,9 @@
                 'background: #000;' +
 			    'color: #fff;' +
 			    'padding: 0.4em 0.4em;' +
-	     	    'border-radius: 0.3em;' +
+	     	    'border-radius: 0.3em 0 0 0.3em;' +
                 'font-weight: 700;' +
-                'font-size: 1.2em;' +
+                'font-size: 0.8em;' +
             '}' +
 			
             // Год
@@ -43,7 +43,7 @@
                 'background: #000;' +
 			    'color: #fff;' +
 			    'padding: 0.4em 0.4em;' +
-	     	    'border-radius: 0.3em;' +
+	     	    'border-radius: 0.3em 0 0 0.3em;' +
                 'font-weight: 700;' +
                 'font-size: 0.8em;' +
             '}' +
@@ -55,6 +55,7 @@
                 'top: 3.6em;' + 
 	            'right: 0em;' + 
 			    'left: auto;' +
+	     	    'border-radius: 0.3em 0 0 0.3em;' +
                 'font-weight: 700;' +
                 'font-size: 0.8em;' +
             '}' +
@@ -65,6 +66,7 @@
                 'top: 3.6em;' + 
 	            'right: 0em;' + 
 			    'left: auto;' +
+	     	    'border-radius: 0.3em 0 0 0.3em;' +
                 'font-weight: 700;' +
                 'font-size: 0.8em;' +
             '}' +
@@ -179,6 +181,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
