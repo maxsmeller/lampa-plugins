@@ -17,18 +17,8 @@
         style.id = 'maxsm_lich_style';
         
         // Оптимизированные объединенные стили
-        var css = '' +
-            // Отступ для времени
-            '.head__time-now {' +
-                'margin-left: 0.5em;' +
-            '}' +
-            
-            // Фикс минимальной высоты шапки
-            '.head__body {' +
-                'min-height: 4.1em;' +
-            '}' +
-            
-            // Адаптивность для мобилок
+        var css = '' +           
+            // По центру для мобилок
             '@media screen and (max-width: 480px) {' +
                 '.full-start-new__head,' +
                 '.full-start-new__title,' +
@@ -43,12 +33,9 @@
                     'justify-content: center !important;' +
                     'text-align: center !important;' +
                 '}' +
-                '.full-start__title-original {' +
-                    'max-width: 100% !important;' +
-                '}' +
             '}' +
             
-            // Карточки
+            // Заголовок карточки максимум 3 строки
             '.card__title {' +
                 'height: 3.6em !important;' +
                 'text-overflow: ellipsis !important;' +
@@ -56,7 +43,7 @@
                 'line-clamp: 3 !important;' +
             '}' +
             
-            // Год - добавлено скругление верхнего левого угла и конкретный цвет фона
+            // Год
             '.card__age {' +
                 'position: absolute !important;' +
                 'right: 0em !important;' +
@@ -64,13 +51,13 @@
                 'z-index: 10 !important;' +
                 'font-weight: 700 !important;' +
                 'padding: 0.4em 0.8em !important;' +
-                'border-radius: 1em 0 1em 0 !important;' + /* Было: 0 0 1em 0, добавили 1em слева сверху */
+                'border-radius: 1em 0 1em 0 !important;' +
                 'line-height: 1.0 !important;' +
                 'font-size: 1.0em !important;' +
                 'background: rgba(0, 0, 0, 0.5) !important;' +
             '}' +
             
-            // Рейтинг - добавлено скругление нижнего левого угла
+            // Рейтинг
             '.card__vote {' +
                 'position: absolute !important;' +
                 'bottom: auto !important;' +
@@ -78,12 +65,12 @@
                 'top: 0em !important;' +
                 'font-weight: 700 !important;' +
                 'padding: 0.4em 0.8em !important;' +
-                'border-radius: 0 1em 0 1em !important;' + /* Было: 0 1em 0 0, добавили 1em слева снизу */
+                'border-radius: 0 1em 0 1em !important;' +
                 'line-height: 1.0 !important;' +
                 'font-size: 1.0em !important;' +
             '}' +
             
-            // Качество - добавлено скругление нижнего правого угла
+            // Качество 
             '.card__quality {' +
                 'position: absolute !important;' +
                 'bottom: auto !important;' +
@@ -93,11 +80,11 @@
                 'padding: 0.4em 0.8em !important;' +
                 'font-weight: 700 !important;' +
                 'font-size: 1.0em !important;' +
-                'border-radius: 1em 0 0 1em !important;' + /* Было: 1em 0 0 0, добавили 1em справа снизу */
+                'border-radius: 1em 0 1em 0 !important;' + 
                 'text-transform: uppercase !important;' +
             '}' +
             
-            // Тип сериал - добавлено скругление нижнего правого угла
+            // Тип сериал
             '.card--tv .card__type {' +
                 'position: absolute !important;' +
                 'bottom: auto !important;' +
@@ -106,7 +93,7 @@
                 'top: 0em !important;' +
                 'font-weight: 700 !important;' +
                 'padding: 0.4em 0.8em !important;' +
-                'border-radius: 1em 0 0 1em !important;' + /* Было: 1em 0 0 0, добавили 1em справа снизу */
+                'border-radius: 1em 0 1em 0 !important;' +
                 'line-height: 1.0 !important;' +
                 'font-size: 1.0em !important;' +
                 'z-index: 5 !important;' +
@@ -123,7 +110,7 @@
                 'min-height: 18em !important;' +
             '}' +
             
-            // Высота карточки
+            // Смещение наполнения карточки вниз для больших экранов
             '@media screen and (min-width: 580px) {' +
                 '.full-start-new {' +
                     'min-height: 80vh !important;' +
@@ -261,3 +248,4 @@
     // Запускаем инициализацию
     init();
 })();
+
