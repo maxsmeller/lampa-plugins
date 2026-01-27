@@ -333,7 +333,7 @@
             ".menu__list {\npadding-left: 0em;\n}\n" +
             // Оставим иконки белыми в левом Меню
             // ".menu__item.focus .menu__ico {\n   -webkit-filter: invert(1);\n    filter: invert(1);\n }\n " +
-            // Фикс ТОЛЬКО для иконок плагинов (те, что в <li>)
+            /* Фикс ТОЛЬКО для иконок плагинов (те, что в <li>)
             "li.menu__item .menu__ico {\n" +
             "    -webkit-filter: none !important;\n" +
             "    filter: none !important;\n" +
@@ -353,9 +353,11 @@
             "li.menu__item.focus .menu__ico svg rect[stroke],\n" +
             "li.menu__item.hover .menu__ico svg rect[stroke] {\n" +
             "    stroke: #fff !important;\n" +
-            "}\n" +
+            "}\n" + 
+            */
             // Белые иконки в бошке
-            // ".head__action.focus, .head__action.hover {\ncolor: fff;\n}\n" +
+            ".head__action.focus, .head__action.hover {\ncolor: fff;\n}\n" +
+            // Фон метки качества
             ".card__quality,\n .card__type::after,\n .card--tv .card__type {\nbackground: rgba(0, 0, 0, 0.6);\n}\n" +
             "</style>\n";
         Lampa.Template.add('forall_style_css', forall_style);
@@ -566,10 +568,11 @@
     // Регистрация плагина в манифесте
     Lampa.Manifest.plugins = {
         name: 'maxsm_themes',
-        version: '3.0.0',
+        version: '3.1.0',
         description: 'maxsm_themes'
     };
 
     // Экспортируем объект плагина для внешнего доступа
     window.maxsm_themes = maxsm_themes;
+
 })();
