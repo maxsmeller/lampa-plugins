@@ -31,15 +31,12 @@
                 //'font-size: 1.0em !important;' +
             '}' +
             
-            // Иконки закладок и т.д.
-            //'.card__icons {' +
-            //    'top: 2.5em !important;' + 
-           // '}' +
-            
             // Рейтинг
             '.card__vote {' +
                 'left: -0.8em;' + 
                 'top: 1.4em;' +
+			    'right: auto;' +
+			    'bottom: auto;' +
 			    'padding: 0.4em 0.4em;' +
 	     	    'border-radius: 0.3em;' +
                 'font-weight: 700 !important;' +
@@ -170,6 +167,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
