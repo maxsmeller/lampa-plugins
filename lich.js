@@ -49,57 +49,48 @@
                 '-webkit-line-clamp: 3 !important;' +
                 'line-clamp: 3 !important;' +
             '}' +
+            
+            // Год - правый нижний угол (соответствует скруглению карточки)
             '.card__age {' +
                 'position: absolute !important;' +
                 'right: 0em !important;' +
                 'bottom: 0em !important;' +
                 'z-index: 10 !important;' +
                 'font-weight: 700 !important;' +
-                'padding: 0.4em 0.6em !important;' +
-                'border-radius: 0.48em 0 0.48em 0 !important;' +
+                'padding: 0.4em 0.8em !important;' +
+                'border-radius: 0 0 1em 0 !important;' + // Совпадает с правым нижним углом карточки
                 'line-height: 1.0 !important;' +
                 'font-size: 1.0em !important;' +
             '}' +
+            
+            // Рейтинг - правый верхний угол
             '.card__vote {' +
                 'position: absolute !important;' +
                 'bottom: auto !important;' +
                 'right: 0em !important;' +
                 'top: 0em !important;' +
                 'font-weight: 700 !important;' +
-                'border-radius: 0 0.34em 0 0.34em !important;' +
+                'padding: 0.4em 0.8em !important;' +
+                'border-radius: 0 1em 0 0 !important;' + // Совпадает с правым верхним углом карточки
                 'line-height: 1.0 !important;' +
-            '}' +
-            '.card__marker {' +
-                'position: absolute !important;' +
-                'left: 0em !important;' +
-                'top: 4em !important;' +
-                'bottom: auto !important;' +
-                'border-radius: 0 0.5em 0.5em 0 !important;' +
-                'font-weight: 700 !important;' +
                 'font-size: 1.0em !important;' +
-                'padding: 0.4em 0.6em !important;' +
-                'display: flex !important;' +
-                'align-items: center !important;' +
-                'line-height: 1.2 !important;' +
-                'max-width: min(12em, 95%) !important;' +
             '}' +
-            '.card__marker > span {' +
-                'max-width: min(12em, 95%) !important;' +
-            '}' +
+                      
+            // Качество - левый верхний угол
             '.card__quality {' +
                 'position: absolute !important;' +
                 'bottom: auto !important;' +
                 'left: 0em !important;' +
                 'right: auto !important;' +
                 'top: 0em !important;' +
-                'padding: 0.4em 0.6em !important;' +
+                'padding: 0.4em 0.8em !important;' +
                 'font-weight: 700 !important;' +
                 'font-size: 1.0em !important;' +
-                'border-radius: 0.4em 0 0.4em 0 !important;' +
+                'border-radius: 1em 0 0 0 !important;' + // Совпадает с левым верхним углом карточки
                 'text-transform: uppercase !important;' +
             '}' +
             
-            // Тип сериал
+            // Тип сериал - левый верхний угол (если нет качества)
             '.card--tv .card__type {' +
                 'position: absolute !important;' +
                 'bottom: auto !important;' +
@@ -107,26 +98,11 @@
                 'right: auto !important;' +
                 'top: 0em !important;' +
                 'font-weight: 700 !important;' +
-                'padding: 0.4em 0.6em !important;' +
-                'border-radius: 0.4em 0 0.4em 0 !important;' +
+                'padding: 0.4em 0.8em !important;' +
+                'border-radius: 1em 0 0 0 !important;' + // Совпадает с левым верхним углом карточки
                 'line-height: 1.0 !important;' +
                 'font-size: 1.0em !important;' +
                 'z-index: 5 !important;' +
-            '}' +
-            
-            // Год (альтернативный стиль)
-            '.card__age {' +
-                'position: absolute;' +
-                'right: 0em;' +
-                'bottom: 0em;' +
-                'z-index: 10;' +
-                'background: rgba(0, 0, 0, 0.6);' +
-                'color: #ffffff;' +
-                'font-weight: 700;' +
-                'padding: 0.4em 0.6em;' +
-                'border-radius: 0.48em 0 0.48em 0;' +
-                'line-height: 1.0;' +
-                'font-size: 1.0em;' +
             '}' +
             
             // Расстояние между рядами
@@ -251,6 +227,33 @@
             '}' +
             '.card-episode.focus {' +
                 'transform: scale(1.03) !important;' +
+            '}' +
+            
+            // Контейнер карточки должен иметь overflow: hidden
+            '.card__view,' +
+            '.card__img,' +
+            '.card__body,' +
+            '.card-episode__body,' +
+            '.full-episode__img {' +
+                'border-radius: 1em !important;' + // Основное скругление карточки
+                'overflow: hidden !important;' + // Важно для обрезки содержимого
+            '}' +
+            
+            // Дополнительно: градиенты для лучшей читаемости
+            '.card__age::before,' +
+            '.card__vote::before,' +
+            '.card__quality::before,' +
+            '.card__marker::before,' +
+            '.card--tv .card__type::before {' +
+                'content: "";' +
+                'position: absolute;' +
+                'top: 0;' +
+                'left: 0;' +
+                'right: 0;' +
+                'bottom: 0;' +
+                'border-radius: inherit;' + // Наследует скругление родителя
+                'z-index: -1;' +
+                'background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%);' +
             '}' +
             '';
         
