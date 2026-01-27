@@ -26,8 +26,6 @@
                 '-webkit-line-clamp: 3 !important;' +
                 'line-clamp: 3 !important;' +
             '}' +
-            
-			/*
 			
             // Год - обновлено: закругление со всех сторон и отступ от края
             '.card__age {' +
@@ -88,8 +86,6 @@
                 'font-size: 1.0em !important;' +
             '}' +
 			
-            */
-			
             // Расстояние между рядами
             '.items-line.items-line--type-cards + .items-line.items-line--type-cards {' +
                 'margin-top: 1em !important;' +
@@ -119,7 +115,7 @@
         }
         
         document.head.appendChild(style);
-        /*
+		
         // Добавление шаблонов если доступен Lampa.Template
         if (typeof Lampa !== 'undefined' && Lampa.Template) {
             // Шаблон карточки с годом выше названия
@@ -167,7 +163,6 @@
         } else {
             console.warn('Lampa.Template не найден, шаблоны не добавлены');
         }
-        */
     }
 
     // Запуск при загрузке приложения
@@ -193,3 +188,4 @@
     // Запускаем инициализацию
     init();
 })();
+
