@@ -64,7 +64,7 @@
                 'font-weight: 700 !important;' +
                 'font-size: 1.0em !important;' +
                 'border-radius: 1em !important;' + /* Закругление со всех сторон */
-                'color: #ffffff;' +
+                // 'color: #ffffff;' +
             '}' +
             
             // Тип сериал - обновлено: закругление со всех сторон и отступ от края
@@ -183,4 +183,5 @@
     // Запускаем инициализацию
     init();
 })();
+
 
