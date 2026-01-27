@@ -18,24 +18,7 @@
         style.id = 'maxsm_lich_style';
         
         // Оптимизированные объединенные стили
-        var css = '' +           
-            // По центру для мобилок
-            '@media screen and (max-width: 480px) {' +
-                '.full-start-new__head,' +
-                '.full-start-new__title,' +
-                '.full-start__title-original,' +
-                '.full-start__rate,' +
-                '.full-start-new__reactions,' +
-                '.full-start-new__rate-line,' +
-                '.full-start-new__details,' +
-                '.full-start-new__buttons,' +
-                '.full-start-new__tagline {' +
-                    '-webkit-justify-content: center !important;' +
-                    'justify-content: center !important;' +
-                    'text-align: center !important;' +
-                '}' +
-            '}' +
-            
+        var css = '' +                      
             // Заголовок карточки максимум 3 строки
             '.card__title {' +
                 'height: 3.6em !important;' +
@@ -199,3 +182,4 @@
     // Запускаем инициализацию
     init();
 })();
+
