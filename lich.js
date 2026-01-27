@@ -43,19 +43,19 @@
 			    'padding: 0.4em 0.4em;' +
 	     	    'border-radius: 0.3em;' +
                 'font-weight: 700 !important;' +
-                //'font-size: 1.0em !important;' +
+                'font-size: 1.1em !important;' +
             '}' +
             
             // Качество
             '.card__quality {' +
                 'font-weight: 700 !important;' +
-                //'font-size: 1.0em !important;' +
+                'font-size: 1.0em !important;' +
             '}' +
             
             // Тип сериал
             '.card--tv .card__type {' +
                 'font-weight: 700 !important;' +
-                //'font-size: 1.0em !important;' +
+                'font-size: 1.0em !important;' +
             '}' +
 			
             // Заголовок карточки максимум 3 строки
@@ -168,6 +168,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
