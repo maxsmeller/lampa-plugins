@@ -40,8 +40,10 @@
 			    'left: auto;' +
 	     		'bottom: 1.4em;' +
 			    'top: auto;' +
-                'background: #ffe216;' +
-			    'color: #000;' +
+                'background: #000;' +
+			    'color: #fff;' +
+                //'background: #ffe216;' +
+			    //'color: #000;' +
 			    'padding: 0.4em 0.4em;' +
 	     	    'border-radius: 0.3em;' +
                 'font-weight: 700;' +
@@ -179,6 +181,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
