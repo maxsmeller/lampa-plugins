@@ -38,12 +38,12 @@
             
             // Рейтинг
             '.card__vote {' +
-                'bottom: auto !important;' +
-                'top: 0.3em !important;' + 
+                'left: -0.8em;' + 
+                'bottom: 3em;' +
 			    'padding: 0.4em 0.4em;' +
 	     	    'border-radius: 0.3em;' +
                 'font-weight: 700 !important;' +
-                'font-size: 1.1em !important;' +
+                'font-size: 1.0em !important;' +
             '}' +
             
             // Качество
@@ -170,6 +170,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
