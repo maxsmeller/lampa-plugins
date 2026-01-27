@@ -60,11 +60,11 @@
             
             // Качество - обновлено: закругление со всех сторон и отступ от края
             '.card__quality {' +
-                'position: absolute !important;' +
+                //'position: absolute !important;' +
                 'bottom: auto !important;' +
-                'left: 0.4em !important;' + 
-                'right: auto !important;' +
-                'top: 0.4em !important;' + 
+                //'left: 0.4em !important;' + 
+                //'right: auto !important;' +
+                'top: 1.4em !important;' + 
                 // 'padding: 0.4em 0.8em !important;' +
                 'font-weight: 700 !important;' +
                 'font-size: 1.0em !important;' +
@@ -74,15 +74,15 @@
             
             // Тип сериал - обновлено: закругление со всех сторон и отступ от края
             '.card--tv .card__type {' +
-                'position: absolute !important;' +
-                'bottom: auto !important;' +
-                'left: 0.4em !important;' + 
-                'right: auto !important;' +
-                'top: 0.4em !important;' + 
+            //    'position: absolute !important;' +
+              //  'bottom: auto !important;' +
+             //  'left: 0.4em !important;' + 
+              //  'right: auto !important;' +
+              //  'top: 0.4em !important;' + 
                 'font-weight: 700 !important;' +
                 // 'padding: 0.4em 0.8em !important;' +
                 // 'border-radius: 1em !important;' + 
-                'line-height: 1.0 !important;' +
+               // 'line-height: 1.0 !important;' +
                 'font-size: 1.0em !important;' +
             '}' +
 			
@@ -188,6 +188,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
