@@ -317,7 +317,7 @@
                 } else if (findStopWords) {
                     if (Q_LOGGING) console.log("MAXSM-QUALITY", "Screen copy detected");
                     callback({ 
-                        quality: 'TS',
+                        quality: translateQuality('TS'),
                         title: "NOT SAVED" 
                     });
                 } else {
@@ -703,3 +703,4 @@
 
 
 })();
+
