@@ -27,7 +27,7 @@
         };
 
         // Устанавливаем стили для выбранной темы
-        style.html(themes[lich]);
+        style.html(themes.lich);
 
         // Добавляем стиль в head
         $('head').append(style);
@@ -137,7 +137,7 @@
             "    color: #fff !important;\n" +
             "}\n" +
             // Белые иконки в бошке
-            ".head__action.focus, .head__action.hover {\ncolor: fff;\n}\n" +
+            ".head__action.focus, .head__action.hover {\ncolor: #fff;\n}\n" +
             // Фон метки качества
             ".card__quality,\n .card__type::after,\n .card--tv .card__type {\nbackground: rgba(0, 0, 0, 0.6);\n}\n" +
             "</style>\n";
