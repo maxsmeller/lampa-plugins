@@ -22,10 +22,9 @@
             // Рейтинг
             '.card__vote {' +
                 'right: -0.8em;' + 
-                //'top: 1.4em;' +
-	     		'bottom: 7.2em;' +
+                'top: 1.4em;' +
 			    'left: auto;' +
-			    //'bottom: auto;' +
+			    'bottom: auto;' +
                 'background: #ffe216;' +
 			    'color: #000;' +
 			    'padding: 0.4em 0.4em;' +
@@ -37,11 +36,9 @@
             // Год
             '.card__age {' +
                 'position: absolute;' +
-                //'right: 0.3em;' + 
-                //'bottom: 0.3em;' + 
 	            'right: -0.8em;' + 
 			    'left: auto;' +
-	     		'bottom: 5.0em;' +
+	     		'bottom: 3.0em;' +
 			    'top: auto;' +
                 'background: #ffe216;' +
 			    'color: #000;' +
@@ -54,16 +51,12 @@
             
             // Качество
             '.card__quality {' +
-				'right: -0.8em;' + 
-			    'left: auto;' +
                 'font-weight: 700;' +
                 'font-size: 0.8em;' +
             '}' +
             
             // Тип сериал
             '.card--tv .card__type {' +
-				'right: -0.8em;' +
-			    'left: auto;' +
 	     		'bottom: 3em;' +
 			    'top: auto;' +
                 'font-weight: 700;' +
@@ -180,6 +173,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
