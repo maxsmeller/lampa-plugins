@@ -1,20 +1,5 @@
 (function() {
     'use strict';
-    
-    // Добавление переводов
-    Lampa.Lang.add({
-        maxsm_lich_tvcaption: {
-            ru: "СЕРИАЛ",       
-            en: "SERIES",   
-            uk: "СЕРІАЛ",    
-            be: "СЕРЫЯЛ",     
-            zh: "剧集",       
-            pt: "SÉRIE",     
-            bg: "СЕРІАЛ",      
-            he: "סִדְרָה",  
-            cs: "SERIÁL" 
-        }
-    });
 
     // Основная функция применения стилей
     function applyStyle() {
@@ -22,9 +7,6 @@
         $('#maxsm_lich_style').remove();
         
         var style = $('<style id="maxsm_lich_style"></style>');
-        
-        // Получаем перевод для использования в CSS
-        var tvCaption = Lampa.Lang.translate('maxsm_lich_tvcaption');
         
         // Объединенные стили - только НЕ цветовые свойства
         var css = "" +
@@ -61,38 +43,6 @@
             ".card__quality { position: absolute !important; bottom: auto !important; left: 0em !important; right: auto !important; top: 0em !important; " +
             "padding: 0.4em 0.6em !important; font-weight: 700 !important; font-size: 1.0em !important; " +
             "border-radius: 0.4em 0 0.4em 0 !important; text-transform: uppercase !important; }" +
-            
-            /* ХИТРЫЙ ФИКС для надписи СЕРИАЛ - оставляем позиционирование, убираем цвета */
-            ".card--tv .card__type { " +
-            "position: absolute !important; " +
-            "bottom: auto !important; " +
-            "left: 0em !important; " +
-            "right: auto !important; " +
-            "top: 0em !important; " +
-            "font-weight: 700 !important; " +
-            "padding: 0.4em 0.6em !important; " +
-            "border-radius: 0.4em 0 0.4em 0 !important; " +
-            "line-height: 1.0 !important; " +
-            "font-size: 1.0em !important; " +
-            "z-index: 5 !important; " +
-            "}" +
-            
-            /* Скрываем оригинальный текст элемента */
-            ".card--tv .card__type { " +
-            "color: transparent !important; " +
-            "background: transparent !important; " +
-            "}" +
-            
-            /* Переопределяем текст через content */
-            ".card--tv .card__type::after { " +
-            "content: '" + tvCaption.replace(/'/g, "\\'") + "' !important; " +
-            "position: absolute !important; " +
-            "top: 0.4em !important; " +
-            "left: 0.6em !important; " +
-            "right: 0.6em !important; " +
-            "color: inherit !important; " +
-            "background: inherit !important; " +
-            "}" +
             
             /* Расстояние между рядами */
             ".items-line.items-line--type-cards + .items-line.items-line--type-cards { margin-top: 1em !important; }" +
@@ -169,8 +119,8 @@
                         '</div>' +
                     '</div>' +
                     '<div class="card__left">' +
-                        '<div class="card__title">{title}</div>' +
-                        '<div class="card__age">{release_year}</div>' +
+                        '<div class="card__title>{title}</div>' +
+                        '<div class="card__age>{release_year}</div>' +
                     '</div>' +
                 '</div>' +
             '</div>');
