@@ -34,8 +34,7 @@
                 'bottom: 0.4em !important;' + 
                 'font-weight: 700 !important;' +
                 'padding: 0.4em 0.8em !important;' +
-                'border-radius: 1em !important;' + 
-                'line-height: 1.0 !important;' +
+                'border-radius: 0.5em !important;' + 
                 'font-size: 1.0em !important;' +
                 'background: rgba(0, 0, 0, 0.5) !important;' +
             '}' +
@@ -47,28 +46,13 @@
             
             // Рейтинг - обновлено: закругление со всех сторон и отступ от края
             '.card__vote {' +
-                'position: absolute !important;' +
                 'bottom: auto !important;' +
                 'right: 0.4em !important;' + 
                 'top: 0.4em !important;' + 
-                'font-weight: 700 !important;' +
                 'padding: 0.4em 0.8em !important;' +
-                'border-radius: 1em !important;' + 
-                'line-height: 1.0 !important;' +
+                'border-radius: 0.5em !important;' + 
                 'font-size: 1.0em !important;' +
             '}' +
-
-'.card .card__vote::before {' +
-    'content: "" !important;' + /* Убрали SVG из content */
-    'width: 1.2em !important;' + /* Относительный размер */
-    'height: 1.2em !important;' +
-    'background-image: url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 -960 960 960\'%3E%3Cpath fill=\'%23ffffff\' d=\'M349.923-241.308L480-320.077l131.077 79.769-34.615-148.307 115.384-99.924L540.077-502 480-642.308 420.923-503l-151.769 13.461 115.384 99.693-34.615 148.538ZM283-150.076l52.615-223.539-173.923-150.847 229.231-18.846L480-754.693l90.077 211.385 228.231 18.846-173.923 150.847L677-150.076 480-268.923 283-150.076Zm197-281.616Z\'/%3E%3C/svg%3E") !important;' +
-    'background-size: contain !important;' +
-    'background-repeat: no-repeat !important;' +
-    'background-position: center !important;' +
-    'flex-shrink: 0 !important;' + /* Иконка не сжимается */
-    'display: inline-block !important;' +
-'}' +
             
             // Качество - обновлено: закругление со всех сторон и отступ от края
             '.card__quality {' +
@@ -200,6 +184,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
