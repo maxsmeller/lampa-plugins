@@ -18,16 +18,8 @@
         style.id = 'maxsm_lich_style';
         
         // Оптимизированные объединенные стили
-        var css = '' +       
-            // Заголовок карточки максимум 3 строки
-            '.card__title {' +
-                'height: 3.6em !important;' +
-                'text-overflow: ellipsis !important;' +
-                '-webkit-line-clamp: 3 !important;' +
-                'line-clamp: 3 !important;' +
-            '}' +
-			
-            // Год - обновлено: закругление со всех сторон и отступ от края
+        var css = '' +       	
+            // Год
             '.card__age {' +
                 'position: absolute !important;' +
                 'right: 0.3em !important;' + 
@@ -36,7 +28,7 @@
 			    'padding: 0.4em 0.4em;' +
 	     	    'border-radius: 0.3em;' +
                 'font-weight: 700 !important;' +
-                'font-size: 1.0em !important;' +
+                //'font-size: 1.0em !important;' +
             '}' +
             
             // Иконки закладок и т.д.
@@ -44,26 +36,34 @@
             //    'top: 2.5em !important;' + 
            // '}' +
             
-            // Рейтинг - обновлено: закругление со всех сторон и отступ от края
+            // Рейтинг
             '.card__vote {' +
                 'bottom: auto !important;' +
                 'top: 0.3em !important;' + 
 			    'padding: 0.4em 0.4em;' +
 	     	    'border-radius: 0.3em;' +
                 'font-weight: 700 !important;' +
-                'font-size: 1.0em !important;' +
+                //'font-size: 1.0em !important;' +
             '}' +
             
-            // Качество - обновлено: закругление со всех сторон и отступ от края
+            // Качество
             '.card__quality {' +
                 'font-weight: 700 !important;' +
-                'font-size: 1.0em !important;' +
+                //'font-size: 1.0em !important;' +
             '}' +
             
-            // Тип сериал - обновлено: закругление со всех сторон и отступ от края
+            // Тип сериал
             '.card--tv .card__type {' +
                 'font-weight: 700 !important;' +
-                'font-size: 1.0em !important;' +
+                //'font-size: 1.0em !important;' +
+            '}' +
+			
+            // Заголовок карточки максимум 3 строки
+            '.card__title {' +
+                'height: 3.6em !important;' +
+                'text-overflow: ellipsis !important;' +
+                '-webkit-line-clamp: 3 !important;' +
+                'line-clamp: 3 !important;' +
             '}' +
 			
             // Расстояние между рядами
@@ -168,6 +168,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
