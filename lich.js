@@ -29,14 +29,13 @@
 			
             // Год - обновлено: закругление со всех сторон и отступ от края
             '.card__age {' +
-               'position: absolute !important;' +
+                'position: absolute !important;' +
                 'right: 0.4em !important;' + 
                 'bottom: 0.4em !important;' + 
                 'background: rgba(0, 0, 0, 0.5) !important;' +
 			    'padding: 0.4em 0.4em;' +
-		        //'background: #ffe216;' +
-	        	//'color: #000;' +
 	     	    'border-radius: 0.3em;' +
+                'font-weight: 700 !important;' +
             '}' +
             
             // Иконки закладок и т.д.
@@ -50,37 +49,19 @@
                 'right: 0.4em !important;' + 
                 'top: 0.4em !important;' + 
 			    'padding: 0.4em 0.4em;' +
-		        //'background: #ffe216;' +
-	        	//'color: #000;' +
 	     	    'border-radius: 0.3em;' +
-			'background: rgba(0, 0, 0, 0.5) !important;' +
+		    //	'background: rgba(0, 0, 0, 0.5) !important;' +
             '}' +
             
             // Качество - обновлено: закругление со всех сторон и отступ от края
             '.card__quality {' +
-                //'position: absolute !important;' +
-                //'bottom: auto !important;' +
-                //'left: 0.4em !important;' + 
-                //'right: auto !important;' +
-                //'top: 1.4em !important;' + 
-                // 'padding: 0.4em 0.8em !important;' +
                 'font-weight: 700 !important;' +
                 'font-size: 1.0em !important;' +
-                // 'border-radius: 1em !important;' + 
-                // 'color: #ffffff;' +
             '}' +
             
             // Тип сериал - обновлено: закругление со всех сторон и отступ от края
             '.card--tv .card__type {' +
-            //    'position: absolute !important;' +
-              //  'bottom: auto !important;' +
-             //  'left: 0.4em !important;' + 
-              //  'right: auto !important;' +
-              //  'top: 0.4em !important;' + 
                 'font-weight: 700 !important;' +
-                // 'padding: 0.4em 0.8em !important;' +
-                // 'border-radius: 1em !important;' + 
-               // 'line-height: 1.0 !important;' +
                 'font-size: 1.0em !important;' +
             '}' +
 			
@@ -186,6 +167,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
