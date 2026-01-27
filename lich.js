@@ -23,7 +23,7 @@
             '.card__vote {' +
                 'right: -0.8em;' + 
                 //'top: 1.4em;' +
-	     		'bottom: 6.0em;' +
+	     		'bottom: 7.2em;' +
 			    'left: auto;' +
 			    //'bottom: auto;' +
                 'background: #ffe216;' +
@@ -53,12 +53,14 @@
             
             // Качество
             '.card__quality {' +
+				'right: -0.8em;' + 
                 'font-weight: 700;' +
                 'font-size: 0.8em;' +
             '}' +
             
             // Тип сериал
             '.card--tv .card__type {' +
+				'right: -0.8em;' + 
 	     		'bottom: 3em;' +
 			    'top: auto;' +
                 'font-weight: 700;' +
@@ -175,6 +177,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
