@@ -26,7 +26,7 @@
                 '-webkit-line-clamp: 3 !important;' +
                 'line-clamp: 3 !important;' +
             '}' +
-            
+            /*
             // Год - обновлено: закругление со всех сторон и отступ от края
             '.card__age {' +
                 'position: absolute !important;' +
@@ -85,7 +85,7 @@
                 'line-height: 1.0 !important;' +
                 'font-size: 1.0em !important;' +
             '}' +
-            
+            */
             // Расстояние между рядами
             '.items-line.items-line--type-cards + .items-line.items-line--type-cards {' +
                 'margin-top: 1em !important;' +
@@ -189,6 +189,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
