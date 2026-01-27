@@ -21,14 +21,13 @@
         var css = '' +       	
             // Год
             '.card__age {' +
-                'position: absolute !important;' +
-                'right: 0.3em !important;' + 
-                'bottom: 0.3em !important;' + 
-                'background: rgba(0, 0, 0, 0.5) !important;' +
+                'position: absolute;' +
+                'right: 0.3em;' + 
+                'bottom: 0.3em;' + 
+                'background: rgba(0, 0, 0, 0.5);' +
 			    'padding: 0.4em 0.4em;' +
-	     	    'border-radius: 0.3em;' +
-                'font-weight: 700 !important;' +
-                //'font-size: 1.0em !important;' +
+	     	    'border-radius: 0.5em;' +
+                'font-weight: 700;' +
             '}' +
             
             // Рейтинг
@@ -39,48 +38,48 @@
 			    'bottom: auto;' +
 			    'padding: 0.4em 0.4em;' +
 	     	    'border-radius: 0.3em;' +
-                'font-weight: 700 !important;' +
-                'font-size: 1.0em !important;' +
+                'font-weight: 700;' +
+                'font-size: 1.0em;' +
             '}' +
             
             // Качество
             '.card__quality {' +
-                'font-weight: 700 !important;' +
-                'font-size: 1.0em !important;' +
+                'font-weight: 700;' +
+                'font-size: 1.0em;' +
             '}' +
             
             // Тип сериал
             '.card--tv .card__type {' +
 	     		'bottom: 3em;' +
 			    'top: auto;' +
-                'font-weight: 700 !important;' +
-                'font-size: 1.0em !important;' +
+                'font-weight: 700;' +
+                'font-size: 1.0em;' +
             '}' +
 			
             // Заголовок карточки максимум 3 строки
             '.card__title {' +
-                'height: 3.6em !important;' +
-                'text-overflow: ellipsis !important;' +
-                '-webkit-line-clamp: 3 !important;' +
-                'line-clamp: 3 !important;' +
+                'height: 3.6em;' +
+                'text-overflow: ellipsis;' +
+                '-webkit-line-clamp: 3;' +
+                'line-clamp: 3;' +
             '}' +
 			
             // Расстояние между рядами
             '.items-line.items-line--type-cards + .items-line.items-line--type-cards {' +
-                'margin-top: 1em !important;' +
+                'margin-top: 1em;' +
             '}' +
             '.card--small .card__view {' +
-                'margin-bottom: 2em !important;' +
+                'margin-bottom: 2em;' +
             '}' +
             '.items-line--type-cards {' +
-                'min-height: 18em !important;' +
+                'min-height: 18em;' +
             '}' +
             
             // Смещение наполнения карточки вниз для больших экранов
             '@media screen and (min-width: 580px) {' +
                 '.full-start-new {' +
-                    'min-height: 80vh !important;' +
-                    'display: flex !important;' +
+                    'min-height: 80vh;' +
+                    'display: flex;' +
                 '}' +
             '}' +
             '';
@@ -167,6 +166,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
