@@ -332,7 +332,7 @@
             ".menu__item.focus {border-radius: 0 0.5em 0.5em 0;\n}\n" +
             ".menu__list {\npadding-left: 0em;\n}\n" +
             // Оставим иконки белыми в левом Меню
-            ".menu__item.focus .menu__ico {\n   -webkit-filter: invert(1);\n    filter: invert(1);\n }\n " +
+            // ".menu__item.focus .menu__ico {\n   -webkit-filter: invert(1);\n    filter: invert(1);\n }\n " +
             // Фикс ТОЛЬКО для иконок плагинов (те, что в <li>)
             "li.menu__item.focus .menu__ico,\n" +
             "li.menu__item.hover .menu__ico {\n" +
@@ -559,5 +559,6 @@
     window.maxsm_themes = maxsm_themes;
 
 })();
+
 
 
