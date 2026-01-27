@@ -23,14 +23,15 @@
             '.card__vote {' +
                 'right: -0.8em;' + 
                 //'top: 1.4em;' +
-	     		'bottom: 3.6em;' +
+	     		'bottom: 5.6em;' +
 			    'left: auto;' +
 			    //'bottom: auto;' +
                 'background: #ffe216;' +
+			    'color: #000;' +
 			    'padding: 0.4em 0.4em;' +
 	     	    'border-radius: 0.3em;' +
                 'font-weight: 700;' +
-                'font-size: 1.0em;' +
+                'font-size: 0.8em;' +
             '}' +
 			
             // Год
@@ -39,9 +40,10 @@
                 //'right: 0.3em;' + 
                 //'bottom: 0.3em;' + 
 	            'right: -0.8em;' + 
-	     		'bottom: 3.0em;' +
+	     		'bottom: 5.0em;' +
 			    'top: auto;' +
                 'background: #ffe216;' +
+			    'color: #000;' +
 			    'padding: 0.4em 0.4em;' +
 	     	    'border-radius: 0.3em;' +
                 'font-weight: 700;' +
@@ -173,6 +175,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
