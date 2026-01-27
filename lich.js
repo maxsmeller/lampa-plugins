@@ -49,11 +49,11 @@
                 'right: 0em !important;' +
                 'bottom: 0em !important;' +
            //     'z-index: 10 !important;' +
-            //    'font-weight: 700 !important;' +
-           //     'padding: 0.4em 0.8em !important;' +
+                'font-weight: 700 !important;' +
+                'padding: 0.4em 0.8em !important;' +
                 'border-radius: 1em 0 1em 0 !important;' +
-            //    'line-height: 1.0 !important;' +
-           //     'font-size: 1.0em !important;' +
+                'line-height: 1.0 !important;' +
+                'font-size: 1.0em !important;' +
                 'background: rgba(0, 0, 0, 0.5) !important;' +
             '}' +
             
@@ -63,11 +63,11 @@
                 'bottom: auto !important;' +
                 'right: 0em !important;' +
                 'top: 0em !important;' +
-           //     'font-weight: 700 !important;' +
-           //     'padding: 0.4em 0.8em !important;' +
+                'font-weight: 700 !important;' +
+                'padding: 0.4em 0.8em !important;' +
                 'border-radius: 0 1em 0 1em !important;' +
-           //     'line-height: 1.0 !important;' +
-            //    'font-size: 1.0em !important;' +
+                'line-height: 1.0 !important;' +
+                'font-size: 1.0em !important;' +
             '}' +
             
             // Качество 
@@ -77,9 +77,9 @@
                 'left: 0em !important;' +
                 'right: auto !important;' +
                 'top: 0em !important;' +
-             //   'padding: 0.4em 0.8em !important;' +
-            //    'font-weight: 700 !important;' +
-            //    'font-size: 1.0em !important;' +
+                'padding: 0.4em 0.8em !important;' +
+                'font-weight: 700 !important;' +
+                'font-size: 1.0em !important;' +
                 'border-radius: 1em 0 1em 0 !important;' + 
             //    'text-transform: uppercase !important;' +
             '}' +
@@ -91,11 +91,11 @@
                 'left: 0em !important;' +
                 'right: auto !important;' +
                 'top: 0em !important;' +
-              //  'font-weight: 700 !important;' +
-             //   'padding: 0.4em 0.8em !important;' +
+                'font-weight: 700 !important;' +
+                'padding: 0.4em 0.8em !important;' +
                 'border-radius: 1em 0 1em 0 !important;' +
-              //  'line-height: 1.0 !important;' +
-             //   'font-size: 1.0em !important;' +
+                'line-height: 1.0 !important;' +
+                'font-size: 1.0em !important;' +
              //   'z-index: 5 !important;' +
             '}' +
             
@@ -154,7 +154,7 @@
                 '<div class="card__title">{title}</div>' +
             '</div>');
         
-        // Шаблон карточки эпизода без футера
+        /* Шаблон карточки эпизода без футера
         Lampa.Template.add('card_episode',
             '<div class="card-episode selector layer--visible layer--render">' +
                 '<div class="card-episode__body">' +
@@ -182,7 +182,7 @@
                         '<div class="card__age">{release_year}</div>' +
                     '</div>' +
                 '</div>' +
-            '</div>');
+            '</div>'); */
     }
 
     // Запуск при загрузке приложения
@@ -208,5 +208,6 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
