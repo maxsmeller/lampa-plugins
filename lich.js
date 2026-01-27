@@ -23,7 +23,7 @@
             '.card__vote {' +
                 'right: -0.8em;' + 
                 //'top: 1.4em;' +
-	     		'bottom: 5.6em;' +
+	     		'bottom: 6.0em;' +
 			    'left: auto;' +
 			    //'bottom: auto;' +
                 'background: #ffe216;' +
@@ -175,6 +175,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
