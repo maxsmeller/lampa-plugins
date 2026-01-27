@@ -38,15 +38,15 @@
         "}" +
         */
         ".card__quality-quality-4K {" +
-        "    background: linear-gradient(135deg, #2e7d32, #4caf50) !important;" +
+        "    background: #2e7d32 !important;" +
         "    color: white !important;" +
         "}" +
         ".card__quality-quality-FHD {" +
-        "    background: linear-gradient(135deg, #ff8f00, #ffb300) !important;" +
+        "    background: #ffe216 !important;" +
         "    color: white !important;" +
         "}" +
         ".card__quality-quality-... {" +
-        "    background: linear-gradient(135deg, #616161, #9e9e9e) !important;" +
+        "    background: #616161 !important;" +
         "    color: white !important;" +
         "}" +
         "</style>";
@@ -739,6 +739,7 @@
 
 
 })();
+
 
 
 
