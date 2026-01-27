@@ -21,31 +21,27 @@
         var css = '' +    
             // Рейтинг
             '.card__vote {' +
-                'right: -0.6em;' + 
-                'top: 1.4em;' +
-			    'left: auto;' +
 			    'bottom: auto;' +
+                'top: 1.4em;' +
+                'right: 0em;' + 
+			    'left: auto;' +
                 'background: #000;' +
 			    'color: #fff;' +
-                //'background: #ffe216;' +
-			    //'color: #000;' +
 			    'padding: 0.4em 0.4em;' +
 	     	    'border-radius: 0.3em;' +
                 'font-weight: 700;' +
-                'font-size: 0.8em;' +
+                'font-size: 1.2em;' +
             '}' +
 			
             // Год
             '.card__age {' +
                 'position: absolute;' +
-	            'right: -0.6em;' + 
-			    'left: auto;' +
 	     		'bottom: 1.4em;' +
 			    'top: auto;' +
+	            'right: 0em;' + 
+			    'left: auto;' +
                 'background: #000;' +
 			    'color: #fff;' +
-                //'background: #ffe216;' +
-			    //'color: #000;' +
 			    'padding: 0.4em 0.4em;' +
 	     	    'border-radius: 0.3em;' +
                 'font-weight: 700;' +
@@ -57,7 +53,7 @@
             '.card__quality {' +
                 'bottom: auto;' + 
                 'top: 3.6em;' + 
-	            'right: -0.6em;' + 
+	            'right: 0em;' + 
 			    'left: auto;' +
                 'font-weight: 700;' +
                 'font-size: 0.8em;' +
@@ -67,7 +63,7 @@
             '.card--tv .card__type {' +
                 'bottom: auto;' + 
                 'top: 3.6em;' + 
-	            'right: -0.6em;' + 
+	            'right: 0em;' + 
 			    'left: auto;' +
                 'font-weight: 700;' +
                 'font-size: 0.8em;' +
@@ -183,6 +179,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
