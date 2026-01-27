@@ -23,6 +23,7 @@
         "    min-width: 2.8em;" +
         "    text-align: center;" +
         "}" +
+        /*
         ".card__quality {" +
         "    position: absolute;" +
         "    bottom: 5px;" +
@@ -35,6 +36,7 @@
         "    font-weight: bold;" +
         "    z-index: 10;" +
         "}" +
+        */
         "</style>";
     
     // Добавляем стили на страницу
@@ -703,5 +705,6 @@
 
 
 })();
+
 
 
