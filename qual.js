@@ -37,6 +37,18 @@
         "    z-index: 10;" +
         "}" +
         */
+        ".card__quality-quality-4K {" +
+        "    background: linear-gradient(135deg, #2e7d32, #4caf50) !important;" +
+        "    color: white !important;" +
+        "}" +
+        ".card__quality-quality-FHD {" +
+        "    background: linear-gradient(135deg, #ff8f00, #ffb300) !important;" +
+        "    color: white !important;" +
+        "}" +
+        ".card__quality-quality-... {" +
+        "    background: linear-gradient(135deg, #616161, #9e9e9e) !important;" +
+        "    color: white !important;" +
+        "}" +
         "</style>";
     
     // Добавляем стили на страницу
@@ -406,6 +418,16 @@
                 if (!hasQuality) {
                     qualityDiv = document.createElement('div');
                     qualityDiv.className = 'card__quality';
+    
+                    // Добавляем класс в зависимости от качества
+                    if (quality === '4K') {
+                        qualityDiv.className += ' card__quality-quality-4K';
+                    } else if (quality === 'FHD') {
+                        qualityDiv.className += ' card__quality-quality-FHD';
+                    } else if (quality === '...') {
+                        qualityDiv.className += ' card__quality-quality-...';
+                    }
+                    
                     qualityInner = document.createElement('div');
                     qualityInner.textContent = quality;
                     qualityDiv.appendChild(qualityInner);
@@ -413,6 +435,18 @@
                 } else {
                     qualityDiv = qualityElements[0];
                     innerElement = qualityDiv.firstElementChild;
+
+                    // Очищаем предыдущие классы качества
+                    qualityDiv.className = 'card__quality';
+                    
+                    // Добавляем новый класс в зависимости от качества
+                    if (quality === '4K') {
+                        qualityDiv.className += ' card__quality-quality-4K';
+                    } else if (quality === 'FHD') {
+                        qualityDiv.className += ' card__quality-quality-FHD';
+                    } else if (quality === '...') {
+                        qualityDiv.className += ' card__quality-quality-...';
+                    }
                     
                     if (innerElement) {
                         innerElement.textContent = quality;
@@ -705,6 +739,7 @@
 
 
 })();
+
 
 
 
