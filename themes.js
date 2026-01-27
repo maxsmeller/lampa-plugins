@@ -334,7 +334,6 @@
             // Оставим иконки белыми в левом Меню
             ".menu__item.focus .menu__ico {\n   -webkit-filter: invert(1);\n    filter: invert(1);\n }\n " +
             // Фикс ТОЛЬКО для иконок плагинов (те, что в <li>)
-            "li.menu__item .menu__ico {\n" +
             "li.menu__item.focus .menu__ico,\n" +
             "li.menu__item.hover .menu__ico {\n" +
             "    color: #fff !important;\n" +
@@ -560,4 +559,5 @@
     window.maxsm_themes = maxsm_themes;
 
 })();
+
 
