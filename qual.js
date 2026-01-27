@@ -38,16 +38,16 @@
         "}" +
         */
         ".card__quality-quality-4K {" +
-        "    background: #98fb98 !important;" +
-        "    color: #000 !important;" +
+        "    background: #2e7d32 !important;" +
+        "    color: #fff !important;" +
         "}" +
         ".card__quality-quality-FHD {" +
-        "    background: #ffe216 !important;" +
-        "    color: #000 !important;" +
+        "    background: #daa520 !important;" +
+        "    color: #fff !important;" +
         "}" +
         ".card__quality-quality-... {" +
-        "    background: #616161 !important;" +
-        "    color: #000 !important;" +
+        "    background: #000 !important;" +
+        "    color: #fff !important;" +
         "}" +
         "</style>";
     
@@ -739,6 +739,7 @@
 
 
 })();
+
 
 
 
