@@ -48,12 +48,12 @@
                 'position: absolute !important;' +
                 'right: 0em !important;' +
                 'bottom: 0em !important;' +
-                'z-index: 10 !important;' +
-                'font-weight: 700 !important;' +
-                'padding: 0.4em 0.8em !important;' +
+           //     'z-index: 10 !important;' +
+            //    'font-weight: 700 !important;' +
+           //     'padding: 0.4em 0.8em !important;' +
                 'border-radius: 1em 0 1em 0 !important;' +
-                'line-height: 1.0 !important;' +
-                'font-size: 1.0em !important;' +
+            //    'line-height: 1.0 !important;' +
+           //     'font-size: 1.0em !important;' +
                 'background: rgba(0, 0, 0, 0.5) !important;' +
             '}' +
             
@@ -63,11 +63,11 @@
                 'bottom: auto !important;' +
                 'right: 0em !important;' +
                 'top: 0em !important;' +
-                'font-weight: 700 !important;' +
-                'padding: 0.4em 0.8em !important;' +
+           //     'font-weight: 700 !important;' +
+           //     'padding: 0.4em 0.8em !important;' +
                 'border-radius: 0 1em 0 1em !important;' +
-                'line-height: 1.0 !important;' +
-                'font-size: 1.0em !important;' +
+           //     'line-height: 1.0 !important;' +
+            //    'font-size: 1.0em !important;' +
             '}' +
             
             // Качество 
@@ -77,11 +77,11 @@
                 'left: 0em !important;' +
                 'right: auto !important;' +
                 'top: 0em !important;' +
-                'padding: 0.4em 0.8em !important;' +
-                'font-weight: 700 !important;' +
-                'font-size: 1.0em !important;' +
+             //   'padding: 0.4em 0.8em !important;' +
+            //    'font-weight: 700 !important;' +
+            //    'font-size: 1.0em !important;' +
                 'border-radius: 1em 0 1em 0 !important;' + 
-                'text-transform: uppercase !important;' +
+            //    'text-transform: uppercase !important;' +
             '}' +
             
             // Тип сериал
@@ -91,12 +91,12 @@
                 'left: 0em !important;' +
                 'right: auto !important;' +
                 'top: 0em !important;' +
-                'font-weight: 700 !important;' +
-                'padding: 0.4em 0.8em !important;' +
+              //  'font-weight: 700 !important;' +
+             //   'padding: 0.4em 0.8em !important;' +
                 'border-radius: 1em 0 1em 0 !important;' +
-                'line-height: 1.0 !important;' +
-                'font-size: 1.0em !important;' +
-                'z-index: 5 !important;' +
+              //  'line-height: 1.0 !important;' +
+             //   'font-size: 1.0em !important;' +
+             //   'z-index: 5 !important;' +
             '}' +
             
             // Расстояние между рядами
@@ -116,46 +116,6 @@
                     'min-height: 80vh !important;' +
                     'display: flex !important;' +
                 '}' +
-            '}' +
-            
-            // Меню 
-            '.menu__item.focus {' +
-                'border-radius: 0 1em 1em 0 !important;' +
-            '}' +
-            '.menu__list {' +
-                'padding-left: 0em !important;' +
-            '}' +
-            
-            // Анимации
-            '.card,' +
-            '.extensions__item,' +
-            '.extensions__block-add,' +
-            '.full-review-add,' +
-            '.full-review,' +
-            '.tag-count,' +
-            '.full-person,' +
-            '.full-episode,' +
-            '.items-cards .selector,' +
-            '.card-more,' +
-            '.explorer-card__head-img.selector,' +
-            '.card-episode {' +
-                'transform: scale(1) !important;' +
-                'transition: transform 0.3s ease !important;' +
-            '}' +
-            
-            '.card.focus,' +
-            '.extensions__item.focus,' +
-            '.extensions__block-add.focus,' +
-            '.full-review-add.focus,' +
-            '.full-review.focus,' +
-            '.tag-count.focus,' +
-            '.full-person.focus,' +
-            '.full-episode.focus,' +
-            '.items-cards .selector.focus,' +
-            '.card-more.focus,' +
-            '.explorer-card__head-img.selector.focus,' +
-            '.card-episode.focus {' +
-                'transform: scale(1.03) !important;' +
             '}' +
             '';
         
@@ -248,4 +208,5 @@
     // Запускаем инициализацию
     init();
 })();
+
 
