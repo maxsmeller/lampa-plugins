@@ -23,9 +23,10 @@
             '.card__vote {' +
                 'right: -0.8em;' + 
                 //'top: 1.4em;' +
-	     		'bottom: 5.6em;' +
+	     		'bottom: 3.6em;' +
 			    'left: auto;' +
 			    //'bottom: auto;' +
+                'background: #ffe216;' +
 			    'padding: 0.4em 0.4em;' +
 	     	    'border-radius: 0.3em;' +
                 'font-weight: 700;' +
@@ -38,9 +39,9 @@
                 //'right: 0.3em;' + 
                 //'bottom: 0.3em;' + 
 	            'right: -0.8em;' + 
-	     		'bottom: 5.0em;' +
+	     		'bottom: 3.0em;' +
 			    'top: auto;' +
-                'background: rgba(0, 0, 0, 0.5);' +
+                'background: #ffe216;' +
 			    'padding: 0.4em 0.4em;' +
 	     	    'border-radius: 0.3em;' +
                 'font-weight: 700;' +
@@ -172,6 +173,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
