@@ -39,15 +39,15 @@
         */
         ".card__quality-quality-4K {" +
         "    background: #2e7d32 !important;" +
-        "    color: white !important;" +
+        "    color: #000 !important;" +
         "}" +
         ".card__quality-quality-FHD {" +
         "    background: #ffe216 !important;" +
-        "    color: white !important;" +
+        "    color: #000 !important;" +
         "}" +
         ".card__quality-quality-... {" +
         "    background: #616161 !important;" +
-        "    color: white !important;" +
+        "    color: #000 !important;" +
         "}" +
         "</style>";
     
@@ -739,6 +739,7 @@
 
 
 })();
+
 
 
 
