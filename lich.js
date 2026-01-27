@@ -22,8 +22,11 @@
             // Год
             '.card__age {' +
                 'position: absolute;' +
-                'right: 0.3em;' + 
-                'bottom: 0.3em;' + 
+                //'right: 0.3em;' + 
+                //'bottom: 0.3em;' + 
+	            'left: -0.8em;' + 
+	     		'bottom: 4em;' +
+			    'top: auto;' +
                 'background: rgba(0, 0, 0, 0.5);' +
 			    'padding: 0.4em 0.4em;' +
 	     	    'border-radius: 0.5em;' +
@@ -45,7 +48,7 @@
             // Качество
             '.card__quality {' +
                 'font-weight: 700;' +
-                'font-size: 1.0em;' +
+                'font-size: 0.8em;' +
             '}' +
             
             // Тип сериал
@@ -53,7 +56,7 @@
 	     		'bottom: 3em;' +
 			    'top: auto;' +
                 'font-weight: 700;' +
-                'font-size: 1.0em;' +
+                'font-size: 0.8em;' +
             '}' +
 			
             // Заголовок карточки максимум 3 строки
@@ -166,6 +169,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
