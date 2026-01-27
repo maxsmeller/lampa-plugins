@@ -30,7 +30,7 @@
             // Год - обновлено: закругление со всех сторон и отступ от края
             '.card__age {' +
                'position: absolute !important;' +
-                'right: -0.8em !important;' + 
+                'right: 0.4em !important;' + 
                 'bottom: 0.4em !important;' + 
                 'background: rgba(0, 0, 0, 0.5) !important;' +
 			    'padding: 0.4em 0.4em;' +
@@ -47,7 +47,7 @@
             // Рейтинг - обновлено: закругление со всех сторон и отступ от края
             '.card__vote {' +
                 'bottom: auto !important;' +
-                'right: -0.8em !important;' + 
+                'right: 0.4em !important;' + 
                 'top: 0.4em !important;' + 
 			    'padding: 0.4em 0.4em;' +
 		        //'background: #ffe216;' +
@@ -186,6 +186,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
