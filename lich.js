@@ -43,6 +43,20 @@
             ".card__quality { position: absolute !important; bottom: auto !important; left: 0em !important; right: auto !important; top: 0em !important; " +
             "padding: 0.4em 0.6em !important; font-weight: 700 !important; font-size: 1.0em !important; " +
             "border-radius: 0.4em 0 0.4em 0 !important; text-transform: uppercase !important; }" +
+
+            ".card--tv .card__type { " +
+            "position: absolute !important; " +
+            "bottom: auto !important; " +
+            "left: 0em !important; " +
+            "right: auto !important; " +
+            "top: 0em !important; " +
+            "font-weight: 700 !important; " +
+            "padding: 0.4em 0.6em !important; " +
+            "border-radius: 0.4em 0 0.4em 0 !important; " +
+            "line-height: 1.0 !important; " +
+            "font-size: 1.0em !important; " +
+            "z-index: 5 !important; " +
+            "}" +
             
             /* Расстояние между рядами */
             ".items-line.items-line--type-cards + .items-line.items-line--type-cards { margin-top: 1em !important; }" +
@@ -137,3 +151,4 @@
         });
     }
 })();
+
