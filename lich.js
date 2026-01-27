@@ -27,55 +27,55 @@
                 'line-clamp: 3 !important;' +
             '}' +
             
-            // Год
+            // Год - обновлено: закругление со всех сторон и отступ от края
             '.card__age {' +
                 'position: absolute !important;' +
-                'right: 0em !important;' +
-                'bottom: 0em !important;' +
+                'right: 0.5em !important;' + /* Сдвиг от правого края */
+                'bottom: 0.5em !important;' + /* Сдвиг от нижнего края */
                 'font-weight: 700 !important;' +
                 'padding: 0.4em 0.8em !important;' +
-                'border-radius: 1em 0 1em 0 !important;' +
+                'border-radius: 1em !important;' + /* Закругление со всех сторон */
                 'line-height: 1.0 !important;' +
                 'font-size: 1.0em !important;' +
                 'background: rgba(0, 0, 0, 0.5) !important;' +
             '}' +
             
-            // Рейтинг
+            // Рейтинг - обновлено: закругление со всех сторон и отступ от края
             '.card__vote {' +
                 'position: absolute !important;' +
                 'bottom: auto !important;' +
-                'right: 0em !important;' +
-                'top: 0em !important;' +
+                'right: 0.5em !important;' + /* Сдвиг от правого края */
+                'top: 0.5em !important;' + /* Сдвиг от верхнего края */
                 'font-weight: 700 !important;' +
                 'padding: 0.4em 0.8em !important;' +
-                'border-radius: 0 1em 0 1em !important;' +
+                'border-radius: 1em !important;' + /* Закругление со всех сторон */
                 'line-height: 1.0 !important;' +
                 'font-size: 1.0em !important;' +
             '}' +
             
-            // Качество 
+            // Качество - обновлено: закругление со всех сторон и отступ от края
             '.card__quality {' +
                 'position: absolute !important;' +
                 'bottom: auto !important;' +
-                'left: 0em !important;' +
+                'left: 0.5em !important;' + /* Сдвиг от левого края */
                 'right: auto !important;' +
-                'top: 0em !important;' +
+                'top: 0.5em !important;' + /* Сдвиг от верхнего края */
                 'padding: 0.4em 0.8em !important;' +
                 'font-weight: 700 !important;' +
                 'font-size: 1.0em !important;' +
-                'border-radius: 1em 0 1em 0 !important;' +
+                'border-radius: 1em !important;' + /* Закругление со всех сторон */
             '}' +
             
-            // Тип сериал
+            // Тип сериал - обновлено: закругление со всех сторон и отступ от края
             '.card--tv .card__type {' +
                 'position: absolute !important;' +
                 'bottom: auto !important;' +
-                'left: 0em !important;' +
+                'left: 0.5em !important;' + /* Сдвиг от левого края */
                 'right: auto !important;' +
-                'top: 0em !important;' +
+                'top: 0.5em !important;' + /* Сдвиг от верхнего края */
                 'font-weight: 700 !important;' +
                 'padding: 0.4em 0.8em !important;' +
-                'border-radius: 1em 0 1em 0 !important;' +
+                'border-radius: 1em !important;' + /* Закругление со всех сторон */
                 'line-height: 1.0 !important;' +
                 'font-size: 1.0em !important;' +
             '}' +
@@ -182,4 +182,3 @@
     // Запускаем инициализацию
     init();
 })();
-
