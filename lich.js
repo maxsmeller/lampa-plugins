@@ -22,7 +22,7 @@
             // Рейтинг
             '.card__vote {' +
 			    'bottom: auto;' +
-                'top: 1.4em;' +
+                'top: 1.2em;' +
                 'right: 0em;' + 
 			    'left: auto;' +
                 'background: #000;' +
@@ -30,7 +30,7 @@
 			    'padding: 0.4em 0.4em;' +
 	     	    'border-radius: 0.3em 0 0 0.3em;' +
                 'font-weight: 700;' +
-                'font-size: 1.0em;' +
+                'font-size: 1.2em;' +
             '}' +
 			           
             // Качество
@@ -58,7 +58,7 @@
             // Год
             '.card__age {' +
                 'position: absolute;' +
-	     		'bottom: 1.4em;' +
+	     		'bottom: 1.2em;' +
 			    'top: auto;' +
 	            'right: 0em;' + 
 			    'left: auto;' +
@@ -180,6 +180,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
