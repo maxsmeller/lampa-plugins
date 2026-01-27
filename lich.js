@@ -29,9 +29,9 @@
 			
             // Год - обновлено: закругление со всех сторон и отступ от края
             '.card__age {' +
-            //    'position: absolute !important;' +
-            //    'right: -0.8em !important;' + 
-             //   'bottom: 0.4em !important;' + 
+               'position: absolute !important;' +
+                'right: -0.8em !important;' + 
+                'bottom: 0.4em !important;' + 
              //   'font-weight: 700 !important;' +
               //  'padding: 0.4em 0.8em !important;' +
                // 'border-radius: 0.5em !important;' + 
@@ -192,6 +192,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
