@@ -38,7 +38,7 @@
         "}" +
         */
         ".card__quality-quality-4K {" +
-        "    background: #2e7d32 !important;" +
+        "    background: #98fb98 !important;" +
         "    color: #000 !important;" +
         "}" +
         ".card__quality-quality-FHD {" +
@@ -739,6 +739,7 @@
 
 
 })();
+
 
 
 
