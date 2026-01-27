@@ -115,7 +115,7 @@
         }
         
         document.head.appendChild(style);
-        
+        /*
         // Добавление шаблонов если доступен Lampa.Template
         if (typeof Lampa !== 'undefined' && Lampa.Template) {
             // Шаблон карточки с годом выше названия
@@ -163,6 +163,7 @@
         } else {
             console.warn('Lampa.Template не найден, шаблоны не добавлены');
         }
+        */
     }
 
     // Запуск при загрузке приложения
@@ -188,6 +189,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
