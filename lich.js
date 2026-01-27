@@ -84,9 +84,7 @@
             ".card-more.focus, .explorer-card__head-img.selector.focus, .card-episode.focus { " +
             "transform: scale(1.03) !important; }" +
             ".menu__item { transition: transform 0.3s ease !important; }" +
-            ".menu__item.focus { transform: translateX(-0.2em) !important; }" +
-            ".selectbox-item, .settings-folder, .settings-param { transition: transform 0.3s ease !important; }" +
-            ".selectbox-item.focus, .settings-folder.focus, .settings-param.focus { transform: translateX(0.2em) !important; }";
+            ".menu__item.focus { transform: translateX(-0.2em) !important; }";
         
         style.html(css);
         $('head').append(style);
@@ -152,6 +150,7 @@
         });
     }
 })();
+
 
 
 
