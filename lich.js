@@ -42,7 +42,7 @@
 			    'top: auto;' +
                 'background: rgba(0, 0, 0, 0.5);' +
 			    'padding: 0.4em 0.4em;' +
-	     	    'border-radius: 0.5em;' +
+	     	    'border-radius: 0.3em;' +
                 'font-weight: 700;' +
                 'font-size: 0.8em;' +
             '}' +
@@ -172,6 +172,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
