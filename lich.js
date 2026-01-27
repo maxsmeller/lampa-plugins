@@ -30,7 +30,7 @@
 			    'padding: 0.4em 0.4em;' +
 	     	    'border-radius: 0.3em 0 0 0.3em;' +
                 'font-weight: 700;' +
-                'font-size: 0.8em;' +
+                'font-size: 1.0em;' +
             '}' +
 			
             // Год
@@ -181,6 +181,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
