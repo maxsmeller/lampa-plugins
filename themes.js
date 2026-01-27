@@ -332,29 +332,13 @@
             ".menu__item.focus {border-radius: 0 0.5em 0.5em 0;\n}\n" +
             ".menu__list {\npadding-left: 0em;\n}\n" +
             // Оставим иконки белыми в левом Меню
-            // ".menu__item.focus .menu__ico {\n   -webkit-filter: invert(1);\n    filter: invert(1);\n }\n " +
-            /* Фикс ТОЛЬКО для иконок плагинов (те, что в <li>)
+            ".menu__item.focus .menu__ico {\n   -webkit-filter: invert(1);\n    filter: invert(1);\n }\n " +
+            // Фикс ТОЛЬКО для иконок плагинов (те, что в <li>)
             "li.menu__item .menu__ico {\n" +
-            "    -webkit-filter: none !important;\n" +
-            "    filter: none !important;\n" +
-            "}\n" +
             "li.menu__item.focus .menu__ico,\n" +
             "li.menu__item.hover .menu__ico {\n" +
             "    color: #fff !important;\n" +
             "}\n" +
-            "li.menu__item .menu__ico svg {\n" +
-            "    -webkit-filter: none !important;\n" +
-            "    filter: none !important;\n" +
-            "}\n" +
-            "li.menu__item.focus .menu__ico svg path[fill],\n" +
-            "li.menu__item.hover .menu__ico svg path[fill] {\n" +
-            "    fill: #fff !important;\n" +
-            "}\n" +
-            "li.menu__item.focus .menu__ico svg rect[stroke],\n" +
-            "li.menu__item.hover .menu__ico svg rect[stroke] {\n" +
-            "    stroke: #fff !important;\n" +
-            "}\n" + 
-            */
             // Белые иконки в бошке
             ".head__action.focus, .head__action.hover {\ncolor: fff;\n}\n" +
             // Фон метки качества
@@ -576,3 +560,4 @@
     window.maxsm_themes = maxsm_themes;
 
 })();
+
