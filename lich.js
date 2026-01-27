@@ -46,55 +46,27 @@
     // Основная функция применения стилей
     function applyStyle() {
         // Удаляем старые стили
-        $('#maxsm_lich_style, #maxsm_lich_forall, #maxsm_lich_animations, #maxsm_lich_translate_tv').remove();
+        $('#maxsm_lich_style').remove();
         
         var style = $('<style id="maxsm_lich_style"></style>');
         
-        // Объединенные стили с возможностью комментирования строк
+        // Получаем перевод для использования в CSS
+        var tvCaption = Lampa.Lang.translate('maxsm_lich_tvcaption');
+        
+        // Объединенные стили - только НЕ цветовые свойства
         var css = "" +
-            /* Основной фон приложения */
-            "html, body, .extensions { background: linear-gradient(135deg, #0a1b2a, #1a4036) !important; color: #fff !important; }" +
+            /* Основной фон приложения - УДАЛЕНО (только цвета) */
             
-            /* Навигационная панель */
-            ".navigation-bar__body { background: rgba(18, 32, 36, 0.96); }" +
+            /* Навигационная панель - УДАЛЕНО (только цвета) */
             
-            /* Модальные окна */
-            ".modal__content { background: rgba(18, 32, 36, 0.96); border: 0 solid rgba(18, 32, 36, 0.96); }" +
+            /* Модальные окна - УДАЛЕНО (только цвета и border) */
             
-            /* Настройки */
-            ".settings__content, .settings-input__content, .selectbox__content, .settings-input { background: rgba(18, 32, 36, 0.96); }" +
+            /* Настройки - УДАЛЕНО (только цвета) */
             
             /* Заставки и загрузчики */
-            ".screensaver__preload { background: #1e2c2f no-repeat 50% 50%; }" +
-            ".activity__loader { position:absolute; top:0; left:0; width:100%; height:100%; display:none; background: #1e2c2f no-repeat 50% 50%; }" +
+            ".activity__loader { position:absolute; top:0; left:0; width:100%; height:100%; display:none; }" +
             
-            /* Элементы с темным фоном */
-            ".company-start.icon--broken .company-start__icon," +
-            ".explorer-card__head-img > img," +
-            ".bookmarks-folder__layer," +
-            ".card-more__box," +
-            ".card__img," +
-            ".extensions__block-add," +
-            ".extensions__item { background-color: #1e2c2f; }" +
-            
-            /* Активные элементы с градиентом - ФИКС АКЦЕНТОВ */
-            ".search-source.focus," +
-            ".simple-button.focus," +
-            ".menu__item.focus," +
-            ".menu__item.traverse," +
-            ".menu__item.hover," +
-            ".full-start__button.focus," +
-            ".full-descr__tag.focus," +
-            ".player-panel .button.focus," +
-            ".full-person.selector.focus," +
-            ".tag-count.selector.focus," +
-            ".full-review.focus," +
-            ".selectbox-item.focus," +
-            ".settings-folder.focus," +
-            ".settings-param.focus { " +
-            "background: linear-gradient(to right, #1e6262, #3da18d) !important; " +
-            "color: #fff !important; " +
-            "}" +
+            /* Активные элементы - УДАЛЕНО (только цвета и градиенты) */
             
             /* Особые стили для элементов настроек */
             ".selectbox-item.focus," +
@@ -103,10 +75,7 @@
             "border-radius: 0.5em 0 0 0.5em !important;" +
             "}" +
             
-            /* Качество и тип контента */
-            ".card__quality1, .card__type1::after, .card--tv .card__type1 { background: linear-gradient(to right, #1e6262, #3da18d) !important; }" +
-            
-            /* Обводка фокуса - ФИКС для карточек в списках */
+            /* Обводка фокуса - оставляем только border и box-shadow без цветов */
             ".full-episode.focus::after," +
             ".card-episode.focus .full-episode::after," +
             ".items-cards .selector.focus::after," +
@@ -121,19 +90,15 @@
             ".extensions__item.focus::after," +
             ".extensions__block-add.focus::after," +
             ".full-review-add.focus::after { " +
-            "border: 0.2em solid #3da18d !important; " +
-            "box-shadow: 0 0 0.8em rgba(61, 161, 141, 0.5) !important; " +
+            "border: 0.2em solid !important; " +
+            "box-shadow: 0 0 0.8em !important; " +
             "}" +
             
-            /* Кнопки в шапке */
-            ".head__action.focus, .head__action.hover { " +
-            "background: linear-gradient(45deg, #3da18d, #1e6262) !important; " +
-            "color: #fff !important;" +
-            "}" +
+            /* Кнопки в шапке - УДАЛЕНО (только цвета и градиенты) */
             
-            /* Торренты */
-            ".torrent-serial { background: rgba(0, 0, 0, 0.22); border: 0.2em solid rgba(0, 0, 0, 0.22); }" +
-            ".torrent-serial.focus { background-color: #1a3b36cc !important; border: 0.2em solid #3da18d !important; }" +
+            /* Торренты - оставляем только border */
+            ".torrent-serial { border: 0.2em solid !important; }" +
+            ".torrent-serial.focus { border: 0.2em solid !important; }" +
             
             /* Отступ для времени */
             ".head__time-now { margin-left: 0.5em; }" +
@@ -148,41 +113,55 @@
             ".full-start-new__buttons, .full-start-new__details, .full-start-new__tagline { " +
             "-webkit-justify-content: center !important; justify-content: center !important; text-align: center !important; }" +
             ".full-start__title-original { max-width: 100% !important; }" +
-            ".full-start-new__right { background: transparent !important; }" +
             "}" +
             
-            /* Рейтинги */
-            ".full-start__rate { border-radius: 0.25em; padding: 0.3em; background-color: rgba(0, 0, 0, 0.3) !important; }" +
+            /* Рейтинги - оставляем только размеры и позиционирование */
+            ".full-start__rate { border-radius: 0.25em; padding: 0.3em; }" +
             ".full-start__pg, .full-start__status, .full-start-new__rate-line .full-start__pg { " +
-            "font-size: 1em !important; background: #fff !important; color: #000 !important; }" +
+            "font-size: 1em !important; }" +
             
-            /* Карточки - ФИКС позиционирования */
+            /* Карточки - оставляем позиционирование, размеры, но убираем цвета */
             ".card__title { height: 3.6em !important; text-overflow: ellipsis !important; -webkit-line-clamp: 3 !important; line-clamp: 3 !important; }" +
-            ".card__age { position: absolute !important; right: 0em !important; bottom: 0em !important; z-index: 10 !important; background: rgba(0, 0, 0, 0.6) !important; " +
-            "color: #ffffff !important; font-weight: 700 !important; padding: 0.4em 0.6em !important; border-radius: 0.48em 0 0.48em 0 !important; " +
+            ".card__age { position: absolute !important; right: 0em !important; bottom: 0em !important; z-index: 10 !important; " +
+            "font-weight: 700 !important; padding: 0.4em 0.6em !important; border-radius: 0.48em 0 0.48em 0 !important; " +
             "line-height: 1.0 !important; font-size: 1.0em !important; }" +
-            ".card__vote { position: absolute !important; bottom: auto !important; right: 0em !important; top: 0em !important; background: rgba(0, 0, 0, 0.6) !important; " +
-            "font-weight: 700 !important; color: #fff !important; border-radius: 0 0.34em 0 0.34em !important; line-height: 1.0 !important; }" +
+            ".card__vote { position: absolute !important; bottom: auto !important; right: 0em !important; top: 0em !important; " +
+            "font-weight: 700 !important; border-radius: 0 0.34em 0 0.34em !important; line-height: 1.0 !important; }" +
             ".card__icons { position: absolute !important; top: 2em !important; left: 0 !important; right: auto !important; display: flex !important; " +
-            "justify-content: center !important; background: rgba(0, 0, 0, 0.6) !important; color: #fff !important; " +
-            "border-radius: 0 0.5em 0.5em 0 !important; }" +
-            ".card__icons-inner { background: none !important; color: #fff !important; }" +
-            ".card__marker { position: absolute !important; left: 0em !important; top: 4em !important; bottom: auto !important; background: rgba(0, 0, 0, 0.6) !important; " +
+            "justify-content: center !important; border-radius: 0 0.5em 0.5em 0 !important; }" +
+            ".card__icons-inner { }" +
+            ".card__marker { position: absolute !important; left: 0em !important; top: 4em !important; bottom: auto !important; " +
             "border-radius: 0 0.5em 0.5em 0 !important; font-weight: 700 !important; font-size: 1.0em !important; padding: 0.4em 0.6em !important; " +
             "display: flex !important; align-items: center !important; line-height: 1.2 !important; max-width: min(12em, 95%) !important; }" +
             ".card__marker > span { max-width: min(12em, 95%) !important; }" +
             ".card__quality { position: absolute !important; bottom: auto !important; left: 0em !important; right: auto !important; top: 0em !important; " +
-            "padding: 0.4em 0.6em !important; color: #fff !important; font-weight: 700 !important; font-size: 1.0em !important; " +
-            "border-radius: 0.4em 0 0.4em 0 !important; text-transform: uppercase !important; background: rgba(0, 0, 0, 0.6) !important; }" +
+            "padding: 0.4em 0.6em !important; font-weight: 700 !important; font-size: 1.0em !important; " +
+            "border-radius: 0.4em 0 0.4em 0 !important; text-transform: uppercase !important; }" +
             
-            /* ХИТРЫЙ ФИКС для надписи СЕРИАЛ - заменяем оригинальный текст через ::after */
-            ".card--tv .card__type { display: none !important; }" +
-            ".card--tv .card__view::after { " +
-            "content: '" + Lampa.Lang.translate('maxsm_lich_tvcaption') + "' !important; " +
-            "position: absolute !important; bottom: auto !important; left: 0em !important; right: auto !important; top: 0em !important; " +
-            "background: rgba(0, 0, 0, 0.6) !important; color: #fff !important; font-weight: 700 !important; padding: 0.4em 0.6em !important; " +
-            "border-radius: 0.4em 0 0.4em 0 !important; line-height: 1.0 !important; font-size: 1.0em !important; " +
-            "z-index: 5 !important; }" +
+            /* ХИТРЫЙ ФИКС для надписи СЕРИАЛ - оставляем позиционирование, убираем цвета */
+            ".card--tv .card__type { " +
+            "position: absolute !important; " +
+            "bottom: auto !important; " +
+            "left: 0em !important; " +
+            "right: auto !important; " +
+            "top: 0em !important; " +
+            "font-weight: 700 !important; " +
+            "padding: 0.4em 0.6em !important; " +
+            "border-radius: 0.4em 0 0.4em 0 !important; " +
+            "line-height: 1.0 !important; " +
+            "font-size: 1.0em !important; " +
+            "z-index: 5 !important; " +
+            "}" +
+            
+            /* Переопределяем текст через content */
+            ".card--tv .card__type::after { " +
+            "content: '" + tvCaption.replace(/'/g, "\\'") + "' !important; " +
+            "}" +
+            
+            /* Убираем стандартное содержимое */
+            ".card--tv .card__type .card__type-inner { " +
+            "display: none !important; " +
+            "}" +
             
             /* Расстояние между рядами */
             ".items-line.items-line--type-cards + .items-line.items-line--type-cards { margin-top: 1em !important; }" +
@@ -192,9 +171,7 @@
             /* Высота карточки */
             "@media screen and (min-width: 580px) { .full-start-new { min-height: 80vh !important; display: flex !important; } }" +
             
-            /* Постер */
-            ".full-start__background.loaded { opacity: 0.8 !important; }" +
-            ".full-start__background.dim { opacity: 0.2 !important; }" +
+            /* Постер - УДАЛЕНО (только opacity) */
             
             /* Скругления */
             ".explorer__files .torrent-filter .simple-button { font-size: 1.2em !important; border-radius: 0.5em !important; }" +
@@ -215,7 +192,6 @@
             /* Меню */
             ".menu__item.focus { border-radius: 0 0.5em 0.5em 0 !important; }" +
             ".menu__list { padding-left: 0em !important; }" +
-            "li.menu__item.focus .menu__ico, li.menu__item.hover .menu__ico { color: #fff !important; }" +
             
             /* Анимации */
             ".card { transform: scale(1) !important; transition: transform 0.3s ease !important; }" +
@@ -240,7 +216,7 @@
         $('head').append(style);
         
         // Добавление шаблонов
-        // addTemplates();
+        addTemplates();
     }
     
     // Функция добавления шаблонов
@@ -270,7 +246,7 @@
                             '<div class="card__title">{title}</div>' +
                             '<div class="card__age">{release_year}</div>' +
                             '<div class="full-episode__num hide">{num}</div>' +
-                            '<div class="full-episode__name">{name}</div>' +
+                            '<div class="full-episode__name>{name}</div>' +
                             '<div class="full-episode__date">{date}</div>' +
                         '</div>' +
                     '</div>' +
