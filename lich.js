@@ -30,12 +30,13 @@
             // Год - обновлено: закругление со всех сторон и отступ от края
             '.card__age {' +
                 'position: absolute !important;' +
-                'right: 0.4em !important;' + 
-                'bottom: 0.4em !important;' + 
+                'right: 0.3em !important;' + 
+                'bottom: 0.3em !important;' + 
                 'background: rgba(0, 0, 0, 0.5) !important;' +
 			    'padding: 0.4em 0.4em;' +
 	     	    'border-radius: 0.3em;' +
                 'font-weight: 700 !important;' +
+                'font-size: 1.0em !important;' +
             '}' +
             
             // Иконки закладок и т.д.
@@ -46,11 +47,11 @@
             // Рейтинг - обновлено: закругление со всех сторон и отступ от края
             '.card__vote {' +
                 'bottom: auto !important;' +
-                'right: 0.4em !important;' + 
-                'top: 0.4em !important;' + 
+                'top: 0.3em !important;' + 
 			    'padding: 0.4em 0.4em;' +
 	     	    'border-radius: 0.3em;' +
-		    //	'background: rgba(0, 0, 0, 0.5) !important;' +
+                'font-weight: 700 !important;' +
+                'font-size: 1.0em !important;' +
             '}' +
             
             // Качество - обновлено: закругление со всех сторон и отступ от края
@@ -167,6 +168,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
