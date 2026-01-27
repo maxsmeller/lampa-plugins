@@ -36,7 +36,7 @@
             // Качество
             '.card__quality {' +
                 'bottom: auto;' + 
-                'top: 3.6em;' + 
+                'top: 4.2em;' + 
 	            'right: 0em;' + 
 			    'left: auto;' +
 	     	    'border-radius: 0.3em 0 0 0.3em;' +
@@ -180,6 +180,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
