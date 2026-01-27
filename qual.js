@@ -6,7 +6,7 @@
     'use strict';
 
     // Переменные настройки
-    var Q_LOGGING = false;  // Логгинг качества
+    var Q_LOGGING = true;  // Логгинг качества
     var Q_CACHE_TIME = 24 * 60 * 60 * 1000;  // Время кеша качества (сутки)
     var QUALITY_CACHE = 'maxsm_quality_cache_v2';
     
@@ -700,5 +700,6 @@
 
     // Запуск плагина
     if (!window.maxsmQualityPlugin) startPlugin();
+
 
 })();
