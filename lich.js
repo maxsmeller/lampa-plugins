@@ -3,15 +3,20 @@
 
     // Основная функция применения стилей
     function applyStyle() {
+        // Проверяем, не добавлены ли уже стили
+        if (document.getElementById('maxsm_lich_style')) {
+            return;
+        }
+        
         // Удаляем старые стили
-        if (typeof $ !== 'undefined') {
+        if (typeof window.$ !== 'undefined' && window.$ && window.$.fn) {
             $('#maxsm_lich_style').remove();
         }
         
         var style = document.createElement('style');
         style.id = 'maxsm_lich_style';
         
-        // Объединенные стили - только НЕ цветовые свойства
+        // Оптимизированные объединенные стили
         var css = '' +
             // Отступ для времени
             '.head__time-now {' +
@@ -42,7 +47,7 @@
                 '}' +
             '}' +
             
-            // Карточки - оставляем позиционирование, размеры, но убираем цвета
+            // Карточки
             '.card__title {' +
                 'height: 3.6em !important;' +
                 'text-overflow: ellipsis !important;' +
@@ -50,7 +55,7 @@
                 'line-clamp: 3 !important;' +
             '}' +
             
-            // Год - правый нижний угол (соответствует скруглению карточки)
+            // Год
             '.card__age {' +
                 'position: absolute !important;' +
                 'right: 0em !important;' +
@@ -58,12 +63,12 @@
                 'z-index: 10 !important;' +
                 'font-weight: 700 !important;' +
                 'padding: 0.4em 0.8em !important;' +
-                'border-radius: 0 0 1em 0 !important;' + // Совпадает с правым нижним углом карточки
+                'border-radius: 0 0 1em 0 !important;' +
                 'line-height: 1.0 !important;' +
                 'font-size: 1.0em !important;' +
             '}' +
             
-            // Рейтинг - правый верхний угол
+            // Рейтинг
             '.card__vote {' +
                 'position: absolute !important;' +
                 'bottom: auto !important;' +
@@ -71,12 +76,12 @@
                 'top: 0em !important;' +
                 'font-weight: 700 !important;' +
                 'padding: 0.4em 0.8em !important;' +
-                'border-radius: 0 1em 0 0 !important;' + // Совпадает с правым верхним углом карточки
+                'border-radius: 0 1em 0 0 !important;' +
                 'line-height: 1.0 !important;' +
                 'font-size: 1.0em !important;' +
             '}' +
-                      
-            // Качество - левый верхний угол
+            
+            // Качество
             '.card__quality {' +
                 'position: absolute !important;' +
                 'bottom: auto !important;' +
@@ -86,11 +91,11 @@
                 'padding: 0.4em 0.8em !important;' +
                 'font-weight: 700 !important;' +
                 'font-size: 1.0em !important;' +
-                'border-radius: 1em 0 0 0 !important;' + // Совпадает с левым верхним углом карточки
+                'border-radius: 1em 0 0 0 !important;' +
                 'text-transform: uppercase !important;' +
             '}' +
             
-            // Тип сериал - левый верхний угол (если нет качества)
+            // Тип сериал
             '.card--tv .card__type {' +
                 'position: absolute !important;' +
                 'bottom: auto !important;' +
@@ -99,7 +104,7 @@
                 'top: 0em !important;' +
                 'font-weight: 700 !important;' +
                 'padding: 0.4em 0.8em !important;' +
-                'border-radius: 1em 0 0 0 !important;' + // Совпадает с левым верхним углом карточки
+                'border-radius: 1em 0 0 0 !important;' +
                 'line-height: 1.0 !important;' +
                 'font-size: 1.0em !important;' +
                 'z-index: 5 !important;' +
@@ -124,7 +129,7 @@
                 '}' +
             '}' +
             
-            // Меню - оставляем только неравномерные скругления
+            // Меню 
             '.menu__item.focus {' +
                 'border-radius: 0 1em 1em 0 !important;' +
             '}' +
@@ -133,133 +138,41 @@
             '}' +
             
             // Анимации
-            '.card {' +
-                'transform: scale(1) !important;' +
-                'transition: transform 0.3s ease !important;' +
-            '}' +
-            '.card.focus {' +
-                'transform: scale(1.03) !important;' +
-            '}' +
-            
-            '.extensions__item {' +
-                'transform: scale(1) !important;' +
-                'transition: transform 0.3s ease !important;' +
-            '}' +
-            '.extensions__item.focus {' +
-                'transform: scale(1.03) !important;' +
-            '}' +
-            
-            '.extensions__block-add {' +
-                'transform: scale(1) !important;' +
-                'transition: transform 0.3s ease !important;' +
-            '}' +
-            '.extensions__block-add.focus {' +
-                'transform: scale(1.03) !important;' +
-            '}' +
-            
-            '.full-review-add {' +
-                'transform: scale(1) !important;' +
-                'transition: transform 0.3s ease !important;' +
-            '}' +
-            '.full-review-add.focus {' +
-                'transform: scale(1.03) !important;' +
-            '}' +
-            
-            '.full-review {' +
-                'transform: scale(1) !important;' +
-                'transition: transform 0.3s ease !important;' +
-            '}' +
-            '.full-review.focus {' +
-                'transform: scale(1.03) !important;' +
-            '}' +
-            
-            '.tag-count {' +
-                'transform: scale(1) !important;' +
-                'transition: transform 0.3s ease !important;' +
-            '}' +
-            '.tag-count.focus {' +
-                'transform: scale(1.03) !important;' +
-            '}' +
-            
-            '.full-person {' +
-                'transform: scale(1) !important;' +
-                'transition: transform 0.3s ease !important;' +
-            '}' +
-            '.full-person.focus {' +
-                'transform: scale(1.03) !important;' +
-            '}' +
-            
-            '.full-episode {' +
-                'transform: scale(1) !important;' +
-                'transition: transform 0.3s ease !important;' +
-            '}' +
-            '.full-episode.focus {' +
-                'transform: scale(1.03) !important;' +
-            '}' +
-            
-            '.items-cards .selector {' +
-                'transform: scale(1) !important;' +
-                'transition: transform 0.3s ease !important;' +
-            '}' +
-            '.items-cards .selector.focus {' +
-                'transform: scale(1.03) !important;' +
-            '}' +
-            
-            '.card-more {' +
-                'transform: scale(1) !important;' +
-                'transition: transform 0.3s ease !important;' +
-            '}' +
-            '.card-more.focus {' +
-                'transform: scale(1.03) !important;' +
-            '}' +
-            
-            '.explorer-card__head-img.selector {' +
-                'transform: scale(1) !important;' +
-                'transition: transform 0.3s ease !important;' +
-            '}' +
-            '.explorer-card__head-img.selector.focus {' +
-                'transform: scale(1.03) !important;' +
-            '}' +
-            
+            '.card,' +
+            '.extensions__item,' +
+            '.extensions__block-add,' +
+            '.full-review-add,' +
+            '.full-review,' +
+            '.tag-count,' +
+            '.full-person,' +
+            '.full-episode,' +
+            '.items-cards .selector,' +
+            '.card-more,' +
+            '.explorer-card__head-img.selector,' +
             '.card-episode {' +
                 'transform: scale(1) !important;' +
                 'transition: transform 0.3s ease !important;' +
             '}' +
+            
+            '.card.focus,' +
+            '.extensions__item.focus,' +
+            '.extensions__block-add.focus,' +
+            '.full-review-add.focus,' +
+            '.full-review.focus,' +
+            '.tag-count.focus,' +
+            '.full-person.focus,' +
+            '.full-episode.focus,' +
+            '.items-cards .selector.focus,' +
+            '.card-more.focus,' +
+            '.explorer-card__head-img.selector.focus,' +
             '.card-episode.focus {' +
                 'transform: scale(1.03) !important;' +
             '}' +
-            
-            // Контейнер карточки должен иметь overflow: hidden
-            '.card__view,' +
-            '.card__img,' +
-            '.card__body,' +
-            '.card-episode__body,' +
-            '.full-episode__img {' +
-                'border-radius: 1em !important;' + // Основное скругление карточки
-                'overflow: hidden !important;' + // Важно для обрезки содержимого
-            '}' +
-            
-            // Дополнительно: градиенты для лучшей читаемости
-            '.card__age::before,' +
-            '.card__vote::before,' +
-            '.card__quality::before,' +
-            '.card__marker::before,' +
-            '.card--tv .card__type::before {' +
-                'content: "";' +
-                'position: absolute;' +
-                'top: 0;' +
-                'left: 0;' +
-                'right: 0;' +
-                'bottom: 0;' +
-                'border-radius: inherit;' + // Наследует скругление родителя
-                'z-index: -1;' +
-                'background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 100%);' +
-            '}' +
             '';
         
-        // Проверяем, поддерживает ли браузер innerHTML для style
+        // Добавляем CSS
         if (style.styleSheet) {
-            // Для старых версий IE
+            // Для IE
             style.styleSheet.cssText = css;
         } else {
             style.appendChild(document.createTextNode(css));
@@ -324,20 +237,25 @@
     }
 
     // Запуск при загрузке приложения
-    if (window.appready) {
-        applyStyle();
-    } else if (typeof Lampa !== 'undefined' && Lampa.Listener) {
-        Lampa.Listener.follow('app', function(event) {
-            if (event.type === 'ready') {
+    function init() {
+        if (window.appready) {
+            applyStyle();
+        } else if (typeof Lampa !== 'undefined' && Lampa.Listener) {
+            Lampa.Listener.follow('app', function(event) {
+                if (event.type === 'ready') {
+                    applyStyle();
+                }
+            });
+        } else {
+            // Fallback: запускаем при полной загрузке DOM
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', applyStyle);
+            } else {
                 applyStyle();
             }
-        });
-    } else {
-        // Fallback: запускаем при полной загрузке DOM
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', applyStyle);
-        } else {
-            applyStyle();
         }
     }
+
+    // Запускаем инициализацию
+    init();
 })();
