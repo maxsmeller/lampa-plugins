@@ -54,6 +54,8 @@
             
             // Тип сериал
             '.card--tv .card__type {' +
+	     		'bottom: 3em;' +
+			    'top: auto;' +
                 'font-weight: 700 !important;' +
                 'font-size: 1.0em !important;' +
             '}' +
@@ -168,6 +170,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
