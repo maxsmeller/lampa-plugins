@@ -18,32 +18,35 @@
         style.id = 'maxsm_lich_style';
         
         // Оптимизированные объединенные стили
-        var css = '' +       	
+        var css = '' +    
+            // Рейтинг
+            '.card__vote {' +
+                'left: -0.8em;' + 
+                //'top: 1.4em;' +
+	     		'bottom: 6.2em;' +
+			    'right: auto;' +
+			    //'bottom: auto;' +
+			    'padding: 0.4em 0.4em;' +
+	     	    'border-radius: 0.3em;' +
+                'font-weight: 700;' +
+                'font-size: 1.0em;' +
+            '}' +
+			
             // Год
             '.card__age {' +
                 'position: absolute;' +
                 //'right: 0.3em;' + 
                 //'bottom: 0.3em;' + 
 	            'left: -0.8em;' + 
-	     		'bottom: 4em;' +
+	     		'bottom: 4.2em;' +
 			    'top: auto;' +
                 'background: rgba(0, 0, 0, 0.5);' +
 			    'padding: 0.4em 0.4em;' +
 	     	    'border-radius: 0.5em;' +
                 'font-weight: 700;' +
+                'font-size: 0.8em;' +
             '}' +
-            
-            // Рейтинг
-            '.card__vote {' +
-                'left: -0.8em;' + 
-                'top: 1.4em;' +
-			    'right: auto;' +
-			    'bottom: auto;' +
-			    'padding: 0.4em 0.4em;' +
-	     	    'border-radius: 0.3em;' +
-                'font-weight: 700;' +
-                'font-size: 1.0em;' +
-            '}' +
+
             
             // Качество
             '.card__quality {' +
@@ -169,6 +172,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
