@@ -21,7 +21,7 @@
         var css = '' +    
             // Рейтинг
             '.card__vote {' +
-                'right: -0.8em;' + 
+                'right: -0.6em;' + 
                 'top: 1.4em;' +
 			    'left: auto;' +
 			    'bottom: auto;' +
@@ -36,7 +36,7 @@
             // Год
             '.card__age {' +
                 'position: absolute;' +
-	            'right: -0.8em;' + 
+	            'right: -0.6em;' + 
 			    'left: auto;' +
 	     		'bottom: 0.8em;' +
 			    'top: auto;' +
@@ -53,7 +53,7 @@
             '.card__quality {' +
                 'bottom: auto;' + 
                 'top: 3.6em;' + 
-	            'right: -0.8em;' + 
+	            'right: -0.6em;' + 
 			    'left: auto;' +
                 'font-weight: 700;' +
                 'font-size: 0.8em;' +
@@ -63,7 +63,7 @@
             '.card--tv .card__type {' +
                 'bottom: auto;' + 
                 'top: 3.6em;' + 
-	            'right: -0.8em;' + 
+	            'right: -0.6em;' + 
 			    'left: auto;' +
                 'font-weight: 700;' +
                 'font-size: 0.8em;' +
@@ -179,6 +179,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
