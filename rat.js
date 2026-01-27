@@ -2,7 +2,7 @@
     'use strict';
 
     // Переменные настройки 
-    var C_LOGGING = false;  // Общий логгинг
+    var C_LOGGING = true;  // Общий логгинг
     var CACHE_TIME = 3 * 24 * 60 * 60 * 1000;  // Время, которое кеш считается валидным (3 суток)
     var OMDB_CACHE = 'maxsm_ratings_omdb_cache';
     var KP_CACHE = 'maxsm_ratings_kp_cache';
@@ -1536,5 +1536,6 @@
     }
 
     if (!window.maxsmRatingsPlugin) startPlugin();
+
 
 })();
