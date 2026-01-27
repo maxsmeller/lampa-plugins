@@ -51,6 +51,8 @@
             
             // Качество
             '.card__quality {' +
+                'bottom: auto;' + 
+                'top: 3.6em;' + 
 	            'right: -0.8em;' + 
 			    'left: auto;' +
                 'font-weight: 700;' +
@@ -59,10 +61,10 @@
             
             // Тип сериал
             '.card--tv .card__type {' +
+                'bottom: auto;' + 
+                'top: 3.6em;' + 
 	            'right: -0.8em;' + 
 			    'left: auto;' +
-	     		'bottom: 3em;' +
-			    'top: auto;' +
                 'font-weight: 700;' +
                 'font-size: 0.8em;' +
             '}' +
@@ -177,6 +179,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
