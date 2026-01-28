@@ -35,7 +35,8 @@
 			           
             // Качество
             '.card__quality {' +
-		    	'background-color: #ffc107 !important;' + 
+		    	'background-color: #ffc107' + 
+				'color: #000' + 
                 'bottom: auto;' + 
                 'top: 4.2em;' + 
 	            'right: 0em;' + 
@@ -47,7 +48,7 @@
             
             // Тип сериал
             '.card--tv .card__type {' +
-		    	'background-color: #dc3545 !important;' +  
+		    	'background-color: #dc3545' +  
                 'bottom: auto;' + 
                 'top: 4.2em;' + 
 	            'right: 0em;' + 
@@ -293,6 +294,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
