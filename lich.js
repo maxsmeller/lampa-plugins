@@ -97,7 +97,7 @@
                 '}' +
             '}' +
 			
-			// Рейтинги внутри карточки
+			// Статус выхода и возростной рейтинг
 			'.full-start-new__rate-line .full-start__pg {' +
 				'font-size: 1em;' +
 				'background: #fff;' +
@@ -108,6 +108,14 @@
 				'background: #fff;' +
 				'color: #000;' +
 			'}' +
+			
+            // Меню слева
+            '.menu__item.focus {' +
+				'border-radius: 0 0.5em 0.5em 0;' +
+			'}' +
+            '.menu__list {' +
+				'padding-left: 0em;' +
+	        '}' +
 		
             '';
         
@@ -193,6 +201,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
