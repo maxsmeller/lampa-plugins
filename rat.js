@@ -291,7 +291,7 @@
 	            var cachedAverage = getAverageFromCache(cardId);
 	            if (cachedAverage) {
 	                ratingValue = parseFloat(cachedAverage.average); // Число
-	                ratingText = '⚖️ ' + ratingValue.toFixed(1);      // Текст со звездой
+	                ratingText = '✦ ' + ratingValue.toFixed(1);      // Текст со звездой
 	                source = 'cache';
 	                ratingDetails = cachedAverage;
 	            }
@@ -1796,6 +1796,7 @@
 
 
 })();
+
 
 
 
