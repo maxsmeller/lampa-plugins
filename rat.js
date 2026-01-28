@@ -388,7 +388,7 @@ function processCardRatings(cards) {
         var cardData = card.card_data || {};
         var cardId = cardData.id;
         
-        // ВАЖНО: Ищем TMDB ID в нескольких местах по приоритету
+        // Ищем TMDB ID в нескольких местах (для возможного запроса к API)
         var tmdbId = null;
         
         // 1. Прямое поле tmdb_id
@@ -401,7 +401,7 @@ function processCardRatings(cards) {
             tmdbId = cardData.ids.tmdb;
             if (C_LOGGING) console.log("MAXSM-RATINGS", "Нашли tmdb_id в cardData.ids.tmdb: " + tmdbId);
         }
-        // 3. Сам cardId может быть TMDB ID (самое важное!)
+        // 3. Сам cardId может быть TMDB ID
         else if (cardId && !isNaN(parseInt(cardId)) && parseInt(cardId) > 0) {
             tmdbId = cardId.toString();
             if (C_LOGGING) console.log("MAXSM-RATINGS", "Используем cardId как tmdb_id: " + tmdbId);
@@ -415,51 +415,85 @@ function processCardRatings(cards) {
                 tmdbId: tmdbId,
                 itemType: itemType,
                 hasTmdbIdField: !!cardData.tmdb_id,
-                hasIdsTmdb: !!(cardData.ids && cardData.ids.tmdb),
-                cardDataKeys: Object.keys(cardData)
+                hasIdsTmdb: !!(cardData.ids && cardData.ids.tmdb)
             });
         }
         
-        // ========== ПОЛУЧАЕМ РЕЙТИНГ ==========
+        // ========== ЭТАП 1: ПОЛУЧАЕМ РЕЙТИНГ ==========
         var ratingValue = null;
         var ratingText = null;
         var source = null;
         var ratingDetails = null;
+        var processed = false; // Флаг, что карточка уже обработана
         
-        // Вариант 1: Рейтинг из кеша (по cardId)
+        // ========== ПРИОРИТЕТ 1: РЕЙТИНГ ИЗ КЕША ==========
         if (cardId) {
-            if (C_LOGGING) console.log("MAXSM-RATINGS", "Проверяем кеш для cardId: " + cardId);
+            if (C_LOGGING) console.log("MAXSM-RATINGS", "ПРИОРИТЕТ 1: Проверяем кеш для cardId: " + cardId);
             var cachedAverage = getAverageFromCache(cardId);
             if (cachedAverage) {
                 ratingValue = parseFloat(cachedAverage.average);
                 ratingText = '📊 ' + ratingValue.toFixed(1);
                 source = 'cache';
                 ratingDetails = cachedAverage;
-                if (C_LOGGING) console.log("MAXSM-RATINGS", "Нашли в кеше: " + ratingValue);
+                processed = true;
+                
+                if (C_LOGGING) console.log("MAXSM-RATINGS", "✓ Нашли в кеше: " + ratingValue);
+                
+                // Немедленно обновляем карточку
+                updateCardRating(card, ratingValue, source, ratingDetails, cardId, tmdbId, i);
             } else {
-                if (C_LOGGING) console.log("MAXSM-RATINGS", "В кеше нет для cardId: " + cardId);
+                if (C_LOGGING) console.log("MAXSM-RATINGS", "✗ В кеше нет для cardId: " + cardId);
             }
         }
         
-        // Вариант 2: Запрос к TMDB API (если есть TMDB ID и нет в кеше)
-        if (!ratingValue && tmdbId) {
-            if (C_LOGGING) console.log("MAXSM-RATINGS", "Нет в кеше, пробуем TMDB для tmdbId: " + tmdbId);
+        // ========== ПРИОРИТЕТ 2: РЕЙТИНГ С КАРТОЧКИ ==========
+        if (!processed) {
+            if (C_LOGGING) console.log("MAXSM-RATINGS", "ПРИОРИТЕТ 2: Проверяем рейтинг на карточке");
+            
+            var cardVoteElem = card.querySelector('.card__vote');
+            if (cardVoteElem) {
+                var ratingTextContent = cardVoteElem.textContent.trim();
+                var parsedRating = parseFloat(ratingTextContent);
+                
+                if (!isNaN(parsedRating) && parsedRating > 0) {
+                    ratingValue = parsedRating;
+                    ratingText = '★ ' + ratingValue.toFixed(1);
+                    source = 'card';
+                    ratingDetails = {
+                        average: ratingValue,
+                        count: 1,
+                        sources: ['card']
+                    };
+                    processed = true;
+                    
+                    if (C_LOGGING) console.log("MAXSM-RATINGS", "✓ Нашли рейтинг на карточке: " + ratingValue);
+                    
+                    // Немедленно обновляем карточку
+                    updateCardRating(card, ratingValue, source, ratingDetails, cardId, tmdbId, i);
+                } else {
+                    if (C_LOGGING) console.log("MAXSM-RATINGS", "✗ Не удалось распарсить рейтинг с карточки: '" + ratingTextContent + "'");
+                }
+            } else {
+                if (C_LOGGING) console.log("MAXSM-RATINGS", "✗ Нет элемента .card__vote на карточке");
+            }
+        }
+        
+        // ========== ПРИОРИТЕТ 3: ЗАПРОС К TMDB API ==========
+        if (!processed && tmdbId) {
+            if (C_LOGGING) console.log("MAXSM-RATINGS", "ПРИОРИТЕТ 3: Запрашиваем TMDB API для tmdbId: " + tmdbId);
             
             // Проверяем корректность tmdbId
             var tmdbIdNum = parseInt(tmdbId);
             if (isNaN(tmdbIdNum) || tmdbIdNum <= 0) {
-                if (C_LOGGING) console.log("MAXSM-RATINGS", "Некорректный tmdbId: " + tmdbId + ", пропускаем TMDB запрос");
-                useCardRating(card, cardId, tmdbId, i);
+                if (C_LOGGING) console.log("MAXSM-RATINGS", "✗ Некорректный tmdbId: " + tmdbId);
+                markCardAsNoRating(card, cardId, tmdbId, i);
                 continue;
             }
             
             // Проверяем доступность Lampa.TMDB
             if (!Lampa.TMDB || typeof Lampa.TMDB.key !== 'function' || typeof Lampa.TMDB.api !== 'function') {
-                if (C_LOGGING) {
-                    console.log("MAXSM-RATINGS", "Ошибка: Lampa.TMDB недоступен!");
-                    console.log("MAXSM-RATINGS", "Lampa.TMDB:", Lampa.TMDB);
-                }
-                useCardRating(card, cardId, tmdbId, i);
+                if (C_LOGGING) console.log("MAXSM-RATINGS", "✗ Lampa.TMDB недоступен");
+                markCardAsNoRating(card, cardId, tmdbId, i);
                 continue;
             }
             
@@ -469,27 +503,25 @@ function processCardRatings(cards) {
                 apiKey = Lampa.TMDB.key();
                 if (C_LOGGING) console.log("MAXSM-RATINGS", "API ключ получен: " + (apiKey ? "есть" : "нет"));
             } catch (error) {
-                if (C_LOGGING) console.log("MAXSM-RATINGS", "Ошибка при получении API ключа:", error);
-                useCardRating(card, cardId, tmdbId, i);
+                if (C_LOGGING) console.log("MAXSM-RATINGS", "✗ Ошибка при получении API ключа:", error);
+                markCardAsNoRating(card, cardId, tmdbId, i);
                 continue;
             }
             
             if (!apiKey) {
-                if (C_LOGGING) console.log("MAXSM-RATINGS", "Ошибка: API ключ TMDB пустой!");
-                useCardRating(card, cardId, tmdbId, i);
+                if (C_LOGGING) console.log("MAXSM-RATINGS", "✗ API ключ TMDB пустой");
+                markCardAsNoRating(card, cardId, tmdbId, i);
                 continue;
             }
             
-            // Используем замыкание для сохранения контекста
+            // Используем замыкание для асинхронного запроса
             (function(currentCard, currentCardId, currentTmdbId, currentType, index) {
                 // Нормализуем тип для TMDB API
                 var tmdbType = currentType;
                 if (currentType === 'tv' || currentType === 'serial' || currentType === 'show') {
                     tmdbType = 'tv';
-                    if (C_LOGGING) console.log("MAXSM-RATINGS", "Тип '" + currentType + "' преобразован в 'tv'");
                 } else {
                     tmdbType = 'movie';
-                    if (C_LOGGING) console.log("MAXSM-RATINGS", "Тип '" + currentType + "' преобразован в 'movie'");
                 }
                 
                 // Формируем путь для запроса
@@ -498,99 +530,135 @@ function processCardRatings(cards) {
                 
                 if (C_LOGGING) {
                     console.log("MAXSM-RATINGS", "=== ЗАПРОС TMDB [" + index + "] ===");
-                    console.log("MAXSM-RATINGS", "CardId: " + (currentCardId || 'нет'));
-                    console.log("MAXSM-RATINGS", "TmdbId: " + currentTmdbId);
-                    console.log("MAXSM-RATINGS", "Тип: " + currentType + " -> " + tmdbType);
-                    console.log("MAXSM-RATINGS", "API путь: " + apiPath);
-                    console.log("MAXSM-RATINGS", "Полный URL: " + apiUrl);
-                    console.log("MAXSM-RATINGS", "Длина API ключа: " + (apiKey ? apiKey.length : 0));
+                    console.log("MAXSM-RATINGS", "TMDB ID: " + currentTmdbId);
+                    console.log("MAXSM-RATINGS", "Тип: " + tmdbType);
+                    console.log("MAXSM-RATINGS", "URL: " + apiUrl);
                 }
                 
-                // Выполняем запрос
+                // Выполняем асинхронный запрос
                 try {
-                    if (C_LOGGING) console.log("MAXSM-RATINGS", "Отправляем silent запрос...");
-                    
                     new Lampa.Reguest().silent(apiUrl, function(tmdbData) {
                         if (C_LOGGING) {
                             console.log("MAXSM-RATINGS", "=== ОТВЕТ TMDB [" + index + "] ===");
-                            console.log("MAXSM-RATINGS", "Успешный ответ");
-                            console.log("MAXSM-RATINGS", "Данные:", tmdbData);
                             if (tmdbData) {
                                 console.log("MAXSM-RATINGS", "vote_average:", tmdbData.vote_average);
                                 console.log("MAXSM-RATINGS", "vote_count:", tmdbData.vote_count);
-                                console.log("MAXSM-RATINGS", "title:", tmdbData.title || tmdbData.name);
-                                console.log("MAXSM-RATINGS", "id:", tmdbData.id);
                             }
                         }
                         
-                        if (tmdbData && tmdbData.vote_average !== undefined && tmdbData.vote_average !== null && tmdbData.vote_average > 0) {
+                        if (tmdbData && tmdbData.vote_average !== undefined && 
+                            tmdbData.vote_average !== null && tmdbData.vote_average > 0) {
+                            
                             var tmdbRating = tmdbData.vote_average;
                             var voteCount = tmdbData.vote_count || 0;
                             
-                            if (C_LOGGING) console.log("MAXSM-RATINGS", "УСПЕХ: Рейтинг TMDB: " + tmdbRating);
+                            if (C_LOGGING) console.log("MAXSM-RATINGS", "✓ Получили рейтинг TMDB: " + tmdbRating);
                             
                             updateCardRating(currentCard, tmdbRating, 'tmdb', {
                                 average: tmdbRating,
                                 count: voteCount,
                                 sources: ['tmdb']
                             }, currentCardId, currentTmdbId, index);
+                            
                         } else {
-                            if (C_LOGGING) {
-                                console.log("MAXSM-RATINGS", "НЕТ РЕЙТИНГА в TMDB ответе");
-                                if (!tmdbData) {
-                                    console.log("MAXSM-RATINGS", "Пустой ответ");
-                                } else if (tmdbData.vote_average === 0) {
-                                    console.log("MAXSM-RATINGS", "Рейтинг равен 0");
-                                } else if (tmdbData.vote_average === null) {
-                                    console.log("MAXSM-RATINGS", "Рейтинг null");
-                                }
-                            }
-                            useCardRating(currentCard, currentCardId, currentTmdbId, index);
+                            if (C_LOGGING) console.log("MAXSM-RATINGS", "✗ Нет рейтинга в TMDB");
+                            markCardAsNoRating(currentCard, currentCardId, currentTmdbId, index);
                         }
                     }, function(xhr) {
                         if (C_LOGGING) {
                             console.log("MAXSM-RATINGS", "=== ОШИБКА TMDB [" + index + "] ===");
-                            console.log("MAXSM-RATINGS", "Ошибка запроса");
                             if (xhr) {
-                                console.log("MAXSM-RATINGS", "Статус: " + xhr.status + " " + xhr.statusText);
-                                console.log("MAXSM-RATINGS", "Ответ: " + (xhr.responseText || 'пусто'));
-                                if (xhr.status === 404) {
-                                    console.log("MAXSM-RATINGS", "404: Контент не найден в TMDB");
-                                } else if (xhr.status === 401) {
-                                    console.log("MAXSM-RATINGS", "401: Проблема с API ключом");
-                                }
+                                console.log("MAXSM-RATINGS", "Статус: " + xhr.status);
                             }
                         }
-                        useCardRating(currentCard, currentCardId, currentTmdbId, index);
+                        markCardAsNoRating(currentCard, currentCardId, currentTmdbId, index);
                     });
                     
                 } catch (error) {
-                    if (C_LOGGING) {
-                        console.log("MAXSM-RATINGS", "=== ИСКЛЮЧЕНИЕ [" + index + "] ===");
-                        console.log("MAXSM-RATINGS", "Ошибка:", error);
-                    }
-                    useCardRating(currentCard, currentCardId, currentTmdbId, index);
+                    if (C_LOGGING) console.log("MAXSM-RATINGS", "✗ Исключение при запросе:", error);
+                    markCardAsNoRating(currentCard, currentCardId, currentTmdbId, index);
                 }
             })(card, cardId, tmdbId, itemType, i);
             
             continue;
         }
         
-        // Вариант 3: Рейтинг с карточки (если нет TMDB ID)
-        if (!tmdbId) {
-            if (C_LOGGING) console.log("MAXSM-RATINGS", "Нет tmdbId для запроса");
-        }
-        
-        if (!ratingValue) {
-            if (C_LOGGING) console.log("MAXSM-RATINGS", "Используем рейтинг с карточки");
-            useCardRating(card, cardId, tmdbId, i);
-        } else {
-            if (C_LOGGING) console.log("MAXSM-RATINGS", "Синхронная обработка из кеша");
-            updateCardRating(card, ratingValue, source, ratingDetails, cardId, tmdbId, i);
+        // ========== НЕТ РЕЙТИНГА ВООБЩЕ ==========
+        if (!processed) {
+            if (C_LOGGING) console.log("MAXSM-RATINGS", "✗ Карточка не обработана - нет рейтинга ниоткуда");
+            markCardAsNoRating(card, cardId, tmdbId, i);
         }
     }
     
-    if (C_LOGGING) console.log("MAXSM-RATINGS", "Завершение обработки");
+    if (C_LOGGING) console.log("MAXSM-RATINGS", "Завершение обработки карточек");
+}
+
+// Функция для обновления рейтинга на карточке (остается без изменений)
+function updateCardRating(card, ratingValue, source, ratingDetails, cardId, tmdbId, index) {
+    cardId = cardId || (card.card_data || {}).id || 'unknown';
+    tmdbId = tmdbId || 'нет';
+    
+    // Формируем текст рейтинга
+    var displayText = '';
+    if (source === 'cache') {
+        displayText = '📊 ' + ratingValue.toFixed(1);
+    } else if (source === 'tmdb') {
+        displayText = '🎬 ' + ratingValue.toFixed(1);
+    } else if (source === 'card') {
+        displayText = '★ ' + ratingValue.toFixed(1);
+    }
+    
+    if (C_LOGGING) {
+        console.log("MAXSM-RATINGS", "updateCardRating [" + (index || '?') + "]:", {
+            cardId: cardId,
+            tmdbId: tmdbId,
+            rating: ratingValue,
+            source: source,
+            display: displayText
+        });
+    }
+    
+    // Находим или создаем элемент
+    var cardVote = card.querySelector('.card__vote');
+    var cardView = card.querySelector('.card__view');
+    
+    if (!cardVote && cardView) {
+        cardVote = document.createElement('div');
+        cardVote.className = 'card__vote';
+        cardView.appendChild(cardVote);
+    }
+    
+    if (cardVote) {
+        cardVote.textContent = displayText;
+        
+        // Раскрашиваем
+        cardVote.classList.remove('low-rating', 'medium-rating', 'high-rating');
+        if (ratingValue < 5) {
+            cardVote.classList.add('low-rating');
+        } else if (ratingValue >= 5 && ratingValue < 7) {
+            cardVote.classList.add('medium-rating');
+        } else {
+            cardVote.classList.add('high-rating');
+        }
+    }
+}
+
+// Функция для пометки карточки как "без рейтинга"
+function markCardAsNoRating(card, cardId, tmdbId, index) {
+    if (C_LOGGING) {
+        console.log("MAXSM-RATINGS", "markCardAsNoRating [" + (index || '?') + "]:", {
+            cardId: cardId || 'нет',
+            tmdbId: tmdbId || 'нет',
+            status: 'Нет рейтинга'
+        });
+    }
+    
+    // Можно добавить специальную пометку или оставить как есть
+    var cardVote = card.querySelector('.card__vote');
+    if (cardVote) {
+        // Оставляем оригинальный рейтинг, если он есть
+        if (C_LOGGING) console.log("MAXSM-RATINGS", "Оставляем оригинальный рейтинг: '" + cardVote.textContent + "'");
+    }
 }
 
 // Функция для использования рейтинга с карточки
@@ -619,68 +687,7 @@ function useCardRating(card, cardId, tmdbId, index) {
     }
 }
 
-// Функция для обновления рейтинга на карточке
-function updateCardRating(card, ratingValue, source, ratingDetails, cardId, tmdbId, index) {
-    cardId = cardId || (card.card_data || {}).id || 'unknown';
-    tmdbId = tmdbId || ((card.card_data || {}).tmdb_id || ((card.card_data || {}).ids ? (card.card_data || {}).ids.tmdb : null)) || 'нет';
-    
-    if (C_LOGGING) console.log("MAXSM-RATINGS", "updateCardRating [" + (index || '?') + "]", {
-        cardId: cardId,
-        tmdbId: tmdbId,
-        ratingValue: ratingValue,
-        source: source
-    });
-    
-    // Формируем текст рейтинга в зависимости от источника
-    var ratingText = '';
-    if (source === 'cache') {
-        ratingText = '📊 ' + ratingValue.toFixed(1);
-    } else if (source === 'tmdb') {
-        ratingText = '🎬 ' + ratingValue.toFixed(1);
-    } else if (source === 'card') {
-        ratingText = '★ ' + ratingValue.toFixed(1);
-    }
-    
-    if (C_LOGGING) console.log("MAXSM-RATINGS", "Карточка " + cardId + 
-        " (tmdb:" + tmdbId + ")" +
-        ": рейтинг " + ratingText + " из " + source + 
-        (ratingDetails ? " (" + ratingDetails.count + " голосов)" : ""));
-    
-    // Находим или создаем элемент для рейтинга
-    var cardVote = card.querySelector('.card__vote');
-    var cardView = card.querySelector('.card__view');
-    
-    if (!cardVote && cardView) {
-        cardVote = document.createElement('div');
-        cardVote.className = 'card__vote';
-        cardView.appendChild(cardVote);
-        if (C_LOGGING) console.log("MAXSM-RATINGS", "Создан новый элемент .card__vote");
-    } else if (!cardVote && !cardView) {
-        if (C_LOGGING) console.log("MAXSM-RATINGS", "Ошибка: нет .card__view для создания .card__vote");
-        return;
-    }
-    
-    if (cardVote) {
-        // Сохраняем старый текст для логирования
-        var oldText = cardVote.textContent;
-        
-        // Обновляем текст
-        cardVote.textContent = ratingText;
-        
-        // Раскрашиваем рейтинг
-        cardVote.classList.remove('low-rating', 'medium-rating', 'high-rating');
-        
-        if (ratingValue < 5) {
-            cardVote.classList.add('low-rating');
-        } else if (ratingValue >= 5 && ratingValue < 7) {
-            cardVote.classList.add('medium-rating');
-        } else if (ratingValue >= 7) {
-            cardVote.classList.add('high-rating');
-        }
-        
-        if (C_LOGGING) console.log("MAXSM-RATINGS", "Обновлен рейтинг: '" + oldText + "' -> '" + ratingText + "'");
-    }
-}
+
     // Обсервер DOM для новых карточек
     var cardsObserver = new MutationObserver(function(mutations) {
         var newCards = [];
@@ -2122,6 +2129,7 @@ function updateCardRating(card, ratingValue, source, ratingDetails, cardId, tmdb
 
 
 })();
+
 
 
 
