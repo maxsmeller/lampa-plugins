@@ -21,30 +21,13 @@
         var css = '' +    
 	        // Иконки закладок и т.д.
 			'.card__icons {' +
-			'  position: absolute;' +
 			'  top: 2em;' +
-			'  left: 0;' +
 			'  right: auto;' +
-			'  display: -webkit-box;' +
-			'  display: -webkit-flex;' +
-			'  display: -moz-box;' +
-			'  display: -ms-flexbox;' +
-			'  display: flex;' +
-			'  -webkit-box-pack: center;' +
-			'  -webkit-justify-content: center;' +
-			'  -moz-box-pack: center;' +
-			'  -ms-flex-pack: center;' +
-			'  justify-content: center;' +
 			'  background: rgba(0, 0, 0, 0.6);' +
-			'  color: #fff;' +
 			'  -webkit-border-radius: 0 0.5em 0.5em 0;' +
 			'  -moz-border-radius: 0 0.5em 0.5em 0;' +
 			'  border-radius: 0 0.5em 0.5em 0;' +
 			'}' +
-			'.card__icons-inner {' +
-			'  background: none;' +
-			'  color: #fff;' +
-			'}'
             // Рейтинг
             '.card__vote {' +
 			    'bottom: auto;' +
@@ -320,6 +303,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
