@@ -251,82 +251,107 @@
         }
     }
 
-	// Упрощенная функция для обработки рейтинга на карточках в списке
+	// Функция для обработки рейтинга на карточках в списке
 	function processCardRatings(cards) {
 	    for (var i = 0; i < cards.length; i++) {
 	        var card = cards[i];
+	        
+	        // ========== ЭТАП 1: ПОЛУЧАЕМ РЕЙТИНГ ==========
+	        var ratingToUse = null;
+	        var source = null;
+	        var ratingDetails = null;
+	        
+	        // Вариант 1: Рейтинг из кеша (высший приоритет)
 	        var cardData = card.card_data || {};
 	        var cardId = cardData.id;
 	        
-	        if (!cardId) continue;
+	        if (cardId) {
+	            var cachedAverage = getAverageFromCache(cardId);
+	            if (cachedAverage) {
+	                ratingToUse = parseFloat(cachedAverage.average);
+	                source = 'cache';
+	                ratingDetails = cachedAverage;
+	            }
+	        }
 	        
-	        // Проверяем кеш средних рейтингов
-	        var cachedAverage = getAverageFromCache(cardId);
+	        // Вариант 2: Рейтинг с карточки (если нет в кеше)
+	        if (!ratingToUse) {
+	            var cardVote = card.querySelector('.card__vote');
+	            if (cardVote) {
+	                var ratingText = cardVote.textContent.trim();
+	                var originalRating = parseFloat(ratingText);
+	                if (!isNaN(originalRating)) {
+	                    ratingToUse = originalRating;
+	                    source = 'card';
+	                }
+	            }
+	        }
 	        
-	        if (!cachedAverage) {
-	            if (C_LOGGING) console.log("MAXSM-RATINGS", "Карточка " + cardId + ": нет среднего рейтинга в кеше");
+	        // Если не нашли ни одного рейтинга - пропускаем карточку
+	        if (!ratingToUse) {
+	            if (C_LOGGING) console.log("MAXSM-RATINGS", "Карточка " + (cardId || 'unknown') + 
+	                ": нет рейтинга (ни в кеше, ни на карточке)");
 	            continue;
 	        }
 	        
-	        var cardVote = card.querySelector('.card__vote');
-	        var averageRating = parseFloat(cachedAverage.average);
+	        if (C_LOGGING) console.log("MAXSM-RATINGS", "Карточка " + (cardId || 'unknown') + 
+	            ": рейтинг " + ratingToUse.toFixed(1) + " из " + source + 
+	            (ratingDetails ? " (" + ratingDetails.count + " источников)" : ""));
 	        
-	        // Случай 1: Есть элемент рейтинга
+	        // ========== ЭТАП 2: МЕНЯЕМ ЦИФРУ НА КАРТОЧКЕ ==========
+	        var cardVote = card.querySelector('.card__vote');
+	        
+	        // Случай A: Есть элемент рейтинга - обновляем его
 	        if (cardVote) {
-	            var ratingText = cardVote.textContent.trim();
-	            var originalRating = parseFloat(ratingText);
-	            
-	            if (!isNaN(originalRating)) {
-	                // Подменяем на средний рейтинг из кеша
-	                cardVote.textContent = '.' + averageRating.toFixed(1); // ЗАКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
-	                // cardVote.textContent = averageRating.toFixed(1); // РАСКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
-	                
-	                // Раскрашиваем по среднему рейтингу
-	                colorizeCardRating(cardVote, averageRating);
-	                
-	                if (C_LOGGING) {
-	                    console.log("MAXSM-RATINGS", "Карточка " + cardId + 
-	                        ": подменен " + originalRating.toFixed(1) + " → " + averageRating.toFixed(1) + 
-	                        " (из " + cachedAverage.count + " источников)");
-	                }
+	            // Для отладки добавляем метку источника
+	            if (source === 'cache') {
+	                cardVote.textContent = '.' + ratingToUse.toFixed(1); // ЗАКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
+	                // cardVote.textContent = ratingToUse.toFixed(1); // РАСКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
+	            } else {
+	                cardVote.textContent = ratingToUse.toFixed(1);
 	            }
 	        }
-	        // Случай 2: Нет элемента рейтинга
+	        // Случай B: Нет элемента рейтинга - создаем новый
 	        else {
 	            var cardView = card.querySelector('.card__view');
-	            if (cardView) {
-	                var newCardVote = document.createElement('div');
-	                newCardVote.className = 'card__vote';
-	                
-	                // Для отладки добавляем точку
-	                newCardVote.textContent = '.' + averageRating.toFixed(1); // ЗАКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
-	                // newCardVote.textContent = averageRating.toFixed(1); // РАСКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
-	                
-	                // Стили как у оригинального элемента
-	                newCardVote.style.cssText = [
-	                    'position: absolute',
-	                    'top: 5px',
-	                    'left: 5px',
-	                    'background: rgba(0, 0, 0, 0.7)',
-	                    'color: white',
-	                    'padding: 2px 6px',
-	                    'border-radius: 3px',
-	                    'font-size: 0.8em',
-	                    'font-weight: bold',
-	                    'z-index: 10'
-	                ].join(';');
-	                
-	                // Раскрашиваем
-	                colorizeCardRating(newCardVote, averageRating);
-	                
-	                // Добавляем в card__view
-	                cardView.appendChild(newCardVote);
-	                
-	                if (C_LOGGING) {
-	                    console.log("MAXSM-RATINGS", "Добавлен рейтинг карточке " + cardId + 
-	                        ": " + averageRating.toFixed(1) + " (из кеша, " + cachedAverage.count + " источников)");
-	                }
+	            if (!cardView) {
+	                if (C_LOGGING) console.log("MAXSM-RATINGS", "Карточка " + (cardId || 'unknown') + 
+	                    ": нет .card__view для вставки рейтинга");
+	                continue;
 	            }
+	            
+	            cardVote = document.createElement('div');
+	            cardVote.className = 'card__vote';
+	            
+	            // Для отладки добавляем метку источника
+	            if (source === 'cache') {
+	                cardVote.textContent = '.' + ratingToUse.toFixed(1); // ЗАКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
+	                // cardVote.textContent = ratingToUse.toFixed(1); // РАСКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
+	            } else {
+	                cardVote.textContent = ratingToUse.toFixed(1);
+	            }
+	            
+	            // Добавляем в card__view
+	            cardView.appendChild(cardVote);
+	            
+	            if (C_LOGGING) console.log("MAXSM-RATINGS", "Карточка " + (cardId || 'unknown') + 
+	                ": создан новый элемент рейтинга");
+	        }
+	        
+	        // ========== ЭТАП 3: РАСКРАШИВАЕМ РЕЙТИНГ ==========
+	        // Удаляем предыдущие классы рейтинга
+	        cardVote.classList.remove('low-rating', 'medium-rating', 'high-rating');
+	        
+	        // Применяем новые классы в зависимости от оценки
+	        if (ratingToUse < 5) {
+	            cardVote.classList.add('low-rating');
+	            if (C_LOGGING) console.log("MAXSM-RATINGS", "Применен класс low-rating (красный) для рейтинга: " + ratingToUse);
+	        } else if (ratingToUse >= 5 && ratingToUse < 7) {
+	            cardVote.classList.add('medium-rating');
+	            if (C_LOGGING) console.log("MAXSM-RATINGS", "Применен класс medium-rating (желтый) для рейтинга: " + ratingToUse);
+	        } else if (ratingToUse >= 7) {
+	            cardVote.classList.add('high-rating');
+	            if (C_LOGGING) console.log("MAXSM-RATINGS", "Применен класс high-rating (зеленый) для рейтинга: " + ratingToUse);
 	        }
 	    }
 	}
@@ -1772,6 +1797,7 @@
 
 
 })();
+
 
 
 
