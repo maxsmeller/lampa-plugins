@@ -96,6 +96,19 @@
                     'display: flex;' +
                 '}' +
             '}' +
+			
+			// Рейтинги внутри карточки
+			'.full-start-new__rate-line .full-start__pg {' +
+				'font-size: 1em;' +
+				'background: #fff;' +
+				'color: #000;' +
+			'}' +
+			'.full-start__pg, .full-start__status {' +
+				'font-size: 1em;' +
+				'background: #fff;' +
+				'color: #000;' +
+			'}' +
+		
             '';
         
         // Добавляем CSS
@@ -180,6 +193,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
