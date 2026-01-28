@@ -269,7 +269,7 @@
 	            var cachedAverage = getAverageFromCache(cardId);
 	            if (cachedAverage) {
 	                ratingValue = parseFloat(cachedAverage.average); // Число
-	                ratingText = ratingValue.toFixed(1) + ' ★';      // Текст со звездой
+	                ratingText = '★' + ratingValue.toFixed(1);      // Текст со звездой
 	                source = 'cache';
 	                ratingDetails = cachedAverage;
 	            }
@@ -282,7 +282,7 @@
 	                var ratingTextContent = cardVoteElem.textContent.trim();
 	                ratingValue = parseFloat(ratingTextContent);
 	                if (!isNaN(ratingValue)) {
-	                    ratingText = ratingValue.toFixed(1) + ' 💠'; // Текст с ромбом
+	                    ratingText = ratingValue.toFixed(1); // Текст с ромбом
 	                    source = 'card';
 	                }
 	            }
@@ -1774,6 +1774,7 @@
 
 
 })();
+
 
 
 
