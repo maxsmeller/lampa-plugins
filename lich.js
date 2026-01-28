@@ -133,7 +133,7 @@
 			'.extensions__item.focus::after,' +
 			'.extensions__block-add.focus::after,' +
 			'.full-review-add.focus::after {' +
-			'    border: 0.2em solid #000;' +
+			'    border: 0.4em solid #fff;' +
 			'}' +
 		
             '';
@@ -220,6 +220,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
