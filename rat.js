@@ -268,7 +268,7 @@
 	        if (cardId) {
 	            var cachedAverage = getAverageFromCache(cardId);
 	            if (cachedAverage) {
-	                ratingToUse = parseFloat(cachedAverage.average);
+	                ratingToUse = parseFloat(cachedAverage.average) + ' ★';
 	                source = 'cache';
 	                ratingDetails = cachedAverage;
 	            }
@@ -281,7 +281,7 @@
 	                var ratingText = cardVote.textContent.trim();
 	                var originalRating = parseFloat(ratingText);
 	                if (!isNaN(originalRating)) {
-	                    ratingToUse = originalRating;
+	                    ratingToUse = originalRating + ' 💠';
 	                    source = 'card';
 	                }
 	            }
@@ -305,8 +305,8 @@
 	        if (cardVote) {
 	            // Для отладки добавляем метку источника
 	            if (source === 'cache') {
-	                cardVote.textContent = '★\n' + ratingToUse.toFixed(1); // ЗАКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
-	                // cardVote.textContent = ratingToUse.toFixed(1); // РАСКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
+	                //cardVote.textContent = '★\n' + ratingToUse.toFixed(1); // ЗАКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
+	                cardVote.textContent = ratingToUse.toFixed(1); // РАСКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
 	            } else {
 	                cardVote.textContent = ratingToUse.toFixed(1);
 	            }
@@ -325,8 +325,8 @@
 	            
 	            // Для отладки добавляем метку источника
 	            if (source === 'cache') {
-	                cardVote.textContent = '★\n' + ratingToUse.toFixed(1); // ЗАКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
-	                // cardVote.textContent = ratingToUse.toFixed(1); // РАСКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
+	                //cardVote.textContent = '★\n' + ratingToUse.toFixed(1); // ЗАКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
+	                cardVote.textContent = ratingToUse.toFixed(1); // РАСКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
 	            } else {
 	                cardVote.textContent = ratingToUse.toFixed(1);
 	            }
@@ -1797,6 +1797,7 @@
 
 
 })();
+
 
 
 
