@@ -43,7 +43,7 @@
         "}" +
         ".card__quality-quality-FHD {" +
         "    background: #ffc107 !important;" +
-        "    color: #fff !important;" +
+        "    color: #000 !important;" +
         "}" +
         ".card__quality-quality-... {" +
         "    background: #dc3545 !important;" +
@@ -739,6 +739,7 @@
 
 
 })();
+
 
 
 
