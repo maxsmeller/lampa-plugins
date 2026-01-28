@@ -19,14 +19,10 @@
         
         // Оптимизированные объединенные стили
         var css = '' +    
+			
 	        // Иконки закладок и т.д.
 			'.card__icons {' +
-				'top: 2em;' +
-				'right: auto;' +
-				'background: rgba(0, 0, 0, 0.6);' +
-				'-webkit-border-radius: 0 0.5em 0.5em 0;' +
-				'-moz-border-radius: 0 0.5em 0.5em 0;' +
-				'border-radius: 0 0.5em 0.5em 0;' +
+				'top: 5em;' +
 			'}' +
 			
             // Рейтинг
@@ -304,6 +300,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
