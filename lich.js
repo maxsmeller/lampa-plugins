@@ -236,6 +236,36 @@
         } else {
             console.warn('Lampa.Template не найден, шаблоны не добавлены');
         }
+		
+	     Lampa.Lang.add({
+	        tv_status_returning_series: {
+	          ru: "Идет"
+	        },
+	        tv_status_planned: {
+	          ru: "Запланирован"
+	        },
+	        tv_status_in_production: {
+	          ru: "В производстве"
+	        },
+	        tv_status_ended: {
+	          ru: "Завершен"
+	        },
+	        tv_status_canceled: {
+	          ru: "Отменен"
+	        },
+	        tv_status_pilot: {
+	          ru: "Пилот"
+	        },
+	        tv_status_released: {
+	          ru: "Вышел"
+	        },
+	        tv_status_rumored: {
+	          ru: "По слухам"
+	        },
+	        tv_status_post_production: {
+	          ru: "Скоро"
+	        }
+	      });
     }
 
     // Запуск при загрузке приложения
@@ -261,6 +291,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
