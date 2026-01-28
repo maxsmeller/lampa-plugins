@@ -362,7 +362,7 @@
 	                // Для отладки добавляем точку
 	                newCardVote.textContent = '.' + ratingValue; // ЗАКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
 	                // newCardVote.textContent = ratingValue; // РАСКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
-	                
+	                /*
 	                // Стили как у оригинального элемента
 	                newCardVote.style.cssText = [
 	                    'position: absolute',
@@ -376,7 +376,7 @@
 	                    'font-weight: bold',
 	                    'z-index: 10'
 	                ].join(';');
-	                
+	                */
 	                // Раскрашиваем
 	                colorizeCardRating(newCardVote, parseFloat(ratingValue));
 	                
@@ -1775,6 +1775,7 @@
 
 
 })();
+
 
 
 
