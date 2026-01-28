@@ -254,7 +254,29 @@
 	function processCardRatings(cards) {
 	    for (var i = 0; i < cards.length; i++) {
 	        var card = cards[i];
-	        
+			var cardVote = card.querySelector('.card__vote');
+        
+	        // ========== ПРОВЕРКА: ЭТО РЕЙТИНГ ИЛИ КОЛИЧЕСТВО ГОЛОСОВ? ==========
+	        if (cardVote) {
+	            var ratingText = cardVote.textContent.trim();
+	            
+	            // Проверяем что это рейтинг, а не количество голосов
+	            // Рейтинг: "7.5", "8.1", "6.0" (одно или два числа с точкой)
+	            // Голоса: "1.5K", "2.3M", "1,234" (с буквами K/M или запятыми)
+	            
+	            var isRating = /^[\d]+\.?[\d]*$/.test(ratingText); // Только цифры и точка
+	            var isVotes = /[KM]/.test(ratingText) || /,/.test(ratingText); // Буквы K/M или запятые
+	            
+	            if (isVotes) {
+	                if (C_LOGGING) console.log("MAXSM-RATINGS", "Пропуск карточки: в лейбле количество голосов: " + ratingText);
+	                continue; // Пропускаем эту карточку
+	            }
+	            
+	            if (!isRating) {
+	                if (C_LOGGING) console.log("MAXSM-RATINGS", "Пропуск карточки: непонятный формат: " + ratingText);
+	                continue; // Пропускаем
+	            }
+	        }
 	        // ========== ЭТАП 1: ПОЛУЧАЕМ РЕЙТИНГ ==========
 	        var ratingValue = null;  // Число для раскраски
 	        var ratingText = null;   // Текст для отображения (с эмодзи)
@@ -1774,6 +1796,7 @@
 
 
 })();
+
 
 
 
