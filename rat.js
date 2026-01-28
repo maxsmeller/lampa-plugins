@@ -256,111 +256,89 @@
 	        var card = cards[i];
 	        var cardVote = card.querySelector('.card__vote');
 	        if (cardVote) {
-	            // Проверяем, не обработали ли уже эту карточку
-	            if (card.hasAttribute('data-rating-processed')) continue;
-	            card.setAttribute('data-rating-processed', 'true');
-	            
 	            var ratingText = cardVote.textContent.trim();
 	            var originalRating = parseFloat(ratingText);
 	            
-	            // Получаем данные карточки
-	            var cardData = card.card_data || {};
-	            var cardId = cardData.id;
-	            
-	            if (cardId) {
-	                if (C_LOGGING) console.log("MAXSM-RATINGS", "Обработка карточки ID: " + cardId);
+	            if (!isNaN(originalRating)) {
+	                // Получаем данные карточки
+	                var cardData = card.card_data || {};
+	                var cardId = cardData.id;
+	                var displayRating = originalRating; // По умолчанию показываем оригинальный
+	                var showAverage = false;
 	                
-	                // Пытаемся получить данные из кеша
-	                var cachedRatings = null;
-	                
-	                // Проверяем кеш OMDB и KP по IMDB ID
-	                if (cardData.imdb_id || cardData.imdb) {
-	                    var imdbId = cardData.imdb_id || cardData.imdb;
-	                    var cardType = getCardType(cardData);
-	                    var cacheKey = cardType + '_' + imdbId;
+	                if (cardId) {
+	                    // Пытаемся получить данные из кеша
+	                    var cachedRatings = null;
 	                    
-	                    var omdbData = getOmdbCache(cacheKey);
-	                    var kpData = getKpCache(cacheKey);
-	                    
-	                    if (omdbData || kpData) {
-	                        // Собираем рейтинги из кеша
-	                        cachedRatings = {
-	                            imdb: (omdbData && omdbData.imdb && omdbData.imdb !== "N/A") ? parseFloat(omdbData.imdb) : 
-	                                   (kpData && kpData.imdb) ? parseFloat(kpData.imdb) : null,
-	                            tmdb: cardData.vote_average || null,
-	                            kp: (kpData && kpData.kp) ? parseFloat(kpData.kp) : null,
-	                            mc: (omdbData && omdbData.mc && omdbData.mc !== "N/A") ? parseFloat(omdbData.mc) / 10 : null,
-	                            rt: (omdbData && omdbData.rt && omdbData.rt !== "N/A") ? parseFloat(omdbData.rt) / 10 : null
-	                        };
+	                    // Проверяем кеш OMDB и KP по IMDB ID
+	                    if (cardData.imdb_id || cardData.imdb) {
+	                        var imdbId = cardData.imdb_id || cardData.imdb;
+	                        var cardType = getCardType(cardData);
+	                        var cacheKey = cardType + '_' + imdbId;
 	                        
-	                        if (C_LOGGING) console.log("MAXSM-RATINGS", "Найдены данные в кеше для карточки " + cardId, cachedRatings);
-	                    }
-	                }
-	                
-	                // Если есть кешированные рейтинги, считаем средний
-	                if (cachedRatings) {
-	                    var ratingsCount = 0;
-	                    var totalWeight = 0;
-	                    var weightedSum = 0;
-	                    
-	                    // Считаем взвешенную сумму
-	                    for (var key in cachedRatings) {
-	                        if (cachedRatings.hasOwnProperty(key) && cachedRatings[key] && !isNaN(cachedRatings[key]) && cachedRatings[key] > 0 && WEIGHTS[key]) {
-	                            weightedSum += cachedRatings[key] * WEIGHTS[key];
-	                            totalWeight += WEIGHTS[key];
-	                            ratingsCount++;
+	                        var omdbData = getOmdbCache(cacheKey);
+	                        var kpData = getKpCache(cacheKey);
+	                        
+	                        if (omdbData || kpData) {
+	                            // Собираем рейтинги из кеша
+	                            cachedRatings = {
+	                                imdb: (omdbData && omdbData.imdb && omdbData.imdb !== "N/A") ? parseFloat(omdbData.imdb) : 
+	                                       (kpData && kpData.imdb) ? parseFloat(kpData.imdb) : null,
+	                                tmdb: cardData.vote_average || null,
+	                                kp: (kpData && kpData.kp) ? parseFloat(kpData.kp) : null,
+	                                mc: (omdbData && omdbData.mc && omdbData.mc !== "N/A") ? parseFloat(omdbData.mc) / 10 : null,
+	                                rt: (omdbData && omdbData.rt && omdbData.rt !== "N/A") ? parseFloat(omdbData.rt) / 10 : null
+	                            };
+	                            
+	                            if (C_LOGGING) console.log("MAXSM-RATINGS", "Найдены данные в кеше для карточки " + cardId, cachedRatings);
 	                        }
 	                    }
 	                    
-	                    // Нужно минимум 2 рейтинга для расчета среднего
-	                    if (ratingsCount >= 2 && totalWeight > 0) {
-	                        var averageRating = (weightedSum / totalWeight).toFixed(1);
+	                    // Если есть кешированные рейтинги, считаем средний
+	                    if (cachedRatings) {
+	                        var ratingsCount = 0;
+	                        var totalWeight = 0;
+	                        var weightedSum = 0;
 	                        
-	                        if (C_LOGGING) console.log("MAXSM-RATINGS", "Карточка " + cardId + 
-	                            ": оригинальный " + originalRating + 
-	                            ", средний из " + ratingsCount + " источников: " + averageRating);
+	                        // Считаем взвешенную сумму
+	                        for (var key in cachedRatings) {
+	                            if (cachedRatings.hasOwnProperty(key) && cachedRatings[key] && !isNaN(cachedRatings[key]) && cachedRatings[key] > 0 && WEIGHTS[key]) {
+	                                weightedSum += cachedRatings[key] * WEIGHTS[key];
+	                                totalWeight += WEIGHTS[key];
+	                                ratingsCount++;
+	                            }
+	                        }
 	                        
-	                        // Создаем контейнер со звездочкой
-	                        var ratingContainer = document.createElement('div');
-	                        ratingContainer.style.cssText = 'display: flex; align-items: center; gap: 4px;';
-	                        
-	                        // Добавляем звездочку
-	                        var starDiv = document.createElement('div');
-	                        starDiv.innerHTML = avg_svg;
-	                        starDiv.style.cssText = 'width: 16px; height: 16px; display: flex; align-items: center; justify-content: center;';
-	                        
-	                        // Создаем новый элемент рейтинга
-	                        var newRatingElement = document.createElement('div');
-	                        newRatingElement.className = 'card__vote';
-	                        newRatingElement.textContent = averageRating;
-	                        
-	                        // Раскрашиваем по среднему рейтингу
-	                        colorizeCardRating(newRatingElement, parseFloat(averageRating));
-	                        
-	                        // Собираем вместе
-	                        ratingContainer.appendChild(starDiv);
-	                        ratingContainer.appendChild(newRatingElement);
-	                        
-	                        // Заменяем оригинальный элемент
-	                        cardVote.parentNode.replaceChild(ratingContainer, cardVote);
-	                        
-	                        // Добавляем атрибут для отслеживания
-	                        ratingContainer.setAttribute('data-average-rating', 'true');
-	                        
-	                        continue; // Переходим к следующей карточке
+	                        // Нужно минимум 2 рейтинга для расчета среднего
+	                        if (ratingsCount >= 2 && totalWeight > 0) {
+	                            var averageRating = (weightedSum / totalWeight).toFixed(1);
+	                            displayRating = parseFloat(averageRating);
+	                            showAverage = true;
+	                            
+	                            if (C_LOGGING) console.log("MAXSM-RATINGS", "Карточка " + cardId + 
+	                                ": оригинальный " + originalRating + 
+	                                ", средний из " + ratingsCount + " источников: " + averageRating);
+	                        }
 	                    }
 	                }
+	                
+	                // Обновляем текст в существующем элементе
+	                // Для отладки добавляем звездочку/точку перед средним рейтингом
+	                if (showAverage) {
+	                    // ЗАКОМЕНТИРОВАТЬ ЭТУ СТРОКУ ПОСЛЕ ТЕСТИРОВАНИЯ:
+	                    cardVote.textContent = '★' + displayRating.toFixed(1);
+	                    // ИЛИ РАСКОММЕНТИРОВАТЬ ЭТУ СТРОКУ ДЛЯ ФИНАЛЬНОЙ ВЕРСИИ:
+	                    // cardVote.textContent = displayRating.toFixed(1);
+	                } else {
+	                    cardVote.textContent = originalRating.toFixed(1);
+	                }
+	                
+	                // Раскрашиваем по вычисленному рейтингу
+	                colorizeCardRating(cardVote, displayRating);
+	                
+	                if (C_LOGGING) console.log("MAXSM-RATINGS", "Применен рейтинг: " + displayRating + 
+	                    (showAverage ? " (средний)" : " (оригинальный)"));
 	            }
-	            
-	            // Если нет данных в кеше или недостаточно для расчета среднего, просто раскрашиваем оригинальный
-	            if (!isNaN(originalRating)) {
-	                if (C_LOGGING) console.log("MAXSM-RATINGS", "Карточка " + (cardId || 'unknown') + 
-	                    ": оригинальный рейтинг " + originalRating + 
-	                    (cachedRatings ? " (недостаточно данных для среднего)" : " (нет данных в кеше)"));
-	                colorizeCardRating(cardVote, originalRating);
-	            }
-	        } else {
-	            if (C_LOGGING) console.log("MAXSM-RATINGS", "Элемент .card__vote не найден на карточке");
 	        }
 	    }
 	}
@@ -1748,4 +1726,5 @@
 
 
 })();
+
 
