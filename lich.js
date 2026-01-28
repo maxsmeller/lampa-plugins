@@ -116,6 +116,25 @@
             '.menu__list {' +
 				'padding-left: 0em;' +
 	        '}' +
+
+			// Уменьшенный бордер
+			'.full-episode.focus::after,' +
+			'.card-episode.focus .full-episode::after,' +
+			'.items-cards .selector.focus::after,' +
+			'.card-more.focus .card-more__box::after,' +
+			'.card-episode.hover .full-episode::after,' +
+			'.card.focus .card__view::after,' +
+			'.card.hover .card__view::after,' +
+			'.torrent-item.focus::after,' +
+			'.watched-history.selector.focus::after,' +
+			'.online-prestige.selector.focus::after,' +
+			'.online-prestige--full.selector.focus::after,' +
+			'.explorer-card__head-img.selector.focus::after,' +
+			'.extensions__item.focus::after,' +
+			'.extensions__block-add.focus::after,' +
+			'.full-review-add.focus::after {' +
+			'    border: 0.2em solid #000;' +
+			'}' +
 		
             '';
         
@@ -201,6 +220,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
