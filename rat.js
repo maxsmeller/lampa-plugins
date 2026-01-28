@@ -10,6 +10,7 @@
     var CACHE_TIME = 3 * 24 * 60 * 60 * 1000;  // Время, которое кеш считается валидным (3 суток)
     var OMDB_CACHE = 'maxsm_ratings_omdb_cache';
     var KP_CACHE = 'maxsm_ratings_kp_cache';
+	var AVERAGE_CACHE = 'maxsm_ratings_average_cache';
     var ID_MAPPING_CACHE = 'maxsm_ratings_id_mapping_cache';
     var PRECONF = (window.RATINGS_PLUGIN_TOKENS && window.RATINGS_PLUGIN_TOKENS.PRECONF) || 'NO';
     var OMDB_API_KEYS = (window.RATINGS_PLUGIN_TOKENS && window.RATINGS_PLUGIN_TOKENS.OMDB_API_KEYS) || 
@@ -250,7 +251,7 @@
         }
     }
 
-	// Функция для обработки рейтинга на карточках в списке
+	// Упрощенная функция для обработки рейтинга на карточках в списке
 	function processCardRatings(cards) {
 	    for (var i = 0; i < cards.length; i++) {
 	        var card = cards[i];
@@ -258,128 +259,73 @@
 	        var cardData = card.card_data || {};
 	        var cardId = cardData.id;
 	        
-	        // Переменные для расчета среднего рейтинга
-	        var averageRating = null;
-	        var showAverage = false;
-	        var ratingsCount = 0;
+	        if (!cardId) continue;
 	        
-	        // Проверяем кеш и рассчитываем средний рейтинг (только если есть ID карточки)
-	        if (cardId) {
-	            // Собираем ВСЕ доступные рейтинги точно как в функции calculateAverageRating()
-	            var ratings = {
-	                imdb: null,
-	                tmdb: cardData.vote_average || null,
-	                kp: null,
-	                mc: null,
-	                rt: null
-	            };
-	            
-	            // Пытаемся получить дополнительные рейтинги из кеша
-	            if (cardData.imdb_id || cardData.imdb) {
-	                var imdbId = cardData.imdb_id || cardData.imdb;
-	                var cardType = getCardType(cardData);
-	                var cacheKey = cardType + '_' + imdbId;
-	                
-	                var omdbData = getOmdbCache(cacheKey);
-	                var kpData = getKpCache(cacheKey);
-	                
-	                // IMDB из OMDB или KP
-	                if (omdbData && omdbData.imdb && omdbData.imdb !== "N/A") {
-	                    ratings.imdb = parseFloat(omdbData.imdb);
-	                } else if (kpData && kpData.imdb) {
-	                    ratings.imdb = parseFloat(kpData.imdb);
-	                }
-	                
-	                // KP из кеша
-	                if (kpData && kpData.kp) {
-	                    ratings.kp = parseFloat(kpData.kp);
-	                }
-	                
-	                // MC из OMDB (делим на 10 как в calculateAverageRating)
-	                if (omdbData && omdbData.mc && omdbData.mc !== "N/A") {
-	                    ratings.mc = parseFloat(omdbData.mc) / 10;
-	                }
-	                
-	                // RT из OMDB (делим на 10 как в calculateAverageRating)
-	                if (omdbData && omdbData.rt && omdbData.rt !== "N/A") {
-	                    ratings.rt = parseFloat(omdbData.rt) / 10;
-	                }
-	            }
-	            
-	            if (C_LOGGING) {
-	                console.log("MAXSM-RATINGS", "Собранные рейтинги для карточки " + cardId, ratings);
-	            }
-	            
-	            // ТОЧНО ТАКОЙ ЖЕ РАСЧЕТ как в calculateAverageRating()
-	            var totalWeight = 0;
-	            var weightedSum = 0;
-	            ratingsCount = 0;
-	            
-	            for (var key in ratings) {
-	                if (ratings.hasOwnProperty(key) && 
-	                    !isNaN(ratings[key]) && 
-	                    ratings[key] > 0) {
-	                    // Используем те же веса что и в основном плагине
-	                    if (WEIGHTS[key]) {
-	                        weightedSum += ratings[key] * WEIGHTS[key];
-	                        totalWeight += WEIGHTS[key];
-	                        ratingsCount++;
-	                    }
-	                }
-	            }
-	            
-	            // ТОЧНО ТАКИЕ ЖЕ УСЛОВИЯ как в calculateAverageRating()
-	            if (totalWeight > 0 && ratingsCount > 1) {
-	                averageRating = (weightedSum / totalWeight).toFixed(1);
-	                showAverage = true;
-	                
-	                if (C_LOGGING) {
-	                    console.log("MAXSM-RATINGS", "Рассчитан средний рейтинг для карточки " + cardId + 
-	                        ": " + averageRating + " из " + ratingsCount + " источников");
-	                }
-	            }
-	        }
+	        // Проверяем кеш средних рейтингов
+	        var cachedAverage = getAverageFromCache(cardId);
 	        
-	        // Случай 1: Есть элемент рейтинга
-	        if (cardVote) {
+	        // Случай 1: Есть элемент рейтинга И есть средний рейтинг в кеше
+	        if (cardVote && cachedAverage) {
 	            var ratingText = cardVote.textContent.trim();
 	            var originalRating = parseFloat(ratingText);
 	            
 	            if (!isNaN(originalRating)) {
-	                // ВАЖНО: Используем оригинальный рейтинг если нет среднего
-	                var displayRating = showAverage ? parseFloat(averageRating) : originalRating;
+	                // Подменяем на средний рейтинг из кеша
+	                var averageRating = parseFloat(cachedAverage.average);
 	                
-	                // Обновляем текст
-	                if (showAverage) {
-	                    cardVote.textContent = '.' + displayRating.toFixed(1); // Для отладки
-	                } else {
-	                    cardVote.textContent = originalRating.toFixed(1);
-	                }
+	                // Для отладки добавляем точку
+	                cardVote.textContent = '.' + averageRating.toFixed(1); // ЗАКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
+	                // cardVote.textContent = averageRating.toFixed(1); // РАСКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
 	                
-	                // Раскрашиваем
-	                colorizeCardRating(cardVote, displayRating);
+	                // Раскрашиваем по среднему рейтингу
+	                colorizeCardRating(cardVote, averageRating);
 	                
 	                if (C_LOGGING) {
-	                    console.log("MAXSM-RATINGS", "Карточка " + (cardId || 'unknown') + 
-	                        " - отображен рейтинг: " + displayRating.toFixed(1) + 
-	                        (showAverage ? " (средний из " + ratingsCount + ")" : " (оригинальный)"));
+	                    console.log("MAXSM-RATINGS", "Карточка " + cardId + 
+	                        ": подменен " + originalRating.toFixed(1) + " → " + averageRating.toFixed(1) + 
+	                        " (из " + cachedAverage.count + " источников)");
 	                }
 	            }
 	        }
-	        // Случай 2: Нет элемента рейтинга, но есть средний рейтинг
-	        else if (showAverage && averageRating) {
+	        // Случай 2: Нет элемента рейтинга, но есть средний рейтинг в кеше
+	        else if (!cardVote && cachedAverage) {
 	            var cardView = card.querySelector('.card__view');
 	            if (cardView) {
-	                var ratingValue = parseFloat(averageRating).toFixed(1);
+	                var averageRating = parseFloat(cachedAverage.average);
 	                var newCardVote = document.createElement('div');
 	                newCardVote.className = 'card__vote';
-	                newCardVote.textContent = '.' + ratingValue; // Для отладки
 	                
-	                colorizeCardRating(newCardVote, parseFloat(ratingValue));
+	                // Для отладки добавляем точку
+	                newCardVote.textContent = '.' + averageRating.toFixed(1); // ЗАКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
+	                // newCardVote.textContent = averageRating.toFixed(1); // РАСКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
+	                
+	                // Стили как у оригинального элемента
+
+	                
+	                // Раскрашиваем
+	                colorizeCardRating(newCardVote, averageRating);
+	                
+	                // Добавляем в card__view
 	                cardView.appendChild(newCardVote);
 	                
 	                if (C_LOGGING) {
-	                    console.log("MAXSM-RATINGS", "Добавлен рейтинг карточке " + cardId + ": " + ratingValue);
+	                    console.log("MAXSM-RATINGS", "Добавлен рейтинг карточке " + cardId + 
+	                        ": " + averageRating.toFixed(1) + " (из кеша, " + cachedAverage.count + " источников)");
+	                }
+	            }
+	        }
+	        // Случай 3: Есть элемент рейтинга, но нет среднего в кеше - просто раскрашиваем
+	        else if (cardVote && !cachedAverage) {
+	            var ratingText = cardVote.textContent.trim();
+	            var originalRating = parseFloat(ratingText);
+	            
+	            if (!isNaN(originalRating)) {
+	                cardVote.textContent = originalRating.toFixed(1);
+	                colorizeCardRating(cardVote, originalRating);
+	                
+	                if (C_LOGGING) {
+	                    console.log("MAXSM-RATINGS", "Карточка " + cardId + 
+	                        ": раскрашен оригинальный рейтинг " + originalRating.toFixed(1) + " (нет среднего в кеше)");
 	                }
 	            }
 	        }
@@ -1128,6 +1074,42 @@
 
     
     // Функции работы с кешем
+	// Сохраняем средний рейтинг в кеш
+	function saveAverageToCache(cardId, data) {
+	    if (!cardId) return;
+	    
+	    if (C_LOGGING) console.log("MAXSM-RATINGS", "Сохранение среднего рейтинга в кеш для card: " + cardId);
+	    
+	    var cache = Lampa.Storage.get(AVERAGE_CACHE) || {};
+	    cache[cardId] = {
+	        average: data.average,
+	        count: data.count,
+	        timestamp: data.timestamp || Date.now()
+	    };
+	    
+	    Lampa.Storage.set(AVERAGE_CACHE, cache);
+	}
+	
+	// Получаем средний рейтинг из кеша
+	function getAverageFromCache(cardId) {
+	    if (!cardId) return null;
+	    
+	    var cache = Lampa.Storage.get(AVERAGE_CACHE) || {};
+	    var item = cache[cardId];
+	    
+	    if (item && (Date.now() - item.timestamp < CACHE_TIME)) {
+	        if (C_LOGGING) console.log("MAXSM-RATINGS", "Найден средний рейтинг в кеше для card: " + cardId + 
+	            " - " + item.average + " из " + item.count + " источников");
+	        return item;
+	    }
+	    
+	    if (item) {
+	        if (C_LOGGING) console.log("MAXSM-RATINGS", "Кеш среднего рейтинга устарел для card: " + cardId);
+	    }
+	    
+	    return null;
+	}
+	
     function getOmdbCache(key) {
         var cache = Lampa.Storage.get(OMDB_CACHE) || {};
         var item = cache[key];
@@ -1456,67 +1438,73 @@
         }
     }
 
-    function calculateAverageRating(localCurrentCard, render) {
-        if (!render) return;
-        if (C_LOGGING) console.log("MAXSM-RATINGS", "card: " + localCurrentCard + ", Calculate avarage rating");   
-    
-        var rateLine = $('.full-start-new__rate-line', render);
-        if (!rateLine.length) return;
-    
-        var ratings = {
-            imdb: parseFloat($('.rate--imdb div:first', rateLine).text()) || 0,
-            tmdb: parseFloat($('.rate--tmdb div:first', rateLine).text()) || 0,
-            kp: parseFloat($('.rate--kp div:first', rateLine).text()) || 0,
-            mc: (parseFloat($('.rate--mc div:first', rateLine).text()) || 0) / 10,
-            rt: (parseFloat($('.rate--rt div:first', rateLine).text()) || 0) / 10
-        };
-    
-        var totalWeight = 0;
-        var weightedSum = 0;
-        var ratingsCount = 0;
-        
-        for (var key in ratings) {
-            if (ratings.hasOwnProperty(key) && !isNaN(ratings[key]) && ratings[key] > 0) {
-                weightedSum += ratings[key] * WEIGHTS[key];
-                totalWeight += WEIGHTS[key];
-                ratingsCount++;
-            }
-        }
-    
-        $('.rate--avg', rateLine).remove();
-        
-        var mode = parseInt(localStorage.getItem('maxsm_ratings_mode'), 10);
-
-        if (totalWeight > 0 && (ratingsCount > 1 ||  mode === 1)) {
-            var averageRating = ( weightedSum / totalWeight ).toFixed(1);
-            var colorClass = getRatingClass(averageRating);
-            
-            if (C_LOGGING) console.log("MAXSM-RATINGS", "card: " + localCurrentCard + ", Average rating: " + averageRating);
-            
-            var avgLabel = Lampa.Lang.translate("maxsm_ratings_avg");
-            
-            if (mode === 1) {
-                avgLabel = Lampa.Lang.translate("maxsm_ratings_avg_simple");
-                $('.full-start__rate', rateLine).not('.rate--oscars, .rate--avg, .rate--awards').hide();
-            } 
-
-            var avgElement = $(
-                '<div class="full-start__rate rate--avg ' + colorClass + '">' +
-                    '<div>' + averageRating + '</div>' +
-                    '<div class="source--name">' + avgLabel + '</div>' +
-                '</div>'
-            );
-
-            var showColors = localStorage.getItem('maxsm_ratings_colors')  === 'true';
-            
-            if (!showColors) { 
-                avgElement.removeClass(colorClass); 
-            }
-            
-            $('.full-start__rate:first', rateLine).before(avgElement);
-        }
-
-    }
+	function calculateAverageRating(localCurrentCard, render) {
+	    if (!render) return;
+	    if (C_LOGGING) console.log("MAXSM-RATINGS", "card: " + localCurrentCard + ", Calculate average rating");   
+	    
+	    var rateLine = $('.full-start-new__rate-line', render);
+	    if (!rateLine.length) return;
+	    
+	    var ratings = {
+	        imdb: parseFloat($('.rate--imdb div:first', rateLine).text()) || 0,
+	        tmdb: parseFloat($('.rate--tmdb div:first', rateLine).text()) || 0,
+	        kp: parseFloat($('.rate--kp div:first', rateLine).text()) || 0,
+	        mc: (parseFloat($('.rate--mc div:first', rateLine).text()) || 0) / 10,
+	        rt: (parseFloat($('.rate--rt div:first', rateLine).text()) || 0) / 10
+	    };
+	    
+	    var totalWeight = 0;
+	    var weightedSum = 0;
+	    var ratingsCount = 0;
+	    
+	    for (var key in ratings) {
+	        if (ratings.hasOwnProperty(key) && !isNaN(ratings[key]) && ratings[key] > 0) {
+	            weightedSum += ratings[key] * WEIGHTS[key];
+	            totalWeight += WEIGHTS[key];
+	            ratingsCount++;
+	        }
+	    }
+	    
+	    $('.rate--avg', rateLine).remove();
+	    
+	    var mode = parseInt(localStorage.getItem('maxsm_ratings_mode'), 10);
+	
+	    if (totalWeight > 0 && (ratingsCount > 1 ||  mode === 1)) {
+	        var averageRating = ( weightedSum / totalWeight ).toFixed(1);
+	        var colorClass = getRatingClass(averageRating);
+	        
+	        if (C_LOGGING) console.log("MAXSM-RATINGS", "card: " + localCurrentCard + ", Average rating: " + averageRating);
+	        
+	        // СОХРАНЯЕМ В КЕШ средний рейтинг
+	        saveAverageToCache(localCurrentCard, {
+	            average: averageRating,
+	            count: ratingsCount,
+	            timestamp: Date.now()
+	        });
+	        
+	        var avgLabel = Lampa.Lang.translate("maxsm_ratings_avg");
+	        
+	        if (mode === 1) {
+	            avgLabel = Lampa.Lang.translate("maxsm_ratings_avg_simple");
+	            $('.full-start__rate', rateLine).not('.rate--oscars, .rate--avg, .rate--awards').hide();
+	        } 
+	
+	        var avgElement = $(
+	            '<div class="full-start__rate rate--avg ' + colorClass + '">' +
+	                '<div>' + averageRating + '</div>' +
+	                '<div class="source--name">' + avgLabel + '</div>' +
+	            '</div>'
+	        );
+	
+	        var showColors = localStorage.getItem('maxsm_ratings_colors')  === 'true';
+	        
+	        if (!showColors) { 
+	            avgElement.removeClass(colorClass); 
+	        }
+	        
+	        $('.full-start__rate:first', rateLine).before(avgElement);
+	    }
+	}
    
     // Инициализация плагина
     function startPlugin() {
@@ -1769,6 +1757,7 @@
 
 
 })();
+
 
 
 
