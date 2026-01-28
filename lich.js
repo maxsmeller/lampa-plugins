@@ -135,7 +135,48 @@
 			'.full-review-add.focus::after {' +
 			'    border: 0.2em solid #fff;' +
 			'}' +
-		
+			
+			// Анимации
+			'.card, ' +
+			'.watched-history, ' +
+			'.torrent-item, ' +
+			'.online-prestige, ' +
+			'.extensions__item, ' +
+			'.extensions__block-add, ' +
+			'.full-review-add, ' +
+			'.full-review, ' +
+			'.tag-count, ' +
+			'.full-person, ' +
+			'.full-episode, ' +
+			'.simple-button, ' +
+			'.full-start__button, ' +
+			'.items-cards .selector, ' +
+			'.card-more, ' +
+			'.explorer-card__head-img.selector, ' +
+			'.card-episode {transform: scale(1); transition: transform 0.3s ease;}' +
+			
+			'.card.focus, ' +
+			'.extensions__item.focus, ' +
+			'.extensions__block-add.focus, ' +
+			'.full-review-add.focus, ' +
+			'.full-review.focus, ' +
+			'.tag-count.focus, ' +
+			'.full-person.focus, ' +
+			'.full-episode.focus, ' +
+			'.simple-button.focus, ' +
+			'.full-start__button.focus, ' +
+			'.items-cards .selector.focus, ' +
+			'.card-more.focus, ' +
+			'.explorer-card__head-img.selector.focus, ' +
+			'.card-episode.focus {transform: scale(1.03);}' +
+			
+			'.watched-history.focus, ' +
+			'.torrent-item.focus, ' +
+			'.online-prestige.focus {transform: scale(1.01);}' +
+			
+			'.menu__item {transition: transform 0.3s ease;}' +
+			
+			'.menu__item.focus {transform: translateX(-0.2em);}' +
             '';
         
         // Добавляем CSS
@@ -220,6 +261,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
