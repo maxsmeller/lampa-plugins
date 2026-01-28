@@ -1633,6 +1633,7 @@
                 localStorage.removeItem(OMDB_CACHE);
                 localStorage.removeItem(KP_CACHE);
                 localStorage.removeItem(ID_MAPPING_CACHE);
+				localStorage.removeItem(AVERAGE_CACHE); 
                 window.location.reload();
             }
         });
@@ -1757,6 +1758,7 @@
 
 
 })();
+
 
 
 
