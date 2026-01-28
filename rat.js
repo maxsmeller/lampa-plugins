@@ -251,107 +251,84 @@
         }
     }
 
-	// Функция для обработки рейтинга на карточках в списке
 	function processCardRatings(cards) {
 	    for (var i = 0; i < cards.length; i++) {
 	        var card = cards[i];
 	        
 	        // ========== ЭТАП 1: ПОЛУЧАЕМ РЕЙТИНГ ==========
-	        var ratingToUse = null;
+	        var ratingValue = null;  // Число для раскраски
+	        var ratingText = null;   // Текст для отображения (с эмодзи)
 	        var source = null;
 	        var ratingDetails = null;
 	        
-	        // Вариант 1: Рейтинг из кеша (высший приоритет)
+	        // Вариант 1: Рейтинг из кеша (средний)
 	        var cardData = card.card_data || {};
 	        var cardId = cardData.id;
 	        
 	        if (cardId) {
 	            var cachedAverage = getAverageFromCache(cardId);
 	            if (cachedAverage) {
-	                ratingToUse = parseFloat(cachedAverage.average) + ' ★';
+	                ratingValue = parseFloat(cachedAverage.average); // Число
+	                ratingText = ratingValue.toFixed(1) + ' ★';      // Текст со звездой
 	                source = 'cache';
 	                ratingDetails = cachedAverage;
 	            }
 	        }
 	        
-	        // Вариант 2: Рейтинг с карточки (если нет в кеше)
-	        if (!ratingToUse) {
-	            var cardVote = card.querySelector('.card__vote');
-	            if (cardVote) {
-	                var ratingText = cardVote.textContent.trim();
-	                var originalRating = parseFloat(ratingText);
-	                if (!isNaN(originalRating)) {
-	                    ratingToUse = originalRating + ' 💠';
+	        // Вариант 2: Рейтинг с карточки (оригинальный)
+	        if (!ratingValue) {
+	            var cardVoteElem = card.querySelector('.card__vote');
+	            if (cardVoteElem) {
+	                var ratingTextContent = cardVoteElem.textContent.trim();
+	                ratingValue = parseFloat(ratingTextContent);
+	                if (!isNaN(ratingValue)) {
+	                    ratingText = ratingValue.toFixed(1) + ' 💠'; // Текст с ромбом
 	                    source = 'card';
 	                }
 	            }
 	        }
 	        
-	        // Если не нашли ни одного рейтинга - пропускаем карточку
-	        if (!ratingToUse) {
+	        // Если не нашли ни одного рейтинга - пропускаем
+	        if (!ratingValue) {
 	            if (C_LOGGING) console.log("MAXSM-RATINGS", "Карточка " + (cardId || 'unknown') + 
-	                ": нет рейтинга (ни в кеше, ни на карточке)");
+	                ": нет рейтинга");
 	            continue;
 	        }
 	        
 	        if (C_LOGGING) console.log("MAXSM-RATINGS", "Карточка " + (cardId || 'unknown') + 
-	            ": рейтинг " + ratingToUse.toFixed(1) + " из " + source + 
+	            ": рейтинг " + ratingText + " из " + source + 
 	            (ratingDetails ? " (" + ratingDetails.count + " источников)" : ""));
 	        
 	        // ========== ЭТАП 2: МЕНЯЕМ ЦИФРУ НА КАРТОЧКЕ ==========
 	        var cardVote = card.querySelector('.card__vote');
 	        
-	        // Случай A: Есть элемент рейтинга - обновляем его
 	        if (cardVote) {
-	            // Для отладки добавляем метку источника
-	            if (source === 'cache') {
-	                //cardVote.textContent = '★\n' + ratingToUse.toFixed(1); // ЗАКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
-	                cardVote.textContent = ratingToUse.toFixed(1); // РАСКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
-	            } else {
-	                cardVote.textContent = ratingToUse.toFixed(1);
-	            }
-	        }
-	        // Случай B: Нет элемента рейтинга - создаем новый
-	        else {
+	            // Обновляем существующий
+	            cardVote.textContent = ratingText;
+	        } else {
+	            // Создаем новый
 	            var cardView = card.querySelector('.card__view');
 	            if (!cardView) {
 	                if (C_LOGGING) console.log("MAXSM-RATINGS", "Карточка " + (cardId || 'unknown') + 
-	                    ": нет .card__view для вставки рейтинга");
+	                    ": нет .card__view");
 	                continue;
 	            }
 	            
 	            cardVote = document.createElement('div');
 	            cardVote.className = 'card__vote';
-	            
-	            // Для отладки добавляем метку источника
-	            if (source === 'cache') {
-	                //cardVote.textContent = '★\n' + ratingToUse.toFixed(1); // ЗАКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
-	                cardVote.textContent = ratingToUse.toFixed(1); // РАСКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
-	            } else {
-	                cardVote.textContent = ratingToUse.toFixed(1);
-	            }
-	            
-	            // Добавляем в card__view
+	            cardVote.textContent = ratingText;
 	            cardView.appendChild(cardVote);
-	            
-	            if (C_LOGGING) console.log("MAXSM-RATINGS", "Карточка " + (cardId || 'unknown') + 
-	                ": создан новый элемент рейтинга");
 	        }
 	        
 	        // ========== ЭТАП 3: РАСКРАШИВАЕМ РЕЙТИНГ ==========
-	        // Удаляем предыдущие классы рейтинга
 	        cardVote.classList.remove('low-rating', 'medium-rating', 'high-rating');
 	        
-	        // Применяем новые классы в зависимости от оценки
-	        if (ratingToUse < 5) {
+	        if (ratingValue < 5) {
 	            cardVote.classList.add('low-rating');
-	            if (C_LOGGING) console.log("MAXSM-RATINGS", "Применен класс low-rating (красный) для рейтинга: " + ratingToUse);
-	        } else if (ratingToUse >= 5 && ratingToUse < 7) {
+	        } else if (ratingValue >= 5 && ratingValue < 7) {
 	            cardVote.classList.add('medium-rating');
-	            if (C_LOGGING) console.log("MAXSM-RATINGS", "Применен класс medium-rating (желтый) для рейтинга: " + ratingToUse);
-	        } else if (ratingToUse >= 7) {
+	        } else if (ratingValue >= 7) {
 	            cardVote.classList.add('high-rating');
-	            if (C_LOGGING) console.log("MAXSM-RATINGS", "Применен класс high-rating (зеленый) для рейтинга: " + ratingToUse);
 	        }
 	    }
 	}
@@ -1797,6 +1774,7 @@
 
 
 })();
+
 
 
 
