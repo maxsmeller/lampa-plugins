@@ -305,7 +305,7 @@
 	        if (cardVote) {
 	            // Для отладки добавляем метку источника
 	            if (source === 'cache') {
-	                cardVote.textContent = '.' + ratingToUse.toFixed(1); // ЗАКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
+	                cardVote.textContent = '★\n' + ratingToUse.toFixed(1); // ЗАКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
 	                // cardVote.textContent = ratingToUse.toFixed(1); // РАСКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
 	            } else {
 	                cardVote.textContent = ratingToUse.toFixed(1);
@@ -325,7 +325,7 @@
 	            
 	            // Для отладки добавляем метку источника
 	            if (source === 'cache') {
-	                cardVote.textContent = '.' + ratingToUse.toFixed(1); // ЗАКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
+	                cardVote.textContent = '★\n' + ratingToUse.toFixed(1); // ЗАКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
 	                // cardVote.textContent = ratingToUse.toFixed(1); // РАСКОММЕНТИРОВАТЬ ПОСЛЕ ТЕСТИРОВАНИЯ
 	            } else {
 	                cardVote.textContent = ratingToUse.toFixed(1);
@@ -1797,6 +1797,7 @@
 
 
 })();
+
 
 
 
