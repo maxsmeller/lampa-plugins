@@ -22,13 +22,13 @@
 			
 	        // Иконки закладок и т.д.
 			'.card__icons {' +
-				'top: 5em;' +
+				'top: 0.5em;' +
 			'}' +
 			
             // Рейтинг
             '.card__vote {' +
 			    'bottom: auto;' +
-                'top: 0.8em;' +
+                'top: 2.2em;' +
                 'right: 0em;' + 
 			    'left: auto;' +
                 'background: #000;' +
@@ -44,7 +44,7 @@
 		    	'background-color: #ffc107;' + 
 				'color: #000;' + 
                 'bottom: auto;' + 
-                'top: 4.2em;' + 
+                'top: 6.4em;' + 
 	            'right: 0em;' + 
 			    'left: auto;' +
 	     	    'border-radius: 0.3em 0 0 0.3em;' +
@@ -56,7 +56,7 @@
             '.card--tv .card__type {' +
 		    	'background-color: #dc3545;' +  
                 'bottom: auto;' + 
-                'top: 4.2em;' + 
+                'top: 6.4em;' + 
 	            'right: 0em;' + 
 			    'left: auto;' +
 	     	    'border-radius: 0.3em 0 0 0.3em;' +
@@ -300,6 +300,7 @@
     // Запускаем инициализацию
     init();
 })();
+
 
 
 
